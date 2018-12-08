@@ -1,0 +1,8 @@
+<!--miniprogram/pages/emotionDetail/emotionDetail.wxml-->
+<!-- <text>miniprogram/pages/emotionDetail/emotionDetail.wxml</text> -->
+
+<view>
+  <rich-text nodes='{{emotion.content}}'></rich-text>
+
+  <button size='mini' bindtap='delete'>删除</button>
+</view>

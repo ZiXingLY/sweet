@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="../../public/css/wheelmenu.css">
+    <link rel="stylesheet" href="../../public/css/banner.css">
+    <!--<link rel="stylesheet" href="../../public/css/">-->
+    <!--<link rel="stylesheet" href="../../public/css/banner_small.css">-->
+    <link rel="stylesheet" href="../../public/css/banner.css">
+    <link rel="stylesheet" href="../../public/css/personalCenter.css">
+    <link rel="stylesheet" href="../../public/css/personalCenter_small.css" media="all and (max-width:650px)">
+
+    <title>个人中心</title>
+    <style>
+        .banner-out{
+            background: #2C323E;
+        }
+        .topNavigation-bg{
+            height: 0;
+        }
+    </style>
+</head>
+
+<!--<style>-->
+    <!--.topNavigation {-->
+        <!--width: 100%;-->
+    <!--}-->
+    <!--@media screen and (max-width: 650px){-->
+        <!--.topNavigation {-->
+            <!--width: 100%;-->
+        <!--}-->
+    <!--}-->
+
+<!--</style>-->
+
+<body>
+<div class="main">
+    <div class="content">
+        <div class="p_lf">
+            <div class="centerTitle">
+                <div class="img-Box" id="imgBox"><img id="headImg" class="headImg" src="../../public/images/defuser.png" onerror="this.src='../../public/images/defuser.png'" alt=""></div>
+                <div class="nicknameBox"><span class="nickname">我的昵称</span><i></i></div>
+                <div>
+                    <div class="grade-box">
+                        <span><i></i>剩余积分</span>
+                        <span id="left-free-scores">0</span>
+                    </div>
+                    <div class="grade-line"></div>
+                    <div class="grade-box">
+                        <span>剩余发布次数</span>
+                        <span id="left-free-times">0</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <ul>
+                <li class="user_data">
+                    <a target="frame" class="p_lf_a oneLi" href="/userVip"><i></i>我的会员</a>
+                </li>
+                <li class="user_score oneLi"><a target="frame" class="p_lf_a" href="/views/front/userScore.html"><i></i>我的积分</a></li>
+                <li class="user_article oneLi"><a target="frame" id="myRele" class="p_lf_a" href="/views/front/userRelease.html"><i></i>我的发布</a></li>
+                <!--<li class="user_info"><a class="p_lf_a" href="message"><i></i>消息中心</a></li>-->
+                <!--<li><a class="p_lf_a" href=""><i></i>绑定邮箱</a></li>-->
+                <!--<li class="user_phone"><a class="p_lf_a" href="bindPhone"><i></i>绑定手机</a></li>-->
+                <li class="user_reset oneLi"><a target="frame" class="p_lf_a" href="/userMessage"><i></i>消息通知</a></li>
+                <!--<li class="user_reset oneLi"><span><i></i>设置 &#32 &#32<img class="unwindImg" src="../../public/imgs/zk.png"></span>-->
+                <li class="user-set oneLi"><a target="frame" class="p_lf_a windA" href="javascript:void(0);"><i></i>设置 &#32 &#32<img class="unwindImg" src="../../public/imgs/zk.png"></a>
+                    <ul>
+                        <li class="setLi"><a target="frame" href="/userInfo">个人资料</a></li>
+                        <li class="setLi"><a target="frame" href="/userModifyPass">修改密码</a></li>
+                        <li class="setLi"><a href="/logout">退出登录</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <iframe name="frame" class="frame" src="/userVip">
+
+        </iframe>
+    </div>
+</div>
+<a href="#wheel2" class="wheel-button ne" id="setMenu">
+    <img src="../../public/imgs/sz2.png">
+</a>
+<ul id="wheel2" class="wheel">
+    <li class="item"><a target="frame" href="/userInfo">个人资料</a></li>
+    <li class="item"><a target="frame" href="/userModifyPass">修改密码</a></li>
+    <li class="item"><a href="/logout">退出登陆</a></li>
+</ul>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="../../public/js/layer.js"></script>
+<script src="../../public/js/jquery.wheelmenu.min.js"></script>
+<script src="../../public/js/bannerNav.js"></script>
+<script src="../../public/js/frameOut.js"></script>
+
+<script>
+
+    // $.ajax({
+    //     type: "get",
+    //     url: "/user/isLogin",
+    //     success: function (result) {
+    //
+    //         if (result.code === 0){
+    //             if (result.data !== "unLogin"){
+    //                 $("#headImg").attr("src","/"+result.data.header);
+    //
+    //                 if (result.data.nickname !== "") {
+    //                     $(".nickname").html(result.data.nickname);
+    //                 }
+    //                 $("#left-free-times").html(result.data.left_free_times);
+    //             }
+    //         }
+    //     }
+    // })
+    $.ajax({
+        type: "get",
+        url: "/credits/getUserAllScore",
+        success: function (res) {
+         if (res.code === 0){
+             $("#left-free-scores").html(res.data.totalScore.totalScore? res.data.totalScore.totalScore :'0');
+             if (res.data.user !== ""){
+
+                 $("#headImg").attr("src","/"+res.data.user.header);
+
+                 if (res.data.user.nickname !== "") {
+                     $(".nickname").html(res.data.user.nickname);
+                 }
+                 $("#left-free-times").html(res.data.user.left_free_times);
+             }
+         }
+        }
+    })
+
+    $(function () {
+        if (location.hash === "#myRele") {
+            console.log("back to myRele")
+            document.getElementById("myRele").click();
+        }
+    })
+</script>

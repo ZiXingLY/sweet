@@ -1,0 +1,14 @@
+<!--pages/addPromise/addPromise.wxml-->
+<text>pages/addPromise/addPromise.wxml</text>
+
+<form bindsubmit="bindFormSubmit">
+
+<view>
+            <textarea value='{{initValue}}'  placeholder='promise区块' name='promise'>
+      </textarea>
+</view>
+      <view>
+        <button form-type="submit" type='primary'> 提交 </button>
+      </view>
+
+</form>

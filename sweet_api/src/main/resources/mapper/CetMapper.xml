@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.anshily.dao.CetMapper">
+  <resultMap id="BaseResultMap" type="io.anshily.model.Cet">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="admission" jdbcType="VARCHAR" property="admission" />
+    <result column="cet_name" jdbcType="VARCHAR" property="cet_name" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="score" jdbcType="DECIMAL" property="score" />
+    <result column="level" jdbcType="INTEGER" property="level" />
+    <result column="times" jdbcType="INTEGER" property="times" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="add_time" jdbcType="VARCHAR" property="add_time" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,10 @@
+<!--component/emotion/emotion.wxml-->
+<view class='emotion-item'>
+  <view class='author'><image  class='author-img' src='{{emotion.authorImg}}'></image></view>
+  <view class='emotion-body'>
+    <view class='author-name'>{{emotion.authorName}}</view>
+    <view  class='emotion-content'>
+       <rich-text nodes='{{emotion.content}}'></rich-text>
+    </view>
+  </view>
+</view>

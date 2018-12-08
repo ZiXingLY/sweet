@@ -1,0 +1,8 @@
+这里css文件夹下的animate.css是动画示例 但是没有引入
+css文件下的和prism.css是被富文本编辑器自动引入的
+
+assets下的font-awesome-min.css是富文本编辑器样式
+
+assets下的skins整个文件夹都是为富文本编辑器准备的
+
+fonts文件夹是bootstrap字体文件

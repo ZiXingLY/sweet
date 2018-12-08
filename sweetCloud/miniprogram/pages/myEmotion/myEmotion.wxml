@@ -1,0 +1,14 @@
+<!--pages/article/article.wxml-->
+<view class='body'>
+<view class='flash-warp'>
+  <view class='flash-body' wx:for="{{emotions}}">
+    <view class='flash-addtime'>
+      <text>{{item.createTime}}</text>
+      <image data-data='{{item}}' bindtap='goToShare' src='/utils/imgs/message_z@3x.png'></image>
+    </view>
+    <view class='flash-content'>
+      <rich-text class='flash-text' nodes="{{item.content}}"></rich-text>   
+    </view>
+  </view>
+</view>
+</view>

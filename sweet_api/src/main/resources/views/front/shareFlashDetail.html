@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="../../public/css/flashDetail.css">
+    <link rel="stylesheet" href="../../public/css/flashDetail_small.css" media="screen and (max-width:650px)">
+
+
+    <link rel="stylesheet" href="../../public/css/banner.css">
+    <link rel="stylesheet" href="../../public/js/share/share.min.css">
+
+    <title>快讯详情</title>
+
+    <style>
+        #qrcode {
+            position: absolute;
+            /* left: 36%; */
+            /* top: 30%; */
+            width: 210px;
+            height: 155px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            border-radius: 5px;
+            box-shadow: 5px 5px 66px -5px;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .qrcode-mask {
+            /*position: absolute;*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+            /*z-index: 10;*/
+            /*background-color: rgba(128, 128, 128, 0.5);*/
+            /*top: 0;*/
+            position: absolute;
+            /* width: 100%; */
+            /* height: 260%; */
+            z-index: 10;
+            background-color: rgba(128, 128, 128, 0.5);
+            height: 110%;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+        }
+        body{
+            position: relative;
+        }
+        .qr-title{
+            margin-bottom: 8px;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<div class="articleContent" >
+
+
+    <div class="Left">
+
+        <div class="main-title">
+            <div class="main-top">
+                <span class="main-top-title"><a href="">快讯</a>-<a href="">快讯详情</a></span>
+                <span class="main-top-login">2018年8月4日 星期六</span>
+            </div>
+        </div>
+
+        <div class="matter">
+
+            <div class="fl_main">
+                <div class="time">22:34</div>
+
+                <div class="fl_main_content">
+                    <h3 id="title" class="title">蓝色光标发布小蓝机器人家族产品，机器人会营销还能撰稿</h3>
+                    <div id="flashDetail" class="detail">8月4日，蓝色光标对外发布智能营销产品矩阵“小蓝机器人家族”，这是营销行业内首款智能自动化人机交互产品族。其中，idataBot营销数据平台、撰稿机器人妙笔、发布机器人生花、鲁班一站式电商营销平台、麦集客等产品均为首次亮相。</div>
+                    <div class="flash-footer">
+                        <div class="flash-footer-look">
+                            <img class="flash-look" src="../../public/images/浏览.png" alt="">
+                            <span id="lookspan">300</span>
+                        </div>
+                        <div class="flash-footer-share">
+                            <img  class="flash-look" src="../../public/images/分享.png" alt="">
+                            <span>分享</span>
+
+                            <div class="social-share share-component" hidden>
+                                <a class="social-share-icon icon-qq" href="javascript:void (0)"></a>
+                                <a class="social-share-icon icon-weibo" href="javascript:void (0)"></a>
+                                <a class="social-share-icon icon-wechat" href="javascript:void (0)"></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="Right">
+
+
+        <div class="projectBox">
+            <img src="../../public/images/xiaochengxu.jpg" alt="">
+            <div class="projectBox-rt">
+                <span>扫码小程序</span>
+                <span>掌上轻松阅读>></span>
+            </div>
+        </div>
+
+        <div class="hotArticles">
+
+            <div class="hotTitle">热门文章</div>
+            <ul class="hotUl">
+                <li>
+                    <img src="../../public/imgs/touming.png">
+                    <span><a href="http://www.baicu.com"></a></span>
+                </li>
+                <li>
+                    <img src="../../public/imgs/touming.png">
+                    <span><a href="http://www.baicu.com"></a></span>
+                </li>
+                <li>
+                    <img src="../../public/imgs/touming.png">
+                    <span><a href="http://www.baicu.com"></a></span>
+                </li>
+                <li>
+                    <img src="../../public/imgs/touming.png">
+                    <span><a href="http://www.baicu.com"></a></span>
+                </li>
+                <li>
+                    <img src="../../public/imgs/touming.png">
+                    <span><a href="http://www.baicu.com"></a></span>
+                </li>
+                <!--<li>-->
+                <!--<img src="https://www.xcj.com/uploads/20180704/78cbc6de9a4eb9a37b0fd7d08d9c2120.jpg">-->
+                <!--<span>asdadadasds</span>-->
+                <!--</li>-->
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+<span id="movFid" th:text="${fid}" hidden></span>
+<span id="movToken" th:text="${token}" hidden></span>
+
+<div class="qrcode-mask" style="display: none">
+    <div id='qrcode'>
+        <div class="qr-title">扫描二维码分享到微信</div>
+    </div>
+</div>
+
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="../../public/js/layer.js"></script>
+<script src="../../public/js/bannerNav.js"></script>
+<script src="../../public/js/shareFlashDetail.js"></script>
+<script src="../../public/js/qrcode.min.js"></script>
+<script>
+
+    var shareUrl = "http://www.51cnews.com//shareArticleDetail?token=";
+
+
+    var flag = 0;
+    var token;
+    $(".flash-footer-share").click(function () {
+        if (flag === 0) {
+            $.ajax({
+                type: "get",
+                url: "/user/isLogin",
+                success: function (result) {
+                    if (result.code === 0) {
+                        if (result.data === "unLogin") {
+                            location.href = "/login?url=" + window.location;
+
+                        } else {
+                            flag = 1;
+                            var fid = $("#movFid").html();
+                            var uid = result.data.id;
+
+                            $.ajax({
+                                url: "/share/genShareToken",
+                                data: {
+                                    fid: fid,
+                                    uid: uid,
+                                    type: 2
+                                },
+                                type: "get",
+                                success: function (res) {
+
+                                    if (res.code === 0) {
+                                        token = res.data.share_token;
+
+                                        qrcode.clear();
+                                        qrcode.makeCode(shareUrl + token);
+
+                                    }
+                                }
+                            })
+
+                            $(".share-component").slideToggle();
+                        }
+                    }
+                }
+            })
+            // flag != 0 时；
+        } else {
+
+            $(".share-component").slideToggle();
+        }
+    })
+
+
+    $(".icon-qq").click(function () {
+        shareToQq("可牛的分享", shareUrl + token, "keniu");
+    });
+    $(".icon-weibo").click(function () {
+        shareToXl("可牛的分享", shareUrl + token);
+    });
+    $(".icon-wechat").click(function (e) {
+        e.stopPropagation();
+        // console.log("flag为0时qrToggle");
+        $(".qrcode-mask").show(500);
+        // createQrCode("http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+    });
+    $(document).on('click touchstart touchmove', 'html', function (event) {
+        $(".qrcode-mask").hide(500);
+        // event.stopPropagation();
+    })
+
+    function shareToXl(title, url) {
+        var sharesinastring = 'http://v.t.sina.com.cn/share/share.php?title=' + title + '&url=' + url + '&content=utf-8&sourceUrl=' + url;
+        window.open(sharesinastring, 'newwindow');
+    }
+
+    function shareToQq(title, url, desc) {
+        // var shareString = 'http://connect.qq.com/widget/shareqq/index.html?url=你的分享网址&sharesource=qzone&title=你的分享标题&pics=你的分享图片地址&summary=你的分享描述&desc=你的分享简述';
+        var shareString = "http://connect.qq.com/widget/shareqq/index.html?url=" + url + "&sharesource=qzone&title=" + title + "&pics=你的分享图片地址&summary=来自7财经的分享&desc=" + desc;
+        window.open(shareString, 'newwindow');
+    }
+
+    qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: window.location,
+        width: 160,
+        height: 160,
+        colorDark: "#2C323E",
+        colorLight: "#FFF",
+        correctLevel: QRCode.CorrectLevel.H
+    });  // 设置要生成二维码的链接
+</script>
+<!--<script>-->
+    <!--function showTheshare(_this) {-->
+        <!--$.ajax({-->
+            <!--type: "get",-->
+            <!--url: "/user/isLogin",-->
+            <!--success: function (result) {-->
+                <!--if (result.code === 0) {-->
+                    <!--if (result.data === "unLogin") {-->
+                        <!--location.href = "/login?url=" + window.location;-->
+
+                    <!--} else {-->
+
+                        <!--// function getQueryString(name) {-->
+                        <!--//     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");-->
+                        <!--//     var r = window.location.search.substr(1).match(reg);-->
+                        <!--//     console.log(r);-->
+                        <!--//     if (r != null)-->
+                        <!--//         return unescape(r[2]);-->
+                        <!--//     return null;-->
+                        <!--// }-->
+                        <!--// console.log(getQueryString("id"));-->
+                        <!--// var aid = getQueryString("id");-->
+                        <!--var fid = $("#movFid").html();-->
+                        <!--var uid = result.data.id;-->
+
+                        <!--$.ajax({-->
+                            <!--url: "/share/genShareToken",-->
+                            <!--data: {-->
+                                <!--fid: fid,-->
+                                <!--uid: uid,-->
+                                <!--type: 2-->
+                            <!--},-->
+                            <!--type: "get",-->
+                            <!--success: function (res) {-->
+
+                                <!--if (res.code === 0){-->
+                                    <!--var token = res.data.share_token;-->
+
+                                    <!--console.log(token);-->
+
+
+                                    <!--$(".icon-qq").click(function () {-->
+                                        <!--shareToQq("可牛的分享","http://localhost:8080/shareFlashDetail?token="+token,"keniu");-->
+                                    <!--});-->
+                                    <!--$(".icon-weibo").click(function () {-->
+                                        <!--shareToXl("可牛的分享","http://localhost:8080/shareFlashDetail?token="+token);-->
+                                    <!--});-->
+                                    <!--$(".icon-wechat").click(function () {-->
+                                        <!--createQrCode("http://localhost:8080/shareFlashDetail?token="+token);-->
+                                    <!--});-->
+                                <!--}-->
+
+                            <!--}-->
+                        <!--})-->
+
+                        <!--console.log("share-component");-->
+
+                        <!--// $(_this).children(".share-component");-->
+                        <!--$(_this).children(".share-component").slideToggle();-->
+
+                    <!--}-->
+                <!--}-->
+            <!--}-->
+        <!--});-->
+    <!--}-->
+
+    <!--function shareToXl(title,url) {-->
+        <!--var sharesinastring = 'http://v.t.sina.com.cn/share/share.php?title=' + title + '&url=' + url + '&content=utf-8&sourceUrl=' + url;-->
+        <!--window.open(sharesinastring, 'newwindow');-->
+    <!--}-->
+
+    <!--function shareToQq(title, url, desc) {-->
+        <!--// var shareString = 'http://connect.qq.com/widget/shareqq/index.html?url=你的分享网址&sharesource=qzone&title=你的分享标题&pics=你的分享图片地址&summary=你的分享描述&desc=你的分享简述';-->
+        <!--var shareString = "http://connect.qq.com/widget/shareqq/index.html?url=" + url + "&sharesource=qzone&title=" + title + "&pics=你的分享图片地址&summary=来自7财经的分享&desc=" + desc;-->
+        <!--window.open(shareString, 'newwindow');-->
+    <!--}-->
+
+    <!--function createQrCode(articleUrl) {-->
+        <!--layer.open({-->
+            <!--type: 1,-->
+            <!--title: '扫描二维码分享到微信',-->
+            <!--skin: 'layui-layer-demo', //样式类名-->
+            <!--closeBtn: 0, //不显示关闭按钮-->
+            <!--anim: 2,-->
+            <!--shadeClose: true, //开启遮罩关闭-->
+            <!--content: "<div id='qrcode'></div>"-->
+        <!--});-->
+        <!--qrcode = new QRCode(document.getElementById("qrcode"), {-->
+            <!--text: articleUrl,-->
+            <!--width: 160,-->
+            <!--height: 160,-->
+            <!--colorDark: "#2C323E",-->
+            <!--colorLight: "#FFF",-->
+            <!--correctLevel: QRCode.CorrectLevel.H-->
+        <!--});  // 设置要生成二维码的链接-->
+    <!--}-->
+<!--</script>-->

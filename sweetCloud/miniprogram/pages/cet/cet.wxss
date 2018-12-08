@@ -1,0 +1,6 @@
+/* miniprogram/pages/cet/cet.wxss */
+@import "../../lib/weui.wxss";
+
+.input-before{
+  margin: 5rpx;
+}

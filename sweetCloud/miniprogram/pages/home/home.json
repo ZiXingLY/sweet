@@ -1,0 +1,9 @@
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "emotion-view": "../../component/emotion/emotion",
+    "moment-view": "../../component/moment/moment",
+    "loading-view": "../../component/loading/loading",
+    "qq-emotion": "../../component/qemotion/qemotion"
+  }
+}

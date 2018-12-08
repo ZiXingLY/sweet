@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://cdn.bootcss.com/Swiper/4.3.0/css/swiper.min.css" rel="stylesheet">
+    <link href="../../public/css/frontIndexBanner.css" rel="stylesheet">
+    <link href="../../public/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/banner.css">
+    <link rel="stylesheet" href="../../public/css/index-small.css" media="all and (max-width:650px)">
+    <link rel="stylesheet" href="../../public/css/line-scale.css">
+    <!--<link rel="stylesheet" href="../../public/css/style.css">-->
+    <link rel="stylesheet" href="../../public/css/shareLooding.css">
+    <style>
+        .logo-box {
+            position: absolute;
+            left: 4%;
+        }
+        .author {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            position: absolute;
+            right: 6%;
+            color: white;
+        }
+        .login-register {
+            font-size: 14px;
+            display: flex;
+            position: absolute;
+            right: 6%;
+            color: white;
+        }
+
+        @media screen and (max-width: 650px){
+            .topNavigation {
+                width: 100%;
+            }
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <title>师院甜甜圈</title>
+</head>
+<body>
+
+    <div class="appBox">
+            <div class="main">
+                <div class="leftBox">
+                    <!--轮播div-->
+                    <div style="display: block;width: 100%;">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <!--<div class="swiper-slide">-->
+                                <!--<img class="swiper-img" src="http://img5.imgtn.bdimg.com/it/u=2622422379,2720158842&fm=27&gp=0.jpg">-->
+                            <!--</div>-->
+                            <!--<div class="swiper-slide">-->
+                                <!--<img class="swiper-img" src="http://img4.imgtn.bdimg.com/it/u=179065729,278521353&fm=27&gp=0.jpg">-->
+                            <!--</div>-->
+                            <!--<div class="swiper-slide">-->
+                                <!--<img class="swiper-img" src="http://img5.imgtn.bdimg.com/it/u=3334969416,3610784871&fm=27&gp=0.jpg">-->
+                            <!--</div>-->
+                            <!--<div class="swiper-slide">-->
+                                <!--<img class="swiper-img" src="http://img2.imgtn.bdimg.com/it/u=3711964097,3124986811&fm=27&gp=0.jpg">-->
+                            <!--</div>-->
+                        </div>
+                        <!-- 如果需要分页器 -->
+                        <div class="swiper-pagination"></div>
+
+                        <!-- 如果需要导航按钮 -->
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+
+                        <!-- 如果需要滚动条 -->
+                        <!--<div class="swiper-scrollbar"></div>-->
+                    </div>
+                    <!--两张图片-->
+                    <div class="adImageBox">
+                        <a href=""><img src="http://img5.imgtn.bdimg.com/it/u=2622422379,2720158842&fm=27&gp=0.jpg"></a>
+                        <a href=""><img src="http://img5.imgtn.bdimg.com/it/u=2622422379,2720158842&fm=27&gp=0.jpg"></a>
+                    </div>
+                    <div class="clearLove"></div>
+                    </div>
+                    <!--分类以及文章列表-->
+                    <div id="allNews">
+                    <div>
+                        <!--分类列表-->
+                        <div class="categoryBox">
+                            <ul class="categoryUl">
+                                <!--<li><span class="selectedSpan"></span><button class="categoryButton">新闻</button></li>-->
+                                <!--<li><span class="selectedSpan"></span><button class="categoryButton">政策</button></li>-->
+                                <!--<li><span class="selectedSpan"></span><button class="categoryButton">行情</button></li>-->
+                                <!--<li><span class="selectedSpan"></span><button class="categoryButton">技术</button></li>-->
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!--文章列表-->
+
+                    <!--<div class="contentBox">-->
+
+                        <!--<span class="artical-pic">-->
+                            <!--<img class="newsPic" src="https://www.xcj.com/uploads/20180718/617651171b502c82dee64f8122d5a436.jpg">-->
+                        <!--</span>-->
+
+                        <!--<span class="contentBrief">-->
+                            <!--<a><h2>这是一个标题这是一个标题这是一个标题这是一个标题这是一个标题这是一个标题这是这是一个标题这是一个标题这是</h2></a>-->
+                            <!--<p class="contentBox-p">这是文本内容这是一个标题这是一个标题这是这是一个标题这是一个标题这是这是一个标题这是一个标题这是这是一个标题这是一个标题这是这是一个标题这是一个标题这是这是一个标题这是一个标题这是</p>-->
+                            <!--<div class="smallSpan">-->
+
+                                <!--<span class="contentUserSpan">-->
+                                    <!--<p>自由马克</p>-->
+                                    <!--<span></span>-->
+                                    <!--<span>2018-01-01</span>-->
+                                <!--</span>-->
+
+                                <!--<span class="lookSpan">-->
+                                    <!--<img src="../../public/images/浏览.png" alt="">-->
+                                    <!--<span>300</span>-->
+                                <!--</span>-->
+                            <!--</div>-->
+
+                        <!--</span>-->
+
+                    <!--</div>-->
+
+
+                    <div class="load"><div id="loadBox" class="loadBox">加载更多</div></div>
+                    </div>
+
+                </div>
+
+                <div class="rightBox">
+
+                    <div class="flash-list">
+                        <div class="flash">快讯</div>
+                        <ul class="hotFlash">
+
+                            <!--<li>-->
+                                <!--<div class="transitionBox"><div class="transition" onclick="Noflash(this)"></div></div>-->
+                                <!--<div class="flashBox" >-->
+                                    <!--<a href="/login" style="text-decoration: none;">-->
+                                    <!--<p class="flash-title">蓝色光标发布小蓝机器人家族产品，机器人会营销还能撰稿</p>-->
+                                    <!--<div class="flash-detail">-->
+                                        <!--<p>8月4日，蓝色光标对外发布智能营销产品矩阵“小蓝机器人家族”，这是营销行业内首款智能自动化人机交互产品族。其中，idataBot营销数据平台、撰稿机器人妙笔、发布机器人生花、鲁班一站式电商营销平台、麦集客等产品均为首次亮相。</p>-->
+                                    <!--</div>-->
+                                    <!--<div class="flash-footer">-->
+                                        <!--<div class="flash-footer-time">38分钟前</div>-->
+                                        <!--<div class="flash-footer-look">-->
+                                            <!--<img class="flash-look" src="../../public/images/浏览.png" alt="">-->
+                                            <!--<span>300</span>-->
+                                        <!--</div>-->
+                                        <!--<div class="flash-footer-share">-->
+                                            <!--<img  class="flash-look" src="../../public/images/分享.png" alt="">-->
+                                            <!--<span>分享</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--</a>-->
+                                <!--</div>-->
+                            <!--</li>-->
+
+                            <!--<li>-->
+                                <!--<div class="transitionBox"><div class="transition"></div></div>-->
+                                <!--<div class="flashBox" >-->
+                                    <!--<p class="flash-title">蓝色光标发布小蓝机器人家族产品，机器人会营销还能撰稿</p>-->
+                                    <!--<div class="flash-footer">-->
+                                        <!--<div class="flash-footer-time">38分钟前</div>-->
+                                        <!--<div class="flash-footer-look">-->
+                                            <!--<img class="flash-look" src="../../public/images/浏览.png" alt="">-->
+                                            <!--<span>300</span>-->
+                                        <!--</div>-->
+                                        <!--<div class="flash-footer-share">-->
+                                            <!--<img  class="flash-look" src="../../public/images/分享.png" alt="">-->
+                                            <!--<span>分享</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</li>-->
+
+
+
+
+                            <a class="loadFlash" href="/flashList">查看更多资讯</a>
+
+
+                        </ul>
+
+                    </div>
+
+                    <div class="hotArticles">
+                        <div class="hotTitle">热门文章</div>
+                        <ul class="hotUl">
+                            <li>
+                                <img src="../../public/images/xiaochengxu.jpg">
+                                <span><a href="http://www.baicu.com"></a></span>
+                            </li>
+                            <li>
+                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1534229340493&di=3ddd5702a9cef3c1cda16e71cf6bdb8a&imgtype=0&src=http%3A%2F%2Fpic30.photophoto.cn%2F20140317%2F0015027437418763_b.jpg">
+                                <span><a href="http://www.baicu.com"></a></span>
+                            </li>
+                            <li>
+                                <img src="../../public/imgs/touming.png">
+                                <span><a href="http://www.baicu.com"></a></span>
+                            </li>
+                            <li>
+                                <img src="../../public/imgs/touming.png">
+                                <span><a href="http://www.baicu.com"></a></span>
+                            </li>
+                            <li>
+                                <img src="../../public/imgs/touming.png">
+                                <span><a href="http://www.baicu.com"></a></span>
+                            </li>
+                            <!--<li>-->
+                            <!--<img src="https://www.xcj.com/uploads/20180704/78cbc6de9a4eb9a37b0fd7d08d9c2120.jpg">-->
+                            <!--<span>asdadadasds</span>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+<!--图片分享所需元素-->
+    <div id="shareElement">
+        <div id="animationBox" class="wrapper nano" style="background-color: #98bff6; color: #98bff6;">
+            <div class="nano-content">
+                <div id="lodingBox" class="item-inner">
+                    <div class="item-loader-container">
+                        <div class="la-line-scale">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="shareErCode" style="display: none"></div>
+        <!--<img id="testImg" style="display: none" src="data:image/png;">-->
+        <img id="shareImage" src="http://localhost:8080/setImage?id=21">
+    </div>
+
+</body>
+</html>
+
+<script src="https://cdn.bootcss.com/Swiper/4.3.0/js/swiper.min.js"></script>
+<!--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>-->
+<script src="../../public/js/jquery.min.js"></script>
+<script src="../../public/js/plugins.min.js"></script>
+<script src="../../public/js/script.min.js"></script>
+<script src="../../public/js/qrcode.min.js"></script>
+<script src="../../public/js/shareImageFun.js"></script>
+<script src="../../public/js/bannerNav.js"></script>
+<script src="../../public/js/layer.js"></script>
+<script src="../../public/js/indexFlash.js"></script>
+<script src="../../public/js/bannerInit.js"></script>
+<script src="../../public/js/bannerJs.js"></script>
+<script src="../../public/js/index.js"></script>
+<script src="../../public/js/top.js"></script>

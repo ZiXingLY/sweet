@@ -1,0 +1,6 @@
+
+2018/10/19 09:30:56 directnet 127.0.0.1:54321 localhost.ptlogin2.qq.com:4309
+2018/10/19 09:30:56 directnet 127.0.0.1:54321 localhost.ptlogin2.qq.com:4305
+2018/10/19 09:30:56 directnet 127.0.0.1:54321 localhost.ptlogin2.qq.com:4307
+2018/10/19 09:30:56 directnet 127.0.0.1:54321 localhost.ptlogin2.qq.com:4301
+2018/10/19 09:30:56 directnet 127.0.0.1:54321 localhost.ptlogin2.qq.com:4303

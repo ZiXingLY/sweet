@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>个人资料</title>
+    <link rel="stylesheet" href="../../public/css/userInfo.css">
+    <link rel="stylesheet" href="../../public/css/userInfo_small.css" media="all and (max-width:650px)">
+</head>
+<body>
+<div class="outmain">
+    <div class="main">
+
+        <div class="main-title">
+            <div class="main-top">
+                <span class="main-top-title">个人资料</span>
+            </div>
+        </div>
+
+
+        <div class="main_content">
+
+            <div class="inner-content">
+
+                <div class="user_head_pic">
+                    <span>头像：</span>
+                    <div class="imgBox" id="imgBox"><img id="headImg" src="../../public/imgs/user.png" alt=""></div>
+                    <input id="head" type="file" style="display: none" accept="image/*" onchange="updateImg(this)"
+                           value="">
+                </div>
+
+                <!--<div><span>头像</span></div>-->
+
+                <div class="inputBox">
+                    <span>昵称：</span>
+                    <input type="text" id="nickname" value="" maxlength="11" placeholder="这是我的昵称">
+                    <!--<span class="checkAlert" id="inputBoxCheckAlert" hidden>请输入正确的手机号</span>-->
+                </div>
+
+                <div class="inputBox">
+                    <span>手机号：</span>
+                    <input type="text" id="phone" readonly value="" maxlength="11">
+                    <!--<span class="checkAlert" id="inputBoxCheckAlert" hidden>请输入正确的手机号</span>-->
+                </div>
+
+                <div class="inputBox">
+                    <button class="saveButton" id="save">保存</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../public/js/layer.js"></script>
+<script>
+    $(function () {
+        $("#imgBox").click(function () {
+            $("#head").click();
+        })
+
+    });
+
+
+    //显示图片
+    function updateImg(e) {
+        console.log(e);
+        console.log($("#file"));
+
+        //获取文件
+        var file = $("#head")[0].files[0];
+
+        if (file) {
+            //创建读取文件的对象
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            //创建文件读取相关的变量
+            var imgFile;
+
+            //为文件读取成功设置事件
+            reader.onload = function (e) {
+                // alert('文件读取完成');
+                imgFile = e.target.result; //获取当前文件的内容
+                // console.log(imgFile);
+                $("#headImg").attr('src', imgFile);
+
+            };
+            // reader.readAsDataURL(file);
+        }
+
+    }
+</script>
+
+<script>
+    var nicknameInput = document.getElementById('nickname');
+    var headInput = document.getElementById('head');
+    var saveBtn = document.getElementById('save');
+
+    saveBtn.onclick = function (ev) {
+        var coverImg = headInput.files[0];
+        var reader = new FileReader();
+        var nickname = nicknameInput.value;
+
+        var user;
+        if (coverImg != null && coverImg != "") {
+
+            reader.readAsDataURL(coverImg);
+            reader.onload = function (ev1) {
+                user = {
+                    info: reader.result,
+                    nickname: nickname
+                };
+
+                $.ajax({
+                    url: "/user/update",
+                    contentType: "application/json",
+                    type: "post",
+                    async: false,
+                    data: JSON.stringify(user),
+                    success: function (is) {
+                        if (is.code === 0) {
+                            layer.msg("保存成功");
+                        } else {
+                            layer.msg("服务器错误，保存失败");
+                        }
+                    }
+                })
+            }
+        }
+        else {
+
+            user = {
+                nickname: nickname
+            };
+
+            $.ajax({
+                url: "/user/update",
+                contentType: "application/json",
+                type: "post",
+                async: false,
+                data: JSON.stringify(user),
+                success: function (is) {
+                    if (is.code === 0) {
+                        layer.msg("保存成功");
+                    } else {
+                        layer.msg("服务器错误，保存失败");
+                    }
+                }
+            })
+        }
+
+    }
+
+
+    $.ajax({
+
+        url: "/user/detail",
+        dataType: "json",
+        type: "GET",
+        success: function (result) {
+
+            console.log(result)
+            if (result.code === 0) {
+                userInfo = result.data;
+                // console.log(user);
+                $("#nickname").val(userInfo.nickname);
+                $("#headImg").attr("src", userInfo.header);
+                $("#phone").val(userInfo.phone);
+            } else {
+                // layer.msg("修改失败！")
+            }
+        }
+    })
+
+
+</script>

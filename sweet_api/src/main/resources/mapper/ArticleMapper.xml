@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.anshily.front.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="io.anshily.model.Article">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="readnumber" jdbcType="INTEGER" property="readnumber" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="isbanner" jdbcType="INTEGER" property="isbanner" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="likenum" jdbcType="INTEGER" property="likenum" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="brief" jdbcType="VARCHAR" property="brief" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="coverimg" jdbcType="LONGVARCHAR" property="coverimg" />
+  </resultMap>
+  <!--轮播查询-->
+  <select id="findAllBanner" resultType="io.anshily.model.Article">
+    select * from qy_article where state = 1 order by aid desc limit 7
+  </select>
+  <!--获取文章通过分类 arg0 ：分类；arg1:分页-->
+  <select id="findArticleByCategory" resultType="map">
+    select * from qy_article a  left join qy_user u on a.uid = u.id where a.cid = #{arg0} and a.state = 1 order by addtime desc limit #{arg1},10
+  </select>
+  <!--查找热门文章-->
+  <select id="findHotArticle" resultType="io.anshily.model.Article">
+    select * from qy_article order by readnumber desc limit 10
+  </select>
+  <!--通过id获取文章-->
+  <select id="readArticleById" parameterType="int" resultType="io.anshily.model.Article">
+    SELECT * FROM qy_article WHERE aid in
+    ((SELECT aid FROM qy_article WHERE aid &lt; #{id} ORDER BY aid DESC LIMIT 1),
+    #{id},
+    (SELECT aid FROM qy_article WHERE aid &gt; #{id} ORDER BY aid LIMIT 1))
+  </select>
+
+  <!--用户根据状态查找文章-->
+  <select id="findMyCheckingArticle" resultType="io.anshily.model.Article">
+    select *from qy_article where uid = #{id} and state = 2 order by addtime desc
+  </select>
+  <select id="findMyReleaseArticle" resultType="io.anshily.model.Article">
+    select *from qy_article where uid = #{id} and state = 1 order by addtime desc
+  </select>
+  <select id="findMyNotPassArticle" resultType="io.anshily.model.Article">
+    select *from qy_article where uid = #{id} and state = 3 order by addtime desc
+  </select>
+
+  <!--后台根据状态查找-->
+  <select id="findArticleByState" parameterType="int" resultType="io.anshily.model.Article">
+    select *from qy_article
+    <where>
+      <if test="state !=null">
+        state = #{state}
+      </if>
+    </where>
+    ORDER  BY addtime DESC
+  </select>
+<!--查找用户所有文章-->
+  <select id="findArticleByUserId" parameterType="int" resultType="io.anshily.model.Article">
+    select * from qy_article where uid = #{id} order by addtime desc
+  </select>
+
+  <select id="wxFindArticleByState" resultType="io.anshily.model.Article">
+    select *from qy_article where uid = #{arg0} and state = #{arg1} order by addtime desc
+  </select>
+
+  <update id="addReadNumber">
+    update qy_article set readnumber = readnumber + 500
+  </update>
+</mapper>

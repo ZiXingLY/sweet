@@ -1,0 +1,71 @@
+<!--index.wxml-->
+<view class="container">
+      <view class="user-info">
+          <button 
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+    ></button>
+      <text>{{userName}}</text>
+      </view>
+<!-- 
+<image class='user-avatar' src='{{avatar}}' mode='aspectFill'></image> -->
+  <!-- 用户 openid -->
+  <!-- <view class="userinfo"> -->
+    <!-- <button 
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+    ></button> -->
+    <!-- <view> -->
+      <!-- <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button> -->
+    <!-- </view> -->
+  <!-- </view> -->
+
+
+  <!-- 上传图片 -->
+  <!-- <view class="uploader">
+    <view class="uploader-text" bindtap="doUpload">
+      <text>上传图片</text>
+    </view>
+    <view class="uploader-container" wx:if="{{imgUrl}}">
+      <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
+    </view>
+  </view> -->
+
+
+  <!-- 操作数据库 -->
+  <!-- <view class="uploader">
+    <navigator url="../databaseGuide/databaseGuide" open-type="navigate" class="uploader-text">
+      <text>前端操作数据库</text>
+    </navigator>
+  </view> -->
+
+  <!-- 新建云函数 -->
+  <view class="uploader">
+    <navigator url="../deviceMotion/deviceMotion" open-type="navigate" class="uploader-text">
+      <text>设备方向</text>
+    </navigator>
+  </view>
+
+    <view class="uploader">
+    <navigator url="../myEmotion/myEmotion" open-type="navigate" class="uploader-text">
+      <text>我的心情</text>
+    </navigator>
+  </view>
+
+    <view class="uploader">
+    <navigator url="../usecom/index" open-type="navigate" class="uploader-text">
+      <text>我的时刻</text>
+    </navigator>
+  </view>
+
+    <view class="uploader">
+    <navigator url="../cet/cet" open-type="navigate" class="uploader-text">
+      <text>我的四六级</text>
+    </navigator>
+  </view>
+
+</view>

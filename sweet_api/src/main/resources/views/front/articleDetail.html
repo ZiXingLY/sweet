@@ -1,0 +1,522 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--<link rel="stylesheet" href="../../public/css/index.css">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="../../public/css/banner.css">
+
+    <link rel="stylesheet" href="../../public/css/articleDetail.css">
+    <link rel="stylesheet" type="text/css" media="screen and (max-width:650px)"
+          href="../../public/css/articleDetail_small.css">
+    <link rel="stylesheet" href="../../public/js/share/share.min.css">
+    <style>
+        .logo {
+            height: 2.6rem;
+        }
+        #qrcode {
+            position: absolute;
+            /* left: 36%; */
+            /* top: 30%; */
+            width: 210px;
+            height: 155px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            border-radius: 5px;
+            box-shadow: 5px 5px 66px -5px;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .qrcode-mask {
+            position: fixed;
+            /* width: 100%; */
+            /* height: 260%; */
+            z-index: 10;
+            background-color: rgba(128, 128, 128, 0.5);
+            height: 110%;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+        }
+        body{
+            position: relative;
+        }
+        .qr-title{
+            margin-bottom: 8px;
+        }
+    </style>
+
+    <title>文章详情</title>
+</head>
+<body>
+
+<!--文章详情-->
+
+<div class="articleContent">
+
+
+    <div class="Left">
+
+        <div class="main-title">
+            <div class="main-top">
+                <span class="main-top-title"><a href="">新闻</a>-<a href="">新闻详情</a></span>
+            </div>
+        </div>
+
+
+        <div class="matter">
+            <!--文章标题-->
+            <p id="articleTitle"></p>
+            <!--文章时间作者浏览量分享量-->
+            <div class="matterTop">
+                <span id="articleAuthor" class="authorSpan"></span>
+                <span id="articleTime" class="timeSpan"></span>
+                <!--浏览量-->
+                <span class="lookSpan">
+                        <img src="../../public/images/浏览.png" alt="">
+                        <span id="articleLook">0</span>
+                </span>
+                <!--分享-->
+                <span class="lookSpan">
+                        <img src="../../public/imgs/k_02.png" alt="">
+                        <span id="articleShare">0</span>
+                </span>
+            </div>
+            <!--文章内容-->
+            <div id="articleContent" class="matterContent">
+            </div>
+
+            <!--<div class="matterFooter">-->
+            <!--&lt;!&ndash;<div class="shareButton">分享：<img src="../../public/images/分享.png" alt=""></div>&ndash;&gt;-->
+            <!--<span id="preSpan">上一篇：<a id="preA" class="mattterOrder" href="" ></a></span>-->
+            <!--<span id="nextSpan">下一篇：<a id="nextA" class="mattterOrder" href="" ></a></span>-->
+            <!--</div>-->
+            <div class="matter-foot">
+                <div class="goodBox">
+                    <img class="goodimg" src="../../public/images/like.png" alt="">
+                    <span id="goodNumber" class="good-Number">0</span>
+                </div>
+                <!--<div class="matter-foot-share" onclick="showTheshare(this)">-->
+                <div class="matter-foot-share">
+                    <img src="../../public/images/文章详情分享.png" alt="">
+                    <span class="good-Number">分享至</span>
+
+                    <div class="social-share share-component" hidden>
+                        <a class="social-share-icon icon-qq" href="javascript:void (0)"></a>
+                        <a class="social-share-icon icon-weibo" href="javascript:void (0)"></a>
+                        <a class="social-share-icon icon-wechat" href="javascript:void (0)"></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="Right">
+
+        <!--<div class="aRight">-->
+
+        <!--<div class="aRightTop">-->
+        <!--<div class="aRightImg" >-->
+        <!--<img id="userHeadImg" src="../../public/imgs/zuozhe.gif" alt="">-->
+        <!--</div>-->
+
+        <!--<p id="userName"></p>-->
+        <!--&lt;!&ndash;<p id="sign"></p>&ndash;&gt;-->
+        <!--</div >-->
+
+        <!--<p class="aRightMiddle"><img src="../../public/images/文章.png" alt="">发表文章总数<span id="allArticlesCount"></span></p>-->
+        <!--<p class="aRightMiddle"><img src="../../public/images/浏览量.png" alt="">文章总浏览量<span id="allView"></span></p>-->
+
+        <!--<a id="moreArticle" class="aRightFoot" href="">阅读更多文章</a>-->
+
+        <!--</div>-->
+
+        <div class="projectBox">
+            <img src="../../public/images/xiaochengxu.jpg" alt="">
+            <div class="projectBox-rt">
+                <span>扫码小程序</span>
+                <span>掌上轻松阅读>></span>
+            </div>
+        </div>
+
+        <div class="hotArticles">
+
+            <div class="hotTitle">热门文章</div>
+            <ul class="hotUl">
+                <li>
+                    <img src="../../public/imgs/touming.png">
+                    <span><a href="http://www.baicu.com"></a></span>
+                </li>
+                <li>
+                    <img src="../../public/imgs/touming.png">
+                    <span><a href="http://www.baicu.com"></a></span>
+                </li>
+                <li>
+                    <img src="../../public/imgs/touming.png">
+                    <span><a href="http://www.baicu.com"></a></span>
+                </li>
+                <li>
+                    <img src="../../public/imgs/touming.png">
+                    <span><a href="http://www.baicu.com"></a></span>
+                </li>
+                <li>
+                    <img src="../../public/imgs/touming.png">
+                    <span><a href="http://www.baicu.com"></a></span>
+                </li>
+                <!--<li>-->
+                <!--<img src="https://www.xcj.com/uploads/20180704/78cbc6de9a4eb9a37b0fd7d08d9c2120.jpg">-->
+                <!--<span>asdadadasds</span>-->
+                <!--</li>-->
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="qrcode-mask" style="display: none">
+    <div id='qrcode'>
+        <div class="qr-title">扫描二维码分享到微信</div>
+    </div>
+</div>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="../../public/js/layer.js"></script>
+<script src="../../public/js/bannerNav.js"></script>
+<script src="../../public/js/articleDetail.js"></script>
+<script src="../../public/js/top.js"></script>
+<script src="../../public/js/qrcode.min.js"></script>
+<script>
+    var flag = 0;
+    var token;
+
+    var shareUrl = "http://www.51cnews.com//shareArticleDetail?token=";
+
+    // var qrindex;
+
+    $(".matter-foot-share").click(function () {
+        if (flag === 0) {
+            $.ajax({
+                type: "get",
+                url: "/user/isLogin",
+                success: function (result) {
+                    if (result.code === 0) {
+                        if (result.data === "unLogin") {
+                            location.href = "/login?url=" + window.location;
+
+                        } else {
+                            flag = 1;
+
+                            function getQueryString(name) {
+                                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                                var r = window.location.search.substr(1).match(reg);
+                                // console.log(r);
+                                if (r != null)
+                                    return unescape(r[2]);
+                                return null;
+                            }
+
+                            console.log(getQueryString("id"));
+                            var aid = getQueryString("id");
+                            var uid = result.data.id;
+
+                            $.ajax({
+                                url: "/share/genShareToken",
+                                data: {
+                                    aid: aid,
+                                    uid: uid,
+                                    type: 1
+                                },
+                                type: "get",
+                                success: function (res) {
+
+                                    if (res.code === 0) {
+                                        token = res.data.share_token;
+
+                                        qrcode.clear();
+                                        qrcode.makeCode(shareUrl + token);
+
+                                    }
+                                }
+                            })
+
+                            $(".share-component").slideToggle(10,function () {
+                                if(document.body.clientWidth > 650){
+                                    $(".share-component").css("display","block");
+                                }else{
+                                    $(".share-component").css("display","inline-flex");
+                                }
+                            });
+                        }
+                    }
+                }
+            })
+            // flag != 0 时；
+        } else {
+
+            // $(".icon-qq").click(function () {
+            //     shareToQq("可牛的分享","http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token,"keniu");
+            // });
+            // $(".icon-weibo").click(function () {
+            //     shareToXl("可牛的分享","http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+            // });
+            // $(".icon-wechat").click(function () {
+            //
+            //     console.log("flag为1时qrToggle");
+            //
+            //     $("#qrcode").slideToggle();
+            //     // createQrCode("http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+            // });
+
+            $(".share-component").slideToggle();
+            // $(".share-component").slideToggle();
+        }
+    })
+
+    $(".icon-qq").click(function () {
+        shareToQq("可牛的分享", shareUrl + token, "keniu");
+    });
+    $(".icon-weibo").click(function () {
+        shareToXl("可牛的分享", shareUrl + token);
+    });
+    $(".icon-wechat").click(function (e) {
+        e.stopPropagation();
+        // console.log("flag为0时qrToggle");
+        $(".qrcode-mask").show(500);
+        // createQrCode("http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+    });
+    $(document).on('click touchstart touchmove', 'html', function (event) {
+        $(".qrcode-mask").hide(500);
+        // event.stopPropagation();
+    })
+
+    // $.ajax({
+    //     type: "get",
+    //     url: "/user/isLogin",
+    //     success: function (result) {
+    //         if (result.code === 0) {
+    //             if (result.data === "unLogin") {
+    //                 location.href = "/login?url=" + window.location;
+    //
+    //             } else {
+    //
+    //                 function getQueryString(name) {
+    //                     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    //                     var r = window.location.search.substr(1).match(reg);
+    //                     // console.log(r);
+    //                     if (r != null)
+    //                         return unescape(r[2]);
+    //                     return null;
+    //                 }
+    //                 console.log(getQueryString("id"));
+    //                 var aid = getQueryString("id");
+    //                 var uid = result.data.id;
+    //
+    //                 $.ajax({
+    //                     url: "/share/genShareToken",
+    //                     data: {
+    //                         aid: aid,
+    //                         uid: uid,
+    //                         type: 1
+    //                     },
+    //                     type: "get",
+    //                     success: function (res) {
+    //
+    //                         if (res.code === 0){
+    //                             var token = res.data.share_token;
+    //
+    //                             console.log(token);
+    //
+    //
+    //                             $(".icon-qq").click(function () {
+    //                                 shareToQq("可牛的分享","http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token,"keniu");
+    //                             });
+    //                             $(".icon-weibo").click(function () {
+    //                                 shareToXl("可牛的分享","http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+    //                             });
+    //                             $(".icon-wechat").click(function () {
+    //                                 createQrCode("http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+    //                             });
+    //                         }
+    //
+    //                     }
+    //                 })
+    //
+    //                 // console.log("share-component");
+    //
+    //                 // $(_this).children(".share-component");
+    //
+    //
+    //             }
+    //         }
+    //     }
+    // });
+    // //
+    // // $(".matter-foot-share").click(function () {
+    // //     $(".share-component").slideToggle();
+    // // })
+    // //
+    // // var  token = "eb163727917cbba1eea208541a643e74"
+    // // $(".icon-qq").click(function () {
+    // //     shareToQq("可牛的分享","http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token,"keniu");
+    // // });
+    // // $(".icon-weibo").click(function () {
+    // //     shareToXl("可牛的分享","http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+    // // });
+    // // $(".icon-wechat").click(function () {
+    // //     createQrCode("http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+    // //
+    // // });
+    // //
+    // // $(_this).children(".share-component").slideToggle();
+    //
+    //
+    // function showTheshare(_this) {
+    //     $.ajax({
+    //         type: "get",
+    //         url: "/user/isLogin",
+    //         success: function (result) {
+    //             if (result.code === 0) {
+    //                 if (result.data === "unLogin") {
+    //                     location.href = "/login?url=" + window.location;
+    //
+    //                 } else {
+    //
+    //                     function getQueryString(name) {
+    //                         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    //                         var r = window.location.search.substr(1).match(reg);
+    //                         // console.log(r);
+    //                         if (r != null)
+    //                             return unescape(r[2]);
+    //                         return null;
+    //                     }
+    //                     console.log(getQueryString("id"));
+    //                     var aid = getQueryString("id");
+    //                     var uid = result.data.id;
+    //
+    //                     $.ajax({
+    //                         url: "/share/genShareToken",
+    //                         data: {
+    //                             aid: aid,
+    //                             uid: uid,
+    //                             type: 1
+    //                         },
+    //                         type: "get",
+    //                         success: function (res) {
+    //
+    //                             if (res.code === 0){
+    //                                 var token = res.data.share_token;
+    //
+    //                                 console.log(token);
+    //
+    //
+    //                                 $(".icon-qq").click(function () {
+    //                                     shareToQq("可牛的分享","http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token,"keniu");
+    //                                 });
+    //                                 $(".icon-weibo").click(function () {
+    //                                     shareToXl("可牛的分享","http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+    //                                 });
+    //                                 $(".icon-wechat").click(function () {
+    //                                     createQrCode("http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+    //                                 });
+    //                             }
+    //
+    //                         }
+    //                     })
+    //
+    //                     // console.log("share-component");
+    //
+    //                     // $(_this).children(".share-component");
+    //                     $(_this).children(".share-component").slideToggle();
+    //
+    //                 }
+    //             }
+    //         }
+    //     });
+    //
+    //     var  token = "eb163727917cbba1eea208541a643e74"
+    //     $(".icon-qq").click(function () {
+    //         shareToQq("可牛的分享","http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token,"keniu");
+    //     });
+    //     $(".icon-weibo").click(function () {
+    //         shareToXl("可牛的分享","http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+    //     });
+    //     $(".icon-wechat").click(function () {
+    //         createQrCode("http://localhost:8080/credits/toReadArticleAddScoreByToken?token="+token);
+    //
+    //     });
+    //
+    //     $(_this).children(".share-component").slideToggle();
+    //
+    // }
+
+    function shareToXl(title, url) {
+        var sharesinastring = 'http://v.t.sina.com.cn/share/share.php?title=' + title + '&url=' + url + '&content=utf-8&sourceUrl=' + url;
+        window.open(sharesinastring, 'newwindow');
+    }
+
+    function shareToQq(title, url, desc) {
+        // var shareString = 'http://connect.qq.com/widget/shareqq/index.html?url=你的分享网址&sharesource=qzone&title=你的分享标题&pics=你的分享图片地址&summary=你的分享描述&desc=你的分享简述';
+        var shareString = "http://connect.qq.com/widget/shareqq/index.html?url=" + url + "&sharesource=qzone&title=" + title + "&pics=你的分享图片地址&summary=来自7财经的分享&desc=" + desc;
+        window.open(shareString, 'newwindow');
+    }
+
+    // function createQrCode(articleUrl) {
+    //     //
+    //     // qrcode.clear();
+    //     // qrcode.makeCode(articleUrl);
+    //     // $("#qrcode").slideToggle();
+    //
+    //     var index = layer.closeAll();
+    //     layer.close(layer.index);
+    //     layer.open({
+    //         type: 1,
+    //         title: '扫描二维码分享到微信',
+    //         skin: 'layui-layer-demo', //样式类名
+    //         closeBtn: 1, //不显示关闭按钮
+    //         anim: 2,
+    //         shadeClose: true, //开启遮罩关闭
+    //         content: "<div id='qrcode'></div>",
+    //         success: function(layero, index){
+    //
+    //
+    //             qrcode.clear();
+    //             qrcode.makeCode(articleUrl);
+    //             console.log(layero, index);
+    //         },
+    //         end: function () {
+    //             console.log("关闭所有弹出层")
+    //             layer.closeAll();
+    //         }
+    //     });
+    //     qrcode = new QRCode(document.getElementById("qrcode"), {
+    //         text: articleUrl,
+    //         width: 160,
+    //         height: 160,
+    //         colorDark: "#2C323E",
+    //         colorLight: "#FFF",
+    //         correctLevel: QRCode.CorrectLevel.H
+    //     });  // 设置要生成二维码的链接
+    // }
+    qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: window.location,
+        width: 160,
+        height: 160,
+        colorDark: "#2C323E",
+        colorLight: "#FFF",
+        correctLevel: QRCode.CorrectLevel.H
+    });  // 设置要生成二维码的链接
+</script>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title> 我的会员</title>
+    <link rel="stylesheet" href="../../public/css/userVip.css">
+    <link rel="stylesheet" href="../../public/css/userVip-small.css" media="all and (max-width:650px)">
+    <!--<link rel="stylesheet" href="../../public/css/userInfo_small.css" media="all and (max-width:650px)">-->
+</head>
+<body>
+<div class="outmain">
+    <div class="main">
+
+        <div class="main-title">
+            <div class="main-top">
+                <span class="main-top-title">我的会员</span>
+            </div>
+        </div>
+
+        <div class="main_content">
+            <div class="inner-content">
+
+                <div class="vipBox">当前<span class="vipSpan">0</span>级，本月剩余文章发布次数：<span class="restTimes">0</span>次</div>
+
+                <a href="/recharge" target="_top" class="saveBox"><button class="saveButton" id="save">续费／升级</button></a>
+
+
+            </div>
+
+        </div>
+
+        <div class="main-title">
+            <div class="main-top">
+                <span class="main-top-title">会员等级说明</span>
+            </div>
+        </div>
+
+        <div class="main_content">
+
+                <div class="iner-Box">
+                    <div class="imgBox"><img src="../../public/imgs/v1.png" alt=""></div>
+                    <div class="newsBox">
+                        <span class="money">¥2000</span>
+                        <p class="newsNumber">每个月可免费发布2条新闻</p>
+                    </div>
+                </div>
+
+                <div class="iner-Box">
+                    <div class="imgBox"><img src="../../public/imgs/v2.png" alt=""></div>
+                    <div class="newsBox">
+                        <span class="money">¥5000</span>
+                        <p class="newsNumber">每个月可免费发布5条新闻</p>
+                    </div>
+                </div>
+
+                <div class="iner-Box">
+                    <div class="imgBox"><img src="../../public/imgs/v3.png" alt=""></div>
+                    <div class="newsBox">
+                        <span class="money">¥10000</span>
+                        <p class="newsNumber">每个月可免费发布10条新闻</p>
+                    </div>
+                </div>
+
+        </div>
+
+        <div class="main-title">
+            <div class="main-top">
+                <span class="main-top-title">购买记录</span>
+            </div>
+        </div>
+
+
+        <div class="score main_content ">
+            <ul id="messageList" class="messageList">
+
+                <!--<li>-->
+                    <!--<span>交易编号1542654125698452125</span>-->
+                    <!--<span>¥5000</span>-->
+                    <!--<span>2018-04-02 13:24</span>-->
+                <!--</li>-->
+
+            </ul>
+        </div>
+
+        <div class="navigatepageNums">
+            <span class="preLi"><a><</a></span>
+            <ul>
+            </ul>
+            <span class="nextA"><a>></a></span>
+            <span id="allPageSpan"></span>
+            <input type="text" id="jumpPageInput"><p>页</p>
+            <button id="jumpPageButton">确定</button>
+            <a id="jumpPageA" style="opacity: 0"></a>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="../../public/js/layer.js"></script>
+<script src="../../public/js/userVip.js"></script>
+<script>
+
+    $.ajax({
+        type: "get",
+        url: "/credits/getUserAllScore",
+        success: function (res) {
+            if (res.code === 0){
+                $("#left-free-scores").html(res.data.totalScore);
+                if (res.data.user !== ""){
+                    //
+                    // $("#headImg").attr("src","/"+res.data.user.header);
+                    //
+                    // if (res.data.user.nickname !== "") {
+                    //     $(".nickname").html(res.data.user.nickname);
+                    // }
+                    $(".vipSpan").html(res.data.user.vip_level);
+                    $(".restTimes").html(res.data.user.left_free_times);
+                }
+            }
+        }
+    })
+</script>

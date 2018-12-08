@@ -1,0 +1,59 @@
+{
+  "cloud": true,
+  "pages": [
+    "pages/home/home",
+    "pages/index/index",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/create/create",
+    "pages/myMoment/myMoment",
+    "pages/myEmotion/myEmotion",
+    "pages/emotionDetail/emotionDetail",
+    "pages/space/space",
+    "pages/deviceMotion/deviceMotion",
+    "pages/momentDetail/momentDetail",
+    "pages/usecom/index",
+    "pages/cet/cet",
+    "pages/addPromise/addPromise",
+  "pages/qEmotionDetail/qEmotionDetail"
+  ],
+  "window": {
+    "backgroundColor": "#303030",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#E91E63",
+    "navigationBarTitleText": "甜甜圈",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "世界",
+        "iconPath": "/images/Worldwide_u.png",
+        "selectedIconPath": "/images/Worldwide_a.png"
+      },
+      {
+        "pagePath": "pages/create/create",
+        "text": "创造",
+        "iconPath": "/images/create_u.png",
+        "selectedIconPath": "/images/create_a.png"
+      },
+      {
+        "pagePath": "pages/space/space",
+        "text": "觅",
+        "iconPath": "/images/Secrets_u.png",
+        "selectedIconPath": "/images/Secrets_a.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "家",
+        "iconPath": "/images/Home_u.png",
+        "selectedIconPath": "/images/Home_a.png"
+      }
+    ]
+  }
+}

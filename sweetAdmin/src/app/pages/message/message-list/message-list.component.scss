@@ -1,0 +1,16 @@
+// 表单中的div在一行显示
+.form-div-inline {
+  div {
+    display: inline-block;
+  }
+}
+// input位置微调
+.input-down {
+  position: relative;
+  top: 2px;
+}
+
+td{
+  vertical-align:middle;
+  text-align:center;
+}

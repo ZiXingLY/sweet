@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.anshily.admin.dao.CreditsMapper">
+  <resultMap id="BaseResultMap" type="io.anshily.model.Credits">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="article_type" jdbcType="INTEGER" property="article_type" />
+    <result column="add_by_openid" jdbcType="VARCHAR" property="add_by_openid" />
+    <result column="add_by_uid" jdbcType="INTEGER" property="add_by_uid" />
+    <result column="oid" jdbcType="INTEGER" property="oid" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="add_time" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="last_update_time" />
+    <result column="vip_level" jdbcType="INTEGER" property="vip_level" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+  </resultMap>
+
+    <select id="getScoreByUidAndType" resultType="map">
+        SELECT SUM(score) as "totalScore" FROM qy_credits
+        WHERE uid = #{uid} and type = #{type};
+    </select>
+  <select id="getUserAllScore" parameterType="int" resultType="map">
+    SELECT SUM(score) as "totalScore" FROM qy_credits
+        WHERE uid = #{uid};
+  </select>
+
+    <select id="findCreditsByUid" resultType="io.anshily.model.Credits">
+        select * from qy_credits where uid = #{uid}
+    </select>
+
+  <select id="articleHasReadByReadId" resultType="io.anshily.model.Credits">
+            select * from qy_credits where uid = #{uid} and aid = #{aid} and add_by_uid = #{add_by_uid}
+  </select>
+
+  <select id="articleHasReadByReadOpenid" resultType="io.anshily.model.Credits">
+            select * from qy_credits where openid = #{openid} and aid = #{aid} and add_by_openid = #{add_by_openid}
+  </select>
+</mapper>

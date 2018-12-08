@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="B.html?id=1&asd=atyu">112asdasd</a>
+</body>
+</html>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        console.log(r);
+        if (r != null)
+            return unescape(r[2]);
+        return null;
+    }
+    console.log(getQueryString("id"));
+    var aid = getQueryString("id");
+    $.ajax({
+        url:"/article/readArticle?id="+aid,
+        dataType:"json",
+        success:function (data) {
+            console.log(data);
+        }
+    })
+</script>

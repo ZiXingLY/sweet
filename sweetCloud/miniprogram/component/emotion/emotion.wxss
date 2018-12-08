@@ -1,0 +1,22 @@
+/* component/emotion/emotion.wxss */
+.emotion-item{
+  display: flex;
+  flex-direction: row;
+  /* border-bottom:2rpx solid #D1D1D1; */
+}
+.author-img{
+  height: 60rpx;
+  width: 60rpx;
+  margin:15rpx;
+  border-radius: 50%;
+}
+.author-name{
+  display: flex;
+  margin-top:35rpx;
+}
+.emotion-body{
+  display: flex;
+  flex-direction: column;
+  font-weight:300;
+  font-size:25rpx;
+}

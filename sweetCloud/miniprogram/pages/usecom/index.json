@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "custom-form-field": "../../component/com/custom-form-field"
+  }
+}

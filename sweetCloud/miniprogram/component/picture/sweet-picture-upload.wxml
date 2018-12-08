@@ -1,0 +1,7 @@
+<!--component/picture/sweet-picture-upload.wxml-->
+
+<block  wx:for='{{Paths}}'>
+  <view class="weui-uploader__input-box {{item == '' ? 'weui-uploader_add' : ''}}" bindtap='chooseImg'>
+    <image class='upload-img' mode='aspectFill' src='{{item}}'></image>
+  </view>
+</block>

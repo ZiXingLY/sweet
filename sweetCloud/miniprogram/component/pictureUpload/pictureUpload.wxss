@@ -1,0 +1,5 @@
+/* component/pictureUpload/pictureUpload.wxss */
+.upImg{
+  width: 250rpx;
+  height: 250rpx;
+}

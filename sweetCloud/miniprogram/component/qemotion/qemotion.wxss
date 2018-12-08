@@ -1,0 +1,44 @@
+/* component/emotion/emotion.wxss */
+.emotion-item{
+  /* display: flex;
+  flex-direction: row; */
+  margin: 10rpx;
+  /* border-bottom:2rpx solid #D1D1D1; */
+  font-size:25rpx;
+}
+.author{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.author-img{
+  height:60rpx;
+  width:60rpx;
+  margin:15rpx;
+  border-radius: 50%;
+}
+.author-name{
+  display: flex;
+  margin-top:35rpx;
+}
+.emotion-body{
+  display: flex;
+  flex-direction: column;
+  font-weight:300;
+  margin: 15rpx;
+}
+.upload-img{
+  width: 220rpx;
+  height: 220rpx;
+  margin:0 7rpx;
+}
+.comment{
+  display: flex;
+  flex-direction: row;
+}
+.comment-name{
+  color: blueviolet;
+}
+.comment-content{
+  /* color: wheat; */
+}

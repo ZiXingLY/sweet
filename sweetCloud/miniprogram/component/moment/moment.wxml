@@ -1,0 +1,19 @@
+<!--component/moment/moment.wxml-->
+<!-- <text>component/moment/moment.wxml</text> -->
+
+<view class='moment-box'>
+
+  <view class='author'><image  class='author-img' src='{{Moment.authorImg}}'></image></view>
+
+<!-- <view class='author-header'>
+  <image class='author-img' src='{{Moment.authorImg}}'></image>
+</view> -->
+
+<block  wx:for='{{Moment.paths}}'>
+  <view class="weui-uploader__input-box">
+    <image class='upload-img' mode='aspectFill' src='{{item}}' bindtap='previewImage' data-url='{{item}}'></image>
+  </view>
+</block>
+
+</view>
+

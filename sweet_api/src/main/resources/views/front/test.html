@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../public/js/html2canvas.js"></script>
+</head>
+<body>
+
+  <!--<img src="/uploads/20180828/40e13dce-1cff-4f23-92fc-66563f2d8148.png">-->
+
+  <div style="width: 100px;height: 100px;background-color: rebeccapurple"></div>
+
+  <button onclick="test()">点击</button>
+
+</body>
+</html>
+<script>
+
+  function test() {
+    html2canvas(document.body).then(function(canvas) {
+      document.body.appendChild(canvas);
+    });
+  }
+</script>

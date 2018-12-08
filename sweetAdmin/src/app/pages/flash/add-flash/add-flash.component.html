@@ -1,0 +1,24 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12" style="padding-bottom: 20px">
+      <input type="text" class="form-control btn-radius" placeholder="请输入文章名称" [(ngModel)]="dataArr.policy_name" maxlength="50">
+    </div>
+  <div class="col-md-12">
+    <app-tinymce-editor [receiveContent]="receiveContent" (updateContent)="updateContent($event)"></app-tinymce-editor>
+  </div>
+</div>
+<div class="row" *ngFor="let item of policyName let i = index" style="margin-top: 20px">
+  <div class="col-md-12">
+    <span>{{item}}</span>
+    <span (click)="deleteimg(i)" style="color: red">删除</span>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 20px; margin-bottom: 40px;text-align: center">
+  <div class="col-md-12">
+    <button class="btn btn-radius btn-secondary" (click)="goBack()">返回</button>
+    <button class="btn btn-radius btn-primary" style="margin-left: 100px" (click)="saveData()">确定</button>
+  </div>
+</div>
+
+</div>

@@ -1,0 +1,5 @@
+{
+    "usingComponents": {
+      "sweet-picture-upload-view": "../../component/picture/sweet-picture-upload"
+    }
+}

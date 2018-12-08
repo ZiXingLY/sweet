@@ -1,0 +1,140 @@
+<div class="row animated fadeIn">
+
+    <div style="width: 20%">
+        <div>
+            <span>轮播图顺序</span><br>
+            <input type="number" class="form-control btn-radius" [(ngModel)]="bannerSort"
+                   style="width: 12rem;margin: 10px 0">
+        </div>
+        <input id="fileInput" type="file" (change)="commodityPictures($event)">
+
+        <img style="width: 14rem;object-fit: cover;" src="{{cropperImg}}"
+             class="btn-radius">
+        <!--<div>-->
+            <!--<app-cropper (updateCropperImg)="commodityPictures($event)"></app-cropper>-->
+
+            <!--<div class="col-md-3" style="position: relative" *ngIf="detailsPicture">-->
+                <!--<img style="width: 14rem;margin-left: -1.5rem;object-fit: cover;" src="{{cropperImg}}" class="btn-radius">-->
+                <!--<a href="Javascript:;" class="delete_btuttons" (click)="deleteimg(i)"><i class="icon-close"></i></a>-->
+                <!--<div class="uploads_buttons" (click)="updateCroppersImg()">{{uploadpictures}}</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3">-->
+                <!--<button class="btn btn-radius btn-primary" *ngIf="!detailsPicture" (click)="updateCroppersImg()">-->
+                    <!--{{uploadpictures}}-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+        <div style="margin: 10px 0">
+            <span>轮播图位置</span>
+            <br>
+            <select id="" name="select" class="form-control" style="margin: 10px 0" [(ngModel)]="bannerShowAddress">
+                <option value="1">政策</option>
+                <option value="2">示范基地</option>
+            </select>
+        </div>
+
+        <div style="margin: 10px 0">
+            <span>图片链接</span>
+            <textarea style="margin: 10px 0" class="form-control btn-radius" rows="5" [(ngModel)]="bannerUrl"
+            ></textarea>
+        </div>
+        <button class="btn btn-success btn-radius" style="margin-top: 10px;width: 100%" (click)="submits()">提交</button>
+    </div>
+    <div class=" table-responsive" style="width: 80%;padding-left: 10px ">
+        <table class="table table-center table-bordered table-hover" style="min-width: 0px">
+            <thead class="table-inverse">
+            <tr>
+                <td>轮播图片</td>
+                <td>排序</td>
+                <td>轮播图位置</td>
+                <td>链接</td>
+                <td>新增日期</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody class="tab-content">
+            <tr *ngFor="let item of bannerList let i = index">
+                <td>
+                    <img style="width: 150px;height: 80px;object-fit: cover;" src="{{imgUrl + item.picture}}"
+                         alt="">
+                </td>
+                <td>{{item.sort}}</td>
+                <td>
+                    <span *ngIf="item.address == 1">政策</span>
+                    <span *ngIf="item.address == 2">示范基地</span>
+                </td>
+                <td>{{item.url}}</td>
+                <td>{{item.add_time | date:'yyyy-MM-dd hh:mm:ss' }}</td>
+                <td>
+                    <a href="javascript:;" (click)="smallModal.show();clickShelves(item.id,item.state)">
+                        <span *ngIf="item.state == 1">下架</span>
+                        <span *ngIf="item.state == 2">上架</span>
+                    </a>
+                    <span class="removeBtn" *ngIf="item.state == 2" style="padding-left: 10px" href="javascript:;"
+                          (click)="smallModal.show();deleteitem(item.id, item.is_shelves)">
+                            删除
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p *ngIf="isnoData" class="noneData">暂无数据</p>
+    </div>
+    <br>
+</div>
+<!--分页组件-->
+<div style="float: right;margin-top: 20px">
+    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" itemsPerPage="10"
+                [maxSize]="maxSize" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页"
+                (pageChanged)="pageChanged($event)"></pagination>
+</div>
+
+<div bsModal #smallModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-primary modal-sm"
+         [ngClass]="{'modal-danger': !shelvesorDeletes, 'modal-primary':shelvesorDeletes}" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">提示</h5>
+                <button type="button" class="close" (click)="smallModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <p style="margin: 0px">{{modalText}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="smallModal.hide()">取消</button>
+                <button (click)="smallModal.hide()" type="button" class="btn btn-primary"
+                        [ngClass]="{'btn-danger': !shelvesorDeletes, 'btn-primary':shelvesorDeletes}"
+                        (click)="smallModal.hide();definiteRequest();">确定
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+<div *ngIf="dangerModal" [config]="{ show: true }" (onHidden)="hideModal()" bsModal #autoShownModal="bs-modal"
+     class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" [ngClass]="{'modal-danger': !issuccess, 'modal-success':issuccess}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">提示</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p style="margin: 0px">{{successText}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn " [ngClass]="{'btn-success':issuccess,'btn-danger':!issuccess}"
+                        (click)="hideModal();">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

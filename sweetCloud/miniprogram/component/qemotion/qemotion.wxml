@@ -1,0 +1,33 @@
+<!--component/emotion/emotion.wxml-->
+<view class='emotion-item'>
+  <view class='author'><image  class='author-img' src='{{emotion.authorImg}}'></image>
+  <rich-text nodes='{{emotion.author}}'></rich-text>
+  </view>
+  <view class='emotion-body'>
+    <!-- <rich-text nodes='{{emotion.author}}'></rich-text> -->
+    <!-- <view class='author-name'>{{emotion.info.name}}</view> -->
+    <view  class='emotion-content'>
+       <rich-text nodes='{{emotion.content}}'></rich-text>
+
+       <block wx:for='{{emotion.info.video}}'>
+              <image class='upload-img' mode='aspectFill' src='{{item.url1}}'></image>
+       </block>
+
+        <block wx:for='{{emotion.info.pic}}'>
+              <image class='upload-img' mode='aspectFill' src='{{item.smallurl}}' catchtap='previewImage' data-url='{{item.smallurl}}'></image>
+              <image wx:if='{{item.is_video}}' class='upload-img' mode='aspectFill' src='{{item.url1}}'></image>
+       </block>
+
+       <view>
+       <view class='comment' wx:for='{{emotion.info.commentlist}}'>
+            <rich-text class='comment-name' nodes='{{item.name}}'></rich-text>：
+          <rich-text class='comment-content' nodes='{{item.content}}'></rich-text>
+       </view>
+        <!-- <block >
+
+          <br/>
+        </block> -->
+       </view>
+    </view>
+  </view>
+</view>

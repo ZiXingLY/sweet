@@ -1,0 +1,74 @@
+<!--miniprogram/pages/home/home.wxml-->
+<!-- <view>
+  <swiper>
+    <swiper-item wx:for='{{imgs}}'wx:key="idx">
+      <image src='{{item.image}}' class='swiper'></image>
+    </swiper-item>
+  </swiper>
+</view> -->
+<!-- <text>miniprogram/pages/home/home.wxml</text> -->
+
+<!--index.wxml-->
+<!--轮播图  -->
+ <swiper indicator-dots="true" autoplay="true" interval="3000" circular='true'>
+  <block wx:for="{{imgs}}" wx:key="idx">
+    <swiper-item>
+      <image bindtap='goToDetail' data-item='{{item}}' mode='aspectFill' src="{{item.image}}" class="slide-image"/>
+    </swiper-item>
+  </block>
+</swiper> 
+<!-- <view class='index-getuser' wx:if="{{!hasUserInfo && !cancelFlag}}">
+  <view class='index-getuser-body'>
+    <text>可牛需要获取您的头像信息</text>
+    <view>
+      <!-- <text bindtap='cancelGetUser'>取消</text> -->
+      <!-- <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">确定</button>
+    </view>
+  </view>
+</view> -->
+<view class='index-scroll'>
+  <view class='{{selectSlide == item.type ? "index-slide-show index-div" : "index-div"}}' wx:for="{{category}}" wx:key="idx" bindtap='changeType' data-index='{{item.type}}'>{{item.title}}</view>
+</view>
+
+<view class='emotion-list' wx:if='{{selectSlide == 4}}'>
+  <view wx:for='{{tiebas}}' class='sw-card'>
+    <qq-emotion emotion='{{item}}' bindtap='goToQemotionDetail' data-idx='{{item.tid}}' data-type='4'></qq-emotion>
+  </view>
+</view>
+
+<view class='emotion-list' wx:if='{{selectSlide == 3}}'>
+  <view wx:for='{{walls}}' class='sw-card'>
+    <qq-emotion emotion='{{item}}' bindtap='goToQemotionDetail' data-idx='{{item.tid}}' data-type='3'></qq-emotion>
+  </view>
+</view>
+
+
+<view class='moment-list' wx:if='{{selectSlide == 2}}'>
+
+  <view wx:for='{{moments}}' class='moment-item'>
+    <moment-view Moment='{{item}}' bindtap='gotoMoment' data-idx='{{item._id}}'></moment-view>
+  </view>
+
+</view>
+
+<view class='emotion-list' wx:if='{{selectSlide == 1}}'>
+  <view wx:for='{{emotions}}' class='sw-card'>
+    <emotion-view emotion='{{item}}' bindtap='goToDetail' data-idx='{{item._id}}'></emotion-view>
+  </view>
+</view>
+
+<view class='index-content'>
+  <!-- <view class='index-content-body' wx:for="{{dataList}}" data-item="{{item}}" bindtap='goToDetail'>
+    <image src='{{item.coverimg}}' class='index-content-cover' mode="aspectFill"></image>
+    <view class='index-content-right'>
+      <text class='index-content-title'>{{item.title}}</text>
+      <view class='index-content-bottom'>
+        <view>{{item.source ? item.source : item.author}} · {{item.showtime}}</view>
+        <view></view>
+        <view><image mode="aspectFit" src='/utils/imgs/k_03@3x.png'></image>{{item.readnumber}}</view>
+      </view>
+    </view>
+  </view> -->
+  <loading-view wx:if="{{!isInfinite}}" class='loading-box'></loading-view>
+  <text wx:if="{{isInfinite}}" class='no-more-data'>暂无更多...</text>
+</view>

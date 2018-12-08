@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="../../public/css/banner.css">
+
+    <link rel="stylesheet" href="../../public/css/regis.css">
+    <link rel="stylesheet" href="../../public/css/regis-small.css" media="all and (max-width:650px)">
+    <title>登录</title>
+</head>
+<body>
+
+    <div class="outmain">
+        <div class="main">
+
+            <div class="main-title">
+                <div class="main-top">
+                    <span class="main-top-title">欢迎您-登录</span>
+                    <span class="main-top-login">还没有账号？<a href="/regis">立即注册</a></span>
+                </div>
+            </div>
+
+            <div class="main_content">
+                <div class="main-center">
+                <div class="inputBox inputBox-top">
+                    <!--<input type="text" id="phone"  placeholder="请输入手机号" onfocus="this.removeAttribute('readonly');" maxlength="11" onchange="testphone()">-->
+                    <input type="text" id="phone"  placeholder="请输入手机号" onfocus="this.removeAttribute('readonly');" maxlength="11" value="15239933620" onchange="testphone()">
+                </div>
+
+                <div class="inputBox">
+                    <!--<input type="password" id="password" onfocus="this.removeAttribute('readonly');findLocalPassword();" placeholder="请输入密码" minlength="6">-->
+                    <input type="password" id="password" onfocus="this.removeAttribute('readonly');findLocalPassword();" placeholder="请输入密码" minlength="6">
+                </div>
+
+                <div class="forgotPass">
+                    <div id="remember" class="img_unselect" onclick="rememberPassword()"></div>
+                    <!--<div id="remember" class="img_unselect" onclick="changeStyle()"></div>-->
+                    <!--<img src="../../public/imgs/hook_n@3x.png" alt="" class="img_unselect" onclick="rememberPassword('remember')">-->
+                    <!--<img src="../../public/imgs/hook_s.png" alt="" class="img_selected" onclick="rememberPassword('forget')">-->
+                    <span onclick="rememberPassword()">记住密码</span>
+                    <a href="/forgotPass">忘记密码?</a>
+                </div>
+
+
+                <button class="regisButton" onclick="login()">登录</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <span id="url" th:text="${url}" hidden></span>
+
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="../../public/js/bannerNav.js"></script>
+<script type="text/javascript" src="../../public/js/layer.js"></script>
+<script src="../../public/js/login.js"></script>

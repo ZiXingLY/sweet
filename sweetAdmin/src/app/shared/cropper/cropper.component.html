@@ -1,0 +1,31 @@
+<!--<button data-toggle="modal" class="btn btn-success form-control btn-radius"  (click)="cropperModal.show()" style="width: 100%">-->
+  <!--上传图片并裁剪-->
+<!--</button>-->
+
+<bs-modal-backdrop id="cropperModalBackDrop" *ngIf="isShowModal" style="opacity: .5;"></bs-modal-backdrop>
+<div bsModal #cropperModal="bs-modal" (onShow)="onModalShow()" (onHide)="onModalHide()" [config]="{backdrop: false}" class="modal fade" tabindex="1" role="dialog" aria-labelledby="myModalLabel" style="z-index: 9999" aria-hidden="true">
+  <div class="modal-dialog modal-primary" role="document" style="max-width: 600px;margin-top: 75px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">图片剪裁</h4>
+        <button type="button" class="close" (click)="cropperModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="cropper_imgDiv" style="width: 100%;height: 300px">
+
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: space-between">
+        <div id="lookDiv" style="width: 200px;height: 112.5px;background-color: #dddddd;text-align: center;line-height: 100px;background-size: 100% 100%;color: white">图片预览</div>
+        <div style="opacity: 0;width: 35px"></div>
+        <label style="width: 90px;margin-bottom: 0;margin-left: 10px">
+          <input (change)="updateImgFile($event)" id="filebutton" type="file" accept="image/png,image/jpg, image/jpeg" class="custom-file-input" style="display: none">
+          <span class="btn btn-success">选择图片</span>
+        </label>
+        <button type="button" class="btn btn-secondary" (click)="setImgAndCloseModal();cropperModal.hide()">确定</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>

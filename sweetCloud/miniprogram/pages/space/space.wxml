@@ -1,0 +1,17 @@
+<!--miniprogram/pages/space/space.wxml-->
+<!-- <text>miniprogram/pages/space/space.wxml</text> -->
+
+<swiper vertical='true' class='swiper'>
+  <block wx:for="{{Secrets}}">
+    <swiper-item class='rich-pare'>
+
+    <rich-text class='rich-body'>{{item}}</rich-text>
+      <!-- <image src="{{item}}"/> -->
+    </swiper-item>
+  </block>
+</swiper>
+<view wx:if= class='float-button'>
+  <view class='float-button-inner' bindtap='goToAddPromise'>
+    add
+  </view>
+</view>

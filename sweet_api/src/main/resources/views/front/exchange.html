@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="../../public/css/banner.css">
+
+    <link rel="stylesheet" href="../../public/css/recharge.css">
+    <link rel="stylesheet" href="../../public/css/recharge-small.css" media="all and (max-width:650px)" >
+    <title>兑换</title>
+
+    <style>
+        .iner-Box-active{
+            border: 2px solid blue;
+        }
+        .banner-out{
+            background:#2C323E ;
+        }
+        .topNavigation-bg{
+            height: 0;
+        }
+        .logo-box{
+            left: 0;
+        }
+        .login-register{
+            right:0;
+        }
+    </style>
+</head>
+<body>
+<div class="outmain">
+    <div class="main">
+
+        <div class="main-title" >
+            <div class="main-top">
+                <span class="main-top-title">积分兑换会员</span>
+            </div>
+        </div>
+
+        <div class="main_content">
+            <div class="MoneyBox">支付积分：<span class="payMoney">0</span><span class="deduct"></span></div>
+            <div class="main_content-title">选择购买方式</div>
+            <div class="buyMethod">
+
+                <div class="iner-Box" id="lv1" onclick="changeList(1)">
+                    <div class="imgBox"><img src="../../public/imgs/v1.png" alt=""></div>
+                    <div class="newsBox">
+                        <span class="money">20000积分</span>
+                        <p class="newsNumber">每个月可免费发布2条新闻</p>
+                    </div>
+                </div>
+
+                <div class="iner-Box" id="lv2" onclick="changeList(2)">
+                    <div class="imgBox"><img src="../../public/imgs/v2.png" alt=""></div>
+                    <div class="newsBox">
+                        <span class="money">50000积分</span>
+                        <p class="newsNumber">每个月可免费发布5条新闻</p>
+                    </div>
+                </div>
+
+                <div class="iner-Box" id="lv3" onclick="changeList(3)">
+                    <div class="imgBox"><img src="../../public/imgs/v3.png" alt=""></div>
+                    <div class="newsBox">
+                        <span class="money">100000积分</span>
+                        <p class="newsNumber">每个月可免费发布10条新闻</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="buyMethod"><button class="payButton">确认支付</button></div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="../../public/js/bannerNav.js"></script>
+<script type="text/javascript" src="../../public/js/layer.js"></script>
+<script>
+    var orginLevel;
+    var userId;
+
+    var orginLevelMap = new Map();
+    $(function () {
+        //请求用户的等级及ID
+        $.ajax({
+            type: "get",
+            url: "/user/isLogin",
+            dataType: "json",
+            success: function (user) {
+                console.log(user);
+                orginLevel = user.data.vip_level;
+                userId = user.data.id;
+                console.log(user.data.id);
+            }
+        });
+        //请求等级的需要花费的钱数及发布新闻的次数
+        $.ajax({
+            type: "get",
+            url: "/level/score/list",
+            dataType: "json",
+            success: function (l) {
+                console.log(l);
+                orginLevelMap.set(0,0);
+                for(var i = 0;i < l.data.list.length;i++){
+                    orginLevelMap.set(l.data.list[i].level,l.data.list[i].score);
+                    // orginLevelMap.set(1, 2000);
+                    // orginLevelMap.set(2, 5000);
+                    // orginLevelMap.set(3, 10000);
+                }
+
+            }
+        })
+    });
+    //改变支付积分的显示
+    var targetVip = 0;
+    function changeList(vipItem){
+        targetVip = vipItem;
+
+        if(vipItem > orginLevel){
+
+            var actived = "#lv"+vipItem;
+            var unactive = "#lv";
+            for (var i=1;i<=3;i++) {
+                unactive = "#lv"+i;
+                $(unactive).css("border","1px solid #D9D9D9");
+            }
+            $(actived).css("border","1px solid #1992EF");
+
+            $(".payMoney").html(orginLevelMap.get(targetVip) - orginLevelMap.get(orginLevel));
+
+            if(orginLevel != 0){
+                $(".deduct").html("原VIP " + orginLevel + "级抵扣" + orginLevelMap.get(orginLevel) + "积分");
+            }else{}
+
+        }else {}
+
+    }
+
+    //触发确认支付按钮
+    $(".payButton").click(function () {
+        var moneytest = document.getElementsByClassName('payMoney')[0].innerHTML;
+        if(moneytest !== "0"){
+            $.ajax({
+                url: "/credits/exchangeCreditToVip",
+                data: {
+                    level: targetVip,
+                    uid: userId
+                },
+                success: function (res) {
+
+                    if (res.code === 0){
+                        layer.msg("succeed!");
+                    }
+                    console.log(res)
+                }
+            })
+        }
+        else{
+            layer.msg("请选择充值等级");
+        }
+
+    })
+</script>

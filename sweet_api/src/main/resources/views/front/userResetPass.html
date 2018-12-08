@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="../../public/css/userModifyPass.css">
+    <link rel="stylesheet" href="../../public/css/userModifyPass-small.css" media="all and (max-width:650px)">
+    <!--<link rel="stylesheet" href="../../public/css/banner.css">-->
+    <title>重置密码</title>
+</head>
+<body>
+<div class="outmain">
+    <div class="main">
+
+        <div class="main-title">
+            <div class="main-top">
+                <span class="main-top-title">修改密码</span>
+            </div>
+        </div>
+
+        <div class="main_content">
+
+
+            <div class="inputBox inputBox-top">
+                <input type="password" id="pass" value="" placeholder="请输入新的密码" minlength="6" onchange="testPass()">
+            </div>
+            <div class="inputBox">
+                <input type="password" id="repass" value="" placeholder="请再次输入密码" minlength="6" onchange="check()">
+            </div>
+
+            <button class="regisButton" onclick="checkPass()">完成</button>
+
+            <a href="#" id="skipOut" target="_top" hidden></a>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<!--<script src="../../public/js/bannerNav.js"></script>-->
+
+<script type="text/javascript" src="../../public/js/layer.js"></script>
+<script src="../../public/js/regis.js"></script>
+<script>
+    //重置密码
+    function checkPass() {
+
+        var phone = localStorage["phone"];
+        console.log(phone);
+        var password = $("#pass").val();
+
+        var user = {
+            phone: phone,
+            password: password
+        }
+
+        if($("#pass").val() == $("#repass").val()){
+            $.ajax({
+
+                contentType:"application/json",
+                async:false,
+                data:JSON.stringify(user),
+                type: "POST",
+
+                // type : "POST",
+                // data : {
+                //     "username" : phone,
+                //     "password" : password
+                // },
+                dataType : "json",
+                url : "/user/ajaxAlterpass",
+                success : function(result) {
+                    console.log(result);
+                    if (result.code != 0) {
+
+                        layer.msg(result.message)
+
+                    } else {
+                        layer.msg("密码修改成功...");
+                        // window.location = "/userVip";
+                        // $("#skipOut").attr("href","/");
+                        setTimeout(function(){
+                            // window.location = "/userVip";
+                            $("#skipOut").attr("href","/login");
+                            document.getElementById("skipOut").click();
+                        }, 500);
+                    }
+                }
+            });
+        }
+        else {
+            layer.msg("两次输入密码不一致");
+        }
+
+    }
+
+</script>

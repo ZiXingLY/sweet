@@ -1,0 +1,83 @@
+<div animated fadeIn>
+    <div class="row">
+        <div class="col-md-2" style="text-align: center;">
+            <span class="text-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*账号：</span>
+        </div>
+        <div class="col-md-4">
+            <span class="text-line" *ngIf="transmissionId">{{AdministrationData.account}}</span>
+            <input *ngIf="!transmissionId" type="text" class="form-control" maxlength="20"
+                   [(ngModel)]="AdministrationData.number">
+        </div>
+    </div>
+    <!--<div class="row" style="margin-top: 30px">-->
+        <!--<div class="col-md-2" style="text-align: center;">-->
+            <!--<span class="text-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*姓名：</span>-->
+        <!--</div>-->
+        <!--<div class="col-md-4">-->
+            <!--<input type="text" class="form-control" maxlength="20" [(ngModel)]="AdministrationData.number">-->
+        <!--</div>-->
+    <!--</div>-->
+    <div *ngIf="!transmissionId" class="row" style="margin-top: 30px">
+        <div class="col-md-2" style="text-align: center;">
+            <span class="text-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*密码：</span>
+        </div>
+        <div class="col-md-4">
+            <input type="password" class="form-control" maxlength="20" [(ngModel)]="AdministrationData.password">
+        </div>
+    </div>
+    <div *ngIf="!transmissionId" class="row" style="margin-top: 30px">
+        <div class="col-md-2" style="text-align: center;">
+            <span class="text-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*确认密码：</span>
+        </div>
+        <div class="col-md-4">
+            <input type="password" class="form-control" maxlength="20" [(ngModel)]="AdministrationData.confirmPassword">
+        </div>
+    </div>
+    <!--<div class="row" style="margin-top: 30px">-->
+        <!--<div class="col-md-2" style="text-align: center;">-->
+            <!--<span class="text-line">*用户角色：</span>-->
+        <!--</div>-->
+        <!--<div class="col-md-4">-->
+            <!--<select class="form-control" [(ngModel)]="AdministrationData.role">-->
+                <!--<option *ngFor="let item of userRoles let i = index" [value]="item.id">-->
+                    <!--{{item.title}}-->
+                <!--</option>-->
+            <!--</select>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+    <div class="row" style="margin-top: 30px">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-secondary  btn-radius" (click)="returnHistory()">取消</button>
+            <button type="button" style="margin-left: 40px" class="btn  btn-primary btn-radius" (click)="determine()">
+                确定
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="isModalShown" [config]="{ show: true }" (onHidden)="confirmshutdown()" bsModal #autoShownModal="bs-modal"
+     class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" [ngClass]="{'modal-success':issuccess,'modal-danger':!issuccess}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">提示</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="confirmshutdown()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <span>{{modelBody}}</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn " [ngClass]="{'btn-success':issuccess,'btn-danger':!issuccess}"
+                        (click)="confirmshutdown();">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

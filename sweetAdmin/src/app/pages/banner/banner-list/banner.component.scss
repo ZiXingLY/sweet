@@ -1,0 +1,21 @@
+.uploads_buttons {
+  text-align: center;
+  line-height: 40px;
+  position: absolute;
+  top: 40px;
+  color: black;
+  left: 3.5rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 80px;
+  height: 40px;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.delete_btuttons {
+  color: red;
+  position: absolute;
+  top: 0;
+  left: 12.5rem;
+  cursor: pointer;
+}

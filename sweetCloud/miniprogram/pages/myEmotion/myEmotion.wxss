@@ -1,0 +1,51 @@
+/* pages/article/article.wxss */
+.body{
+  padding: 30rpx 20rpx;
+  width: 94%; 
+}
+.flash-warp{
+  padding: 0 30rpx 30rpx;
+  width: 94%;
+  border-left: 1px solid #DCDCDC;
+}
+.flash-addtime{
+  color: #1992EF;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+.flash-content{
+  font-size: 28rpx;
+}
+.flash-content text{
+  line-height: 46rpx;  
+}
+.flash-title{
+  font-weight: bold;
+}
+.flash-text{
+  font-weight: 300;
+}
+.flash-addtime image{
+  width: 34rpx;
+  height: 34rpx;
+}
+.flash-addtime text{
+  position: relative;
+  left: -40rpx;
+}
+.flash-addtime text::before{
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background-color: #1992EF;
+  margin-right: 10rpx;
+  content: '';
+  display: inline-block;
+}
+.flash-body{
+  position: relative;
+  margin-bottom: 35rpx;
+} 

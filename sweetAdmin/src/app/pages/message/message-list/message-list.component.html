@@ -1,0 +1,98 @@
+<div class="animated fadeIn ">
+    <div class="row" style="margin-bottom: 20px">
+
+        <div class="col-md-1" >
+            <button class="btn btn-radius btn-danger" data-toggle="modal" (click)="smallModal.show()">删除</button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-center" style="min-width: 0px">
+            <thead class="table-inverse">
+            <tr class="text-nowrap">
+                <td>
+                    <input type="checkbox"  id="male" [(ngModel)]="master" (click)="all(master)" /><label for="male" style="margin-left: 5px">全选</label>
+                </td>
+                <td>序号</td>
+                <td>消息类型</td>
+                <td>消息内容</td>
+                <td>状态</td>
+                <td>发生日期</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody class="tab-content">
+
+            <tr *ngFor="let item of dataArr,let i=index">
+                <td>
+                    <input id={{i}} type="checkbox"  [checked] = 'selecTed' (click)="choice(item.id, $event.target.checked)"  >                </td>
+                <td>{{i+1}}</td>
+                <td>
+                    <span *ngIf="item.message_type == 1">投稿</span>
+                    <span *ngIf="item.message_type == 2">咨询</span>
+                    <span *ngIf="item.message_type == 3">提问</span>
+                    <span *ngIf="item.message_type == 4">账号申请</span>
+                </td>
+                <td>{{item.message_content}}
+                </td>
+                <td>
+                    <span *ngIf="item.message_state == 1">未读</span>
+                    <span *ngIf="item.message_state == 2">已读</span>
+                </td>
+                <td>{{formatDateTime(item.add_time)}}</td>
+                <td>
+                    <span *ngIf="item.message_state == 1" class="removeBtn" style="color: #00b3ee" (click)="read(item.id)">阅读</span>
+                </td>
+
+
+            </tr>
+            </tbody>
+        </table>
+        <p *ngIf="isNodata" class="noneData">暂无数据</p>
+
+        <!--分页组件-->
+        <div style="float: right">
+            <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" itemsPerPage="10"
+                        [maxSize]="maxSize" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页"
+                        (pageChanged)="pageChanged($event)"></pagination>
+        </div>
+    </div>
+</div>
+<!--提示框-->
+<div bsModal #smallModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-danger" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">提示</h5>
+                <button type="button" class="close" (click)="smallModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center" >
+                <p style="margin: 0px">{{modalText}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="smallModal.hide()">取消</button>
+                <button type="button" class="btn btn-danger" (click)="smallModal.hide(); deleteSelected()">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<div *ngIf="dangerModal" [config]="{ show: true }" (onHidden)="hideModal()" bsModal #autoShownModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" [ngClass]="{'modal-danger': !issuccess, 'modal-success':issuccess}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">提示</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p style="margin: 0px">{{successText}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn " [ngClass]="{'btn-success':issuccess,'btn-danger':!issuccess}" (click)="hideModal();">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+

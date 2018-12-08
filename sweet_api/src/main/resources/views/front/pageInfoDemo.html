@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .navigatepageNums{
+            width: 500px;
+            height: 30px;
+        }
+        .navigatepageNums ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .pageNum{
+            text-align: center;
+            line-height: 30px;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+        .active{
+            background-color: #0e90d2;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="navigatepageNums">
+        <ul>
+            <li class="preLi"><a><</a></li>
+            <li class="nextA"><a>></a></li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+ var pn = getQueryString("pn") == null?1:getQueryString("pn");
+ var pageInfo = requestPageInfo(pn);//每次获取的分页信息
+ var pageUl = document.getElementsByClassName("navigatepageNums")[0];
+ addLi(pageInfo);
+
+    function addLi(pageInfo) {
+        for (var i = 0; i < pageInfo.navigatepageNums.length; i++){
+            var li = document.createElement("li");
+            var a = document.createElement("a");
+            li.setAttribute("class","pageNum");
+            a.setAttribute("href","?pn="+pageInfo.navigatepageNums[i]);
+            a.innerText = pageInfo.navigatepageNums[i];
+            if (pageInfo.navigatepageNums[i] == pageInfo.pageNum) {
+                li.classList.add("active");
+            }
+            li.onclick = function (ev) {
+              change();
+            };
+            li.appendChild(a);
+            pageUl.appendChild(li);
+        }
+    }
+    function requestPageInfo(pn) {
+        var pageInfo;
+        $.ajax({
+            url:"http://localhost:8080/flash/list?pn="+pn,
+            type:"get",
+            dataType:"json",
+            async:false,
+            success:function (data) {
+                console.log(data);
+                pageInfo = data;
+            }
+        });
+        return pageInfo;
+    }
+ function getQueryString(name) {
+     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+     var r = window.location.search.substr(1).match(reg);
+     console.log(r);
+     if (r != null)
+         return unescape(r[2]);
+     return null;
+ }
+function change(_this){
+        var li = document.querySelectorAll(".pageNum");
+        for (var i = 0; i < li.length; i++) {
+
+        }
+ }
+</script>

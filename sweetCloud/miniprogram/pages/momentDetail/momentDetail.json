@@ -1,0 +1,5 @@
+{
+    "usingComponents": {
+      "moment-view": "../../component/moment/moment"
+    }
+}

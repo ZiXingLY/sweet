@@ -1,0 +1,187 @@
+<div class="animated fadeIn">
+  <!--表单-->
+
+  <div class="row" style="margin-top: 20px; margin-bottom: 40px;">
+    <div class="col-md-12" style="text-align: left">
+      <button class="btn btn-secondary"   [routerLink]="['add']" style="margin: 0 5px;background-color: #22a8d8;border-radius: 5px"><span style="color: white">新增</span></button>
+      <!--<button *ngIf="isExamine == '2'" class="btn btn-radius btn-primary" style="margin-left: 100px"-->
+      <!--(click)="toExamine()">审核-->
+      <!--</button>-->
+    </div>
+  <!--<div class="row">-->
+  <!--<div class="form-group col-md-2">-->
+  <!--<select id="select1" name="select" class="form-control" [(ngModel)]="showkeys" (change)="showKey()">-->
+  <!--<option value="1">昵称</option>-->
+  <!--<option value="2">手机号码</option>-->
+  <!--</select>-->
+  <!--</div>-->
+
+  <!--<div class="form-group col-md-3" style="padding-left: 0px">-->
+  <!--<input type="text" *ngIf="showkeys == 1" placeholder="请输入查询昵称" class="form-control btn-radius" name="number"-->
+  <!--[(ngModel)]="nickname">-->
+  <!--<input type="text" *ngIf="showkeys == 2" placeholder="请输入查询账号" class="form-control btn-radius" name="number"-->
+  <!--[(ngModel)]="account">-->
+
+  <!--</div>-->
+
+  <!--<div class="form-group col-md-2">-->
+  <!--<select id="select3" name="select" class="form-control" [(ngModel)]="user_type">-->
+  <!--<option value="">用户类型</option>-->
+  <!--<option value="1">普通会员</option>-->
+  <!--<option value="2">基地会员</option>-->
+  <!--</select>-->
+  <!--</div>-->
+
+  <!--<div class="form-group col-md-2">-->
+  <!--<select id="select2" name="select" class="form-control" [(ngModel)]="user_state">-->
+  <!--<option value="">禁用状态</option>-->
+  <!--<option value="1">已禁用</option>-->
+  <!--<option value="2">未禁用</option>-->
+  <!--</select>-->
+  <!--</div>-->
+
+  <!--<div class="form-group col-md-1" style="padding-left: 0px" (click)="getDate()">-->
+  <!--<button type="button" class="btn btn-primary btn-radius">查询</button>-->
+  <!--</div>-->
+  <!--</div>-->
+</div>
+
+
+
+<!--表格-->
+<div class="table-responsive" style="margin-top: 20px;overflow: auto;">
+  <table class="table table-hover table-bordered  table-center text-nowrap" style="min-width: 0px">
+    <thead class="table-inverse">
+    <tr>
+      <td>序号</td>
+      <td>标题</td>
+      <!--<td>内容</td>-->
+      <td>添加时间</td>
+      <td>阅读量</td>
+      <td>操作</td>
+    </tr>
+    </thead>
+    <tbody class="tab-content">
+    <tr *ngFor="let item of dataList let i =index">
+      <td>{{i + 1 }}</td>
+      <td >
+
+        {{item.title}}</td>
+
+      <!--<td>-->
+        <!--<div style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;width:200px;"  [innerHTML]="item.content" ></div></td>-->
+      <td>{{item.addtime | date:'yyyy-MM-dd hh:mm:ss' }}
+
+      </td>
+      <td>{{item.readnumber}}</td>
+      <td>
+
+        <span *ngIf="item.status == 0" class="removeBtn" style="margin: 0 5px"
+              (click)="tipshow(item.id,item.status);smallModal.show()" style="margin: 0 5px">取消禁用</span>
+        <span class="removeBtn" style="margin: 0 5px"
+              [routerLink]="['details', item.fid]" style="margin: 0 5px">查看</span>
+
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <p *ngIf="isNodata" class="noneData">暂无数据</p>
+
+  <div style="float: right">
+    <!--分页组件-->
+    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage"
+                itemsPerPage="10"
+                [maxSize]="maxSize" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页"
+                (pageChanged)="pageChanged($event)"></pagination>
+  </div>
+</div>
+
+
+<div bsModal #smallModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-danger modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">提示</h5>
+        <button type="button" class="close" (click)="smallModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <p style="margin: 0px">{{modalText}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="smallModal.hide()">取消</button>
+        <button type="button" class="btn btn-danger" (click)="smallModal.hide();determination();">确定</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
+
+<!--审核 模态框-->
+<div *ngIf="auditModal" [config]="{ show: true }" (onHidden)="auditModules()" bsModal #autoShownModal="bs-modal"
+     class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm" style="max-width: 600px"
+       [ngClass]="{'modal-primary':issuccess,'modal-danger':!issuccess}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">审核</h5>
+        <button type="button" class="close" (click)="auditModules()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: left;padding-left: 20px">
+        <div class="row" style="margin: 10px 0">
+          <span>真实姓名：</span><span>{{auditData.real_name}}</span>
+        </div>
+        <div class="row" style="margin: 10px 0">
+          <span>手机号：</span><span>{{auditData.account}}</span>
+        </div>
+        <div class="row" style="margin: 10px 0">
+          <span>身份证照：</span>
+          <br>
+          <div>
+            <img src="{{IMG_URL + auditData.id_card_picture_con}}" alt=""
+                 style="width: 250px;margin: 10px 0;height: 200px;object-fit: cover;">
+            <img src="{{ IMG_URL + auditData.id_card_picture_front}}" alt=""
+                 style="width: 250px;margin: 10px 0;height: 200px;object-fit: cover;">
+          </div>
+        </div>
+        <div class="row" style="margin: 10px 0">
+          <span>基地名称：</span><span>{{auditData.base_name}}</span>
+        </div>
+      </div>
+      <div class="modal-footer" style="text-align: center;justify-content: center">
+        <button type="button" class="btn  btn-primary" (click)="smallModal.hide();auditSumit(1)">通过</button>
+        <button type="button" class="btn btn-secondary" (click)="smallModal.hide();auditSumit(2);">不通过</button>
+      </div>
+    </div><!-- /.modal-content -->
+
+  </div>
+</div>
+
+
+<div *ngIf="delectModal" [config]="{ show: true }" (onHidden)="confirmshutdown()" bsModal #autoShownModal="bs-modal"
+     class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm" [ngClass]="{'modal-success':issuccess,'modal-danger':!issuccess}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">提示</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="confirmshutdown()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <span>{{modelBody}}</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn " [ngClass]="{'btn-success':issuccess,'btn-danger':!issuccess}"
+                (click)="confirmshutdown();">确定
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

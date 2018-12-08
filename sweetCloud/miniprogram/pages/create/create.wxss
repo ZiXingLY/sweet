@@ -1,0 +1,14 @@
+/* miniprogram/pages/create/create.wxss */
+.edit-box{
+  display: flex;
+  flex-direction: column;
+  margin:25rpx;
+}
+.edit-form{
+  display: flex;
+  flex-direction: column;
+}
+.picker{
+    padding: 13px;
+    background-color: #FFFFFF;
+}

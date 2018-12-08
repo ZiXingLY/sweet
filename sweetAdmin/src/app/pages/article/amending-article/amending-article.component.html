@@ -1,0 +1,99 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" class="form-control btn-radius" placeholder="请输入文章名称" [(ngModel)]="dataArr.policy_name" maxlength="50">
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-md-3">
+            <select class="form-control btn-radius" name="" id="" [(ngModel)]="dataArr.policy_type" >
+                <option value="">请选择文章类型</option>
+                <option *ngFor="let  item of labelList" [value]="item.cid">{{item.name}}</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="row" >
+        <div class="col-md-10">
+        <textarea style="width: 100%" placeholder="请输入文章摘要" [(ngModel)]="dataArr.brief"></textarea>
+        </div>
+
+        <!--<select class="form-control btn-radius" name="" id="3" [(ngModel)]="dataArr.base_id">-->
+                <!--<option value="">所属基地</option>-->
+                <!--<option *ngFor="let  item of baseData" [value]="item.id">{{item.base_name}}</option>-->
+            <!--</select>-->
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" class="form-control btn-radius" placeholder="请输文章来源" [(ngModel)]="dataArr.source" maxlength="50">
+        </div>
+    </div> <div class="row">
+    <div class="col-md-10">
+        <input type="text" class="form-control btn-radius" placeholder="请输文章作者" [(ngModel)]="dataArr.author" maxlength="50">
+    </div>
+</div> <div class="row">
+    <div class="col-md-10">
+        <input type="text" class="form-control btn-radius" placeholder="请输文章关键字" [(ngModel)]="dataArr.keyword" maxlength="50">
+    </div>
+</div>
+
+    <!--上传图片-->
+    <div *ngIf="detailsPictures" class="col-md-3 " style="position: relative;margin-left: 70px" >
+        <img style="width: 230px;height: 160px" src="{{bgImg}}" class="btn-radius">
+        <a style="color: red;
+    position: absolute;
+    top: 0;
+    left: 300px;
+    cursor: pointer;" href="Javascript:;" class="delete_btuttons" (click)="deleteimg()"><i class="icon-close"></i></a>
+        <label class="uploads_buttons" style="margin-bottom: 0;margin-left: 10px ;  text-align: center;
+    line-height: 40px;
+    position: absolute;
+    top: 80px;
+    color: black;
+    left: 90px;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 80px;
+    height: 40px;
+    border-radius: 40px;
+    cursor: pointer;">
+            <input (change)="updatebgImg($event)" type="file" accept="image/png,image/jpg, image/jpeg" class="custom-file-input" style="display: none">
+            <span >{{uploadpictures}}</span>
+        </label>
+    </div>
+    <!--*ngIf="!detailsPictures"-->
+    <label *ngIf="!bgImg"  style="width: 90px;margin-bottom: 0;margin-left: 15px">
+        <input (change)="updatebgImg($event)" type="file" accept="image/png,image/jpg, image/jpeg" class="custom-file-input" style="display: none">
+        <!--*ngIf="!this.saveData.business_head"-->
+        <span  class="btn btn-success">选择封面图片</span>
+    </label>
+    <!--<div class="col-md-3">-->
+    <!--<button class="btn btn-radius btn-success" *ngIf="!detailsPicture"  (click)="updateCroppersImg()">{{uploadpictures}}</button>-->
+    <!--</div>-->
+</div>
+
+    <!--<div class="row" style="margin-top: 20px">-->
+        <!--<div class="col-md-12">-->
+            <!--<label style="width: 90px;" class="btn btn-primary">-->
+                <!--<input (change)="updateImgFile($event)" type="file" accept=".xls,.xlsx,.doc,.docx,.txt,.pdf" class="custom-file-input" style="display: none">-->
+                <!--<span>上传图片</span>-->
+            <!--</label>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="row" style="margin-top: 20px">
+        <div class="col-md-12">
+            <app-tinymce-editor [receiveContent]="receiveContent" (updateContent)="updateContent($event)"></app-tinymce-editor>
+        </div>
+    </div>
+    <div class="row" *ngFor="let item of policyName let i = index" style="margin-top: 20px">
+        <div class="col-md-12">
+            <span>{{item}}</span>
+            <span (click)="deleteimg(i)" style="color: red">删除</span>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px; margin-bottom: 40px;text-align: center">
+        <div class="col-md-12">
+            <button class="btn btn-radius btn-secondary" (click)="goBack()">返回</button>
+            <button class="btn btn-radius btn-primary" style="margin-left: 100px" (click)="saveData()">确定</button>
+        </div>
+    </div>

@@ -1,0 +1,133 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-primary" [routerLink]="['add']">新增</button>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 20px">
+        <!--<div class="col-md-2">-->
+            <!--<select name="" class="form-control btn-radius" id="1" [(ngModel)]="requestData.type">-->
+                <!--<option value="1">已审核</option>-->
+                <!--<option value="2">待审核</option>-->
+                <!--<option value="2">审核不通过</option>-->
+
+            <!--</select>-->
+        <!--</div>-->
+        <!--<div class="col-md-3">-->
+            <!--<input type="text" class="form-control btn-radius"  [(ngModel)]="requestData.content">-->
+        <!--</div>-->
+        <!--<div class="col-md-2">-->
+            <!--<select name="" class="form-control btn-radius" id="2" [(ngModel)]="requestData.policy_type">-->
+                <!--<option value="">政策类型</option>-->
+                <!--<option *ngFor="let item of policyType" [value]="item.id">{{item.label_name}}</option>-->
+            <!--</select>-->
+        <!--</div>-->
+        <div class="col-md-2">
+            <select name="" class="form-control btn-radius" id="3" [(ngModel)]="requestData.state">
+                <option value="">状态</option>
+                <option value="1">已上架</option>
+                <option value="0">审核中</option>
+                <option value="2">未上架</option>
+                <option value="3">审核未通过</option>
+            </select>
+        </div>
+        <div>
+            <button class="btn btn-primary btn-radius" (click)="sqlBase()">查询</button>
+        </div>
+    </div>
+    <div class="table-responsive" style="margin-top: 20px">
+        <table class="table table-center table-bordered table-hover" style="min-width: 0px">
+            <thead class="table-inverse">
+            <tr>
+                <td>序号</td>
+                <td>文章名称</td>
+                <td>文章封面</td>
+
+                <!--<td>政策类型</td>-->
+                <!--<td>发布人</td>-->
+                <td>浏览量</td>
+                <td>新增时间</td>
+                <td>来源</td>
+                <td>作者</td>
+                <!--<td>关键字</td>-->
+
+                <td>状态</td>
+                <td>操作</td>
+
+            </tr>
+            </thead>
+            <tbody class="tab-content">
+            <tr *ngFor="let item of dataArr let i = index">
+                <td>{{i + 1}}</td>
+                <td style="text-align: left">
+                    <div style="overflow: hidden; /*自动隐藏文字*/
+text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+white-space: nowrap;/*强制不换行*/
+width:20em;/*不允许出现半汉字截断*/">{{item.title}}</div></td>
+                <td><img style="width: 100px" src="{{item.coverimg}}" alt="">
+                    </td>
+                <!--<td>-->
+                <!--<span *ngFor="let itemlist of policyType">-->
+                    <!--<span *ngIf="itemlist.id == item.policy_type">{{itemlist.label_name}}</span>-->
+                <!--</span>-->
+                <!--</td>-->
+                <!--<td>{{item.publisher}}</td>-->
+                <td>{{item.readnumber}}</td>
+                <td>{{item.addtime | date:'yyyy-MM-dd hh:mm:ss' }}</td>
+
+                <td>{{item.source}}</td>
+                <td>{{item.author}}</td>
+                <!--<td>{{item.keyword}}</td>-->
+
+                <td>
+                    <!--1代表上架0代表下架2表示审核中3审核未通过-->
+                    <!--<span *ngIf="item.state == 1"></span>-->
+                    <span *ngIf="item.state == 2">审核中</span>
+                    <span *ngIf="item.state == 3">审核未通过</span>
+                <!--</td>-->
+                <!--<td>-->
+                    <span *ngIf="item.state == 1">已上架</span>
+                    <span *ngIf="item.state == 0">未上架</span>
+                </td>
+                <td>
+                    <span class="removeBtn" style="color: #00aced" [routerLink]="['view', item.aid, 2]">查看</span>
+                    <span class="removeBtn" style="color: #00aced;margin-left: 10px" *ngIf="item.state == 2" [routerLink]="['view', item.aid, 2]">审核</span>
+                    <!--<span class="removeBtn" style="color: #00aced;margin-left: 10px" *ngIf="item.state == 2 && item.publisher == '平台'" [routerLink]="['edit', item.id]">编辑</span>-->
+                    <span class="removeBtn" style="color: #00aced;margin-left: 10px" *ngIf="item.state == 0 && item.check_state != 1" (click)="shelfState(item.aid, 1)">上架</span>
+                    <span class="removeBtn" style="color: #00aced;margin-left: 10px" *ngIf="item.state == 1" (click)="shelfState(item.aid, 0)">下架</span>
+                    <!--<span class="removeBtn" style="color: #00aced;margin-left: 10px" *ngIf="item.isbanner == 2"  (click)="setto(item.aid,item.isbanner)">上架轮播图</span>-->
+                    <!--<span class="removeBtn" style="color: #00aced;margin-left: 10px" *ngIf="item.isbanner == 1"  (click)="setto(item.aid,item,isbanner)">下架轮播图</span>-->
+                    <span class="removeBtn" style="margin-left: 10px"  (click)="deleteData(item.aid)">删除</span>
+
+                    <!--*ngIf="item.state == 2"-->
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <p *ngIf="isnoData"  class="noneData">暂无数据</p>
+    </div>
+
+    <!--分页组件-->
+    <div style="float: right">
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" itemsPerPage="10" [maxSize]="maxSize" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+</div>
+<div *ngIf="dangerModal" [config]="{ show: true }" (onHidden)="hideModal(0)" bsModal #autoShownModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-primary">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">提示</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="hideModal(0)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p style="margin: 0px">{{successText}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="hideModal(0);">取消</button>
+                <button type="button" class="btn btn-primary" (click)="hideModal(1);">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

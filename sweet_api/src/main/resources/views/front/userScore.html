@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title> 我的会员</title>
+    <link rel="stylesheet" href="../../public/css/userVip.css">
+
+    <link rel="stylesheet" href="../../public/css/userScore_small.css" media="all and (max-width:650px)">
+</head>
+<body>
+<div class="outmain">
+    <div class="main">
+
+        <div class="main-title">
+            <div class="main-top">
+                <span class="main-top-title">我的积分</span>
+            </div>
+        </div>
+
+        <div class="main_content">
+            <div class="inner-content">
+
+                <div class="vipBox">当前剩余积分：<span class="restTimes">0</span></div>
+
+                <a href="/exchange" target="_top"><button class="saveButton" id="save">兑换会员</button></a>
+
+
+            </div>
+
+        </div>
+
+        <div class="main-title">
+            <div class="main-top">
+                <span class="main-top-title">会员说明</span>
+                <!--<div class="transitionBox"><div class="transition"></div></div>-->
+            </div>
+        </div>
+
+        <div class="main_content">
+            <div>
+                <p class="memberIntro">
+                    本积分与cny兑换比例为10:1cny.可与XXX币做等值兑换.<br>
+                    用户每分享一次新闻给好友.只要好友允许获取微信openid并打开.即可获得1积分.最多5积分.同一
+                    个新闻每个用户第一次阅读有效...
+                </p>
+            </div>
+        </div>
+
+        <div class="main-title">
+            <div class="main-top">
+                <span class="main-top-title">积分账单</span>
+            </div>
+        </div>
+
+
+        <div class="score main_content ">
+            <ul id="messageList" class="messageList">
+                <!--<li>-->
+                    <!--<span>分享文章</span>-->
+                    <!--<span>+50</span>-->
+                    <!--<span>2018-04-02 13:24</span>-->
+                <!--</li>-->
+                <!--<li><span>xxxxxxx评论了你的消息</span><span>3min ago</span></li>-->
+            </ul>
+        </div>
+
+        <div class="navigatepageNums">
+            <span class="preLi"><a><</a></span>
+            <ul>
+            </ul>
+            <span class="nextA"><a>></a></span>
+            <span id="allPageSpan"></span>
+            <input type="text" id="jumpPageInput"><p>页</p>
+            <button id="jumpPageButton">确定</button>
+            <a id="jumpPageA" style="opacity: 0"></a>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="../../public/js/userScore.js"></script>
+<script>
+
+    $.ajax({
+        type: "get",
+        url: "/credits/getUserAllScore",
+        success: function (res) {
+            if (res.code === 0){
+                $(".restTimes").html(res.data.totalScore.totalScore? res.data.totalScore.totalScore :'0');
+                if (res.data.user !== ""){
+                    //
+                    // $("#headImg").attr("src","/"+res.data.user.header);
+                    //
+                    // if (res.data.user.nickname !== "") {
+                    //     $(".nickname").html(res.data.user.nickname);
+                    // }
+                    // $(".restTimes").html(res.data.user.left_free_times);
+                }
+            }
+        }
+    })
+</script>

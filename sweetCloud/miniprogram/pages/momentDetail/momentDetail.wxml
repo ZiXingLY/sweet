@@ -1,0 +1,5 @@
+<!--miniprogram/pages/momentDetail/momentDetail.wxml-->
+<!-- <text>miniprogram/pages/momentDetail/momentDetail.wxml</text> -->
+    <moment-view Paths='{{paths}}' ></moment-view>
+
+      <button size='mini' bindtap='delete'>删除</button>

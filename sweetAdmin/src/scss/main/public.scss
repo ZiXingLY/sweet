@@ -1,0 +1,249 @@
+$radiusNum: 3px;
+$colorRed:#f86c6b;
+$colorGreen:#4dbd74;
+// 各样式圆角设置
+.btn-radius {
+  border-radius: $radiusNum;
+}
+.btn-radius::-webkit-inner-spin-button{
+  display: none;
+}
+.btn {
+  border-radius: $radiusNum;
+}
+
+.modal-content {
+  border-radius: $radiusNum;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+}
+
+.btn-clear-red {
+  border: none;
+  outline: none;
+  background: none;
+  color: $colorRed;
+  //padding-top: 0;
+  //padding-bottom: 0;
+}
+.removeBtn{
+  color: $colorRed;
+  cursor: pointer;
+}
+.editBtn{
+  color: $colorGreen;
+  cursor: pointer;
+}
+// 无边框按钮样式
+.btn-clear-red {
+  border: none;
+  outline: none;
+  background: none;
+  color: $colorRed;
+  //padding-top: 0;
+  //padding-bottom: 0;
+}
+
+.btn-clear-skyblue {
+  border: none;
+  outline: none;
+  background: none;
+  color: deepskyblue;
+  //padding-top: 0;
+  //padding-bottom: 0;
+}
+
+.btn-clear-green {
+  border: none;
+  outline: none;
+  background: none;
+  color: #4dbd74;
+  //padding-top: 0;
+  //padding-bottom: 0;
+}
+
+.btn-clear {
+  border: none;
+  outline: none;
+  background: none;
+  //padding-top: 0;
+  //padding-bottom: 0;
+}
+
+//模态窗口title文字
+.modal-title {
+  width: 100%;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.nav-padding-left {
+  padding-left: 30px !important;
+}
+
+.sidebar .nav .nav-item .nav-link.active,
+.sidebar .nav .nav-item .navbar .active.dropdown-toggle,
+.navbar .sidebar .nav .nav-item .active.dropdown-toggle {
+  background: rgba(255, 255, 255, .2);
+}
+
+// 表格元素水平居中
+.table-center {
+  th,
+  td {
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
+// app
+.app {
+  background-color: white;
+}
+
+.app-body .main {
+  background-color: white;
+}
+
+.text-style {
+  line-height: 38px;
+  margin-right: 20px
+}
+.text-line {
+
+  line-height: 38px;
+}
+//文字不换行
+.text_wrap {
+  white-space: nowrap;
+}
+
+.noneData {
+  text-align: center;
+  font-size: 30px;
+  color: rgb(120, 120, 120);
+}
+
+// 删除图片样式
+.delet_btutton {
+  color: red;
+  position: absolute;
+  top: 0;
+  left: 180px;
+  cursor: pointer;
+}
+
+// 上传图片样式
+.upload_button {
+  text-align: center;
+  line-height: 40px;
+  position: absolute;
+  top: 35px;
+  color: #333333;
+  left: 65px;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 80px;
+  height: 40px;
+  border-radius: 40px;
+  cursor:pointer;
+}
+
+//多张图片样式
+.delets_btutton {
+  color: red;
+  position: absolute;
+  top: 0;
+  left: 180px;
+  cursor:pointer;
+}
+
+//多张图片样式
+.uploads_button {
+  text-align: center;
+  line-height: 40px;
+  position: absolute;
+  top: 30px;
+  color: #333333;
+  left: 60px;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 80px;
+  height: 40px;
+  border-radius: 40px;
+  cursor:pointer;
+}
+
+.btn-clear-red {
+  border: none;
+  outline: none;
+  background: none;
+  color: $colorRed;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.btn-clear-skyblue {
+  border: none;
+  outline: none;
+  background: none;
+  color: deepskyblue;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.btn-clear-green {
+  border: none;
+  outline: none;
+  background: none;
+  color: #4dbd74;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.btn-clear {
+  border: none;
+  outline: none;
+  background: none;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.nav-padding-left {
+  padding-left: 30px !important;
+}
+
+.sidebar .nav .nav-item .nav-link.active,
+.sidebar .nav .nav-item .navbar .active.dropdown-toggle,
+.navbar .sidebar .nav .nav-item .active.dropdown-toggle {
+  background: rgba(255, 255, 255, .2);
+}
+
+// 表格元素水平居中
+.table-center {
+  min-width: 1024px;
+  th,
+  td {
+    text-align: center;
+  }
+}
+
+.app {
+  background-color: white;
+}
+
+.app-body .main {
+  background-color: white;
+}
+
+// 模态框内部padding
+.modal-body {
+  padding: 25px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.my-pagination /deep/ .ngx-pagination .current {
+  background: red;
+}
+// 去掉a标签的样式
+a:hover, a:visited, a:link, a:active{
+  text-decoration: none;
+}

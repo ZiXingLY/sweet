@@ -1,0 +1,7 @@
+<!--component/pictureUpload/pictureUpload.wxml-->
+
+<view>
+
+</view>
+<image src='{{Paths[0]}}' class='upImg'></image>
+<button size='mini' bindtap='chooseImg'>选择图片</button>

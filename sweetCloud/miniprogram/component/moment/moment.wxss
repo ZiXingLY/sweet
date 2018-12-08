@@ -1,0 +1,50 @@
+/* component/moment/moment.wxss */
+/* component/picture/sweet-picture-upload.wxss */
+
+.moment-box{
+  display: flex;
+  flex-direction: row;
+}
+.weui-uploader__input-box {
+    float:left;
+position:relative;
+margin:5rpx;
+width:220rpx;
+height:220rpx;
+/* border:1px solid #D9D9D9; */
+
+}
+.weui-uploader_add:before, .weui-uploader_add:after{
+  content: " ";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: #D9D9D9;
+}
+.weui-uploader__input-box:after {
+    width: 39.5px;
+    height: 2px;
+}
+.weui-uploader__input-box:before {
+    width: 2px;
+    height: 39.5px;
+}
+.upload-img{
+  width: 220rpx;
+  height: 220rpx;
+}
+
+.author-img{
+  height: 80rpx;
+  width: 80rpx;
+  margin:0 25rpx;
+  border-radius: 50%;
+}
+/* 
+.author-header{
+    height: 80rpx;
+  width: 80rpx;
+  margin:25rpx;
+} */

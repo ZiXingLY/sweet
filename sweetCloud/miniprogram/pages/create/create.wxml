@@ -1,0 +1,40 @@
+<!--miniprogram/pages/create/create.wxml-->
+<!-- <text>miniprogram/pages/create/create.wxml</text> -->
+<view>
+
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+      {{array[index]}}
+    </view>
+  </picker>
+</view>
+<view class='edit-box'>
+  <view>
+    <form bindsubmit="bindFormSubmit" class='edit-form'>
+
+    <view wx:if='{{index == 0}}'>
+
+            <textarea value='{{initValue}}'  placeholder='写下你的心情吧' name='emotion'>
+      </textarea>
+
+    </view>
+
+      <view wx:if='{{index == 1}}' style='display: flex;'>
+        <sweet-picture-upload-view name='paths'>
+        </sweet-picture-upload-view>
+      </view>
+
+      <view wx:if='{{index == 2}}'>
+      <text>在这里写下你小秘密吧</text>
+      </view>
+
+      <view class='menu-bar'>
+      </view>
+
+      <view>
+        <button form-type="submit" type='primary'> 提交 </button>
+      </view>
+
+    </form>
+  </view>
+</view>

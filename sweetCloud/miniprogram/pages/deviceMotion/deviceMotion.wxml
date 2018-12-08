@@ -1,0 +1,8 @@
+<!--miniprogram/pages/deviceMotion/deviceMotion.wxml-->
+<!-- <text>miniprogram/pages/deviceMotion/deviceMotion.wxml</text> -->
+方向：<switch bindchange='showMotion'></switch>
+<view wx:if="{{device}}">
+ap:<text>{{ap}}</text>
+bt:<text>{{bt}}</text>
+gm:<text>{{gm}}</text>
+</view>

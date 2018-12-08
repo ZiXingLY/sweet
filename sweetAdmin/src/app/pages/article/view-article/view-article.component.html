@@ -1,0 +1,105 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-11 row">
+            <h3 style="display: inline-block;margin-left: -2rem">
+                {{dataArr.policy_name}}
+                <span style="font-size: 10px;font-weight:normal" *ngIf="dataArr.check_state == 1">待审核</span>
+                <span style="font-size: 10px;font-weight:normal" *ngIf="dataArr.check_state == 2">通过</span>
+                <span style="font-size: 10px;font-weight:normal" *ngIf="dataArr.check_state == 3">不通过</span>
+            </h3>
+        </div>
+    </div>
+    <div class="row card" style="border-radius: 10px;    display: inherit;    padding: 0px 0px 30px 0px; width: 80%">
+        <div class="col-md-1"></div>
+        <div class="col-md-12 card-header " >
+            <!--<span>文章标题:</span>-->
+            <h4 style="text-align: center;">{{dataArr.title}}</h4>
+        </div>
+        <div class="card-body">
+        <div class="col-md-12 " style="padding-top: 30px;display: flex">
+            <!--<span>文章封面:</span>-->
+            <!--<span><img src="{{ dataArr.coverimg}}" alt="" style="width: 200px"></span>-->
+            <div style="padding: 1rem 1rem 1rem 1rem;background-color: white"  [innerHTML]="dataArr.content"></div>
+        </div>
+        <!--<div class="col-md-12 " style="padding-top: 30px">-->
+            <!--&lt;!&ndash;<span>文章内容:</span>&ndash;&gt;-->
+
+        <!--</div>-->
+        <div class="col-md-12 " style="padding-top: 30px;">
+            <div style="float: left">
+        <span>上传时间:</span>
+        <span>{{dataArr.addtime | date:'yyyy-MM-dd hh:mm:ss' }}</span>
+            </div>
+            <div style="float: right">
+                <span>阅读量:</span>
+                <span>{{dataArr.readnumber}}</span>
+            </div>
+    </div>
+
+        <!--<div class="col-md-12 " style="padding-top: 30px;text-align: right">-->
+
+        <!--</div>-->
+
+        <!--<div class="col-md-12 " style="padding-top: 30px">-->
+            <!--<span>是否为轮播图:</span>-->
+            <!--<span *ngIf="dataArr.isbanner == 1">是</span>-->
+            <!--<span *ngIf="dataArr.isbanner == 0">不是</span>-->
+        <!--</div>-->
+
+        <!--<div class="col-md-12 " style="padding-top: 30px">-->
+            <!--<span>审核/上下架状态:</span>-->
+            <!--<span *ngIf="dataArr.state == 2">审核中</span>-->
+            <!--<span *ngIf="dataArr.state == 3">审核未通过</span>-->
+            <!--&lt;!&ndash;</td>&ndash;&gt;-->
+            <!--&lt;!&ndash;<td>&ndash;&gt;-->
+            <!--<span *ngIf="dataArr.state == 1">已上架</span>-->
+            <!--<span *ngIf="dataArr.state == 0">未上架</span>-->
+        <!--</div>-->
+
+        <!--<div class="col-md-2 Label" *ngIf="dataArr.atitle">-->
+            <!--<span>{{dataArr.policy_type3_name}}</span>-->
+        <!--</div>-->
+    </div>
+    </div>
+    <!--<div class="row" style="margin-top: 20px">-->
+        <!--<div class="col-md-1"></div>-->
+        <!--<div class="col-md-11" [innerHTML]="dataArr.policy_content"></div>-->
+    <!--</div>-->
+    <!--<div class="row" *ngFor="let item of policyName let i = index" style="margin-top: 20px">-->
+        <!--<div class="col-md-1"></div>-->
+        <!--<div class="col-md-11">-->
+            <!--<span>{{item}}</span>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="row" style="margin-top: 20px;    padding-left: 30px;" *ngIf="isExamine == '2'">
+        <div class="col-md-4" style="    text-align: right;
+    line-height: 35px;">*审核结果：</div>
+        <div class="col-md-6" style="line-height: 35px">
+            <label>
+                <input class="form-check-input" name="authentication" value="1" type="radio"
+                       style="margin-top: 11px;margin:0 5px" [(ngModel)]="checkState">审核通过
+            </label>
+            <label style="margin-left:50px;">
+                <input class="form-check-input" name="authentication" value="3" type="radio" style="margin-top: 11px;margin-right: 5px"
+                       [(ngModel)]="checkState">审核不通过
+            </label>
+        </div>
+    </div>
+    <!--<div class="row" style="margin-top: 20px" *ngIf="isExamine == '1' && checkState== '3'">-->
+        <!--<div class="col-md-1"></div>-->
+        <!--<div class="col-md-3">*审核不通过原因：</div>-->
+        <!--<div class="col-md-6" style="line-height: 35px">-->
+            <!--<textarea class="form-control btn-radius" collapse="3" placeholder="请输入审核不通过的原因"-->
+                      <!--[(ngModel)]="causeAnalysis"></textarea>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="row" style="margin-top: 20px; margin-bottom: 40px">
+        <div class="col-md-9" style="text-align: center">
+            <button class="btn btn-secondary" (click)="back()">返回</button>
+            <button *ngIf="isExamine == '2'" class="btn btn-radius btn-primary" style="margin-left: 100px"
+                    (click)="toExamine()">审核
+            </button>
+        </div>
+    </div>
+</div>
