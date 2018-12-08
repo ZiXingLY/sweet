@@ -120,7 +120,7 @@
     <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.4.01" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.7" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" level="project" />
@@ -194,7 +194,6 @@
     <orderEntry type="library" name="Maven: com.github.multiformats:java-multibase:v1.0.0" level="project" />
     <orderEntry type="library" name="Maven: com.github.multiformats:java-multihash:v1.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.github.ipld:java-cid:v1.1.0" level="project" />
-    <orderEntry type="library" name="Maven: com.qy.myBatisPrj:sweet:1.0" level="project" />
     <orderEntry type="library" name="Maven: com.gxb.block.baas:baas-sdk-client:1.0.2-RELEASE" level="project" />
     <orderEntry type="library" name="Maven: com.neovisionaries:nv-websocket-client:2.3" level="project" />
     <orderEntry type="library" name="Maven: org.tukaani:xz:1.8" level="project" />
