@@ -13,9 +13,9 @@ import pymongo
 
 def get_emotion():
     # 安装PhantomJS指定路径
-    # driver = webdriver.PhantomJS(executable_path=r"/Users/anshi/Desktop/resource/phantomjs-2.1.1-macosx/bin/phantomjs")
+    driver = webdriver.PhantomJS(executable_path=r"/Users/anshi/Desktop/resource/phantomjs-2.1.1-macosx/bin/phantomjs")
     # driver = webdriver.PhantomJS(executable_path=r"/root/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")
-    driver = webdriver.PhantomJS(executable_path=r"/root/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")
+    # driver = webdriver.PhantomJS(executable_path=r"/root/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")
     # driver = webdriver.Chrome(executable_path=r'C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\Scripts\phantomjs-2.1.1-windows\phantomjs-2.1.1-windows\bin\chromedriver.exe') #这个是chormedriver的地址
     driver.get('https://qzone.qq.com/')
 
@@ -245,7 +245,7 @@ def get_emotion():
 
         #     f.write('{},{},{}\n'.format(str(QQnum), sendTime, msg))
         #     print(str(QQnum) + " : " + sendTime + " : " + msg)
-        if begin == 200:
+        if begin == 500:
             tag = 0
         begin = begin + 20
         time.sleep(2)
