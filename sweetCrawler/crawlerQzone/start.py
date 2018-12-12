@@ -20,7 +20,15 @@ mongodb_address = "mongodb://47.93.226.47:27017/"
 mongodb_db_name = "sweet"
 mongodb_table_name = 'wall_emotions'
 
-def get_emotion():
+g_qzonetoken = ''
+gtk = ''
+driver = ''
+
+def get_login_info():
+
+    global g_qzonetoken
+    global gtk
+    global driver
 
     # global target_qzone_uin
     # global source_qzone_uin
@@ -63,8 +71,61 @@ def get_emotion():
     gtk = getGTK(cookie)  # 通过getGTK函数计算gtk
     print(g_qzonetoken)
     print(gtk)
+
+
+def getGTK(cookie):
+    hashes = 5381
+    for letter in cookie['p_skey']:
+        hashes += (hashes << 5) + ord(letter)
+    return hashes & 0x7fffffff
+# print('enter')
+# schedule.enter(30*60,0,get_emotion,())
+# schedule.run()
+def init():
+    conf = configparser.ConfigParser()
+    conf.read("config.ini")
+    global target_qzone_uin
+    global source_qzone_uin
+    global max_crawler_emotion_num
+    global source_qzone_password
+
+    global mongodb_address
+    global mongodb_db_name
+    global mongodb_table_name
+
+    target_qzone_uin = conf.get("init", "target_qzone_uin")
+    source_qzone_uin = conf.get("init", "source_qzone_uin")
+    source_qzone_password = conf.get("init", "source_qzone_password")
+    max_crawler_emotion_num = int(conf.get("init", "max_crawler_emotion_num"))
+
+    mongodb_address = conf.get("mongo", 'mongodb_address')
+    mongodb_db_name = conf.get("mongo", 'mongodb_db_name')
+    mongodb_table_name = conf.get("mongo", 'mongodb_table_name')
+
+    for i in range(1,len(argv)):
+        if argv[i] == '-t':
+            print('贴吧君')
+            mongodb_table_name = conf.get("mongo", 'mongodb_table_name_t')
+            target_qzone_uin = conf.get("init", "target_qzone_uin_t")
+
+    # if argv[1]:
+    #     print("t")
+    
+    # print(max_crawler_emotion_num)
+    # print(type(max_crawler_emotion_num))
+def fetch_loop():
+    loop_flat = 1
+    while loop_flat == 1:
+        # 表白墙、贴吧君
+        qNoList = ['2425936375','449338017']
+        for qno in qNoList:
+            crawlerAndStore(qno)
+            time.sleep(5*60)
+
+    
+def crawlerAndStore(QQnum):
     last_source = ""
-    QQnum = target_qzone_uin
+    # QQnum = target_qzone_uin
     tag = 1
     # QQname = numList[QQnum]
     begin = 0
@@ -141,7 +202,7 @@ def get_emotion():
                 'content': content,
                 'info': emotion
             }
-            result = col.find_one({'tid': tid})
+            result = col.find_one({'tid': tid,'uin': uin})
             # x = col.insert_one(item)
             # print(x.inserted_id)
 
@@ -248,49 +309,9 @@ def get_emotion():
         begin = begin + 20
         time.sleep(2)
 
-
-def getGTK(cookie):
-    hashes = 5381
-    for letter in cookie['p_skey']:
-        hashes += (hashes << 5) + ord(letter)
-    return hashes & 0x7fffffff
-# print('enter')
-# schedule.enter(30*60,0,get_emotion,())
-# schedule.run()
-def init():
-    conf = configparser.ConfigParser()
-    conf.read("config.ini")
-    global target_qzone_uin
-    global source_qzone_uin
-    global max_crawler_emotion_num
-    global source_qzone_password
-
-    global mongodb_address
-    global mongodb_db_name
-    global mongodb_table_name
-
-    target_qzone_uin = conf.get("init", "target_qzone_uin")
-    source_qzone_uin = conf.get("init", "source_qzone_uin")
-    source_qzone_password = conf.get("init", "source_qzone_password")
-    max_crawler_emotion_num = int(conf.get("init", "max_crawler_emotion_num"))
-
-    mongodb_address = conf.get("mongo", 'mongodb_address')
-    mongodb_db_name = conf.get("mongo", 'mongodb_db_name')
-    mongodb_table_name = conf.get("mongo", 'mongodb_table_name')
-
-    for i in range(1,len(argv)):
-        if argv[i] == '-t':
-            print('贴吧君')
-            mongodb_table_name = conf.get("mongo", 'mongodb_table_name_t')
-            target_qzone_uin = conf.get("init", "target_qzone_uin_t")
-
-    # if argv[1]:
-    #     print("t")
-    
-    # print(max_crawler_emotion_num)
-    # print(type(max_crawler_emotion_num))
-
 init()
+get_login_info()
+fetch_loop()
 # print(max_crawler_emotion_num)
 # print(type(max_crawler_emotion_num))
 print(argv)
@@ -299,4 +320,4 @@ print(argv)
 #     if argv[i] == '-t':
 #         print('ttt')
     # print("parameter",i,argv[i])
-get_emotion()
+# get_emotion()
