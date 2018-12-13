@@ -7,6 +7,7 @@ import io.anshily.base.core.ResultGenerator;
 import io.anshily.model.SweetWall;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -49,6 +50,22 @@ public class SweetWallController {
         return ResultGenerator.successResult(map);
 //        System.out.println("succeed!");
 //        return ResultGenerator.successResult(list);
+    }
+
+    @RequestMapping("listByConditions")
+    public Result listByConditions(@RequestParam(required = false, defaultValue = "2425936375") String uin,@RequestParam(required = false, defaultValue = "0") Integer page){
+
+        System.out.println(uin);
+        System.out.println(page);
+
+        List<SweetWall> list = sweetWallService.listByConditions(uin,page);
+
+        System.out.println(list);
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("list",list);
+        map.put("total",sweetWallService.getTotals());
+        return ResultGenerator.successResult(map);
     }
 
     @RequestMapping("/count")

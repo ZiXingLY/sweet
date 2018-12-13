@@ -23,6 +23,8 @@ mongodb_table_name = 'wall_emotions'
 g_qzonetoken = ''
 gtk = ''
 driver = ''
+sleep_time = 600
+get_number_per_crawler = 60
 
 def get_login_info():
 
@@ -92,6 +94,8 @@ def init():
     global mongodb_address
     global mongodb_db_name
     global mongodb_table_name
+    global sleep_time
+    global get_number_per_crawler
 
     target_qzone_uin = conf.get("init", "target_qzone_uin")
     source_qzone_uin = conf.get("init", "source_qzone_uin")
@@ -101,6 +105,9 @@ def init():
     mongodb_address = conf.get("mongo", 'mongodb_address')
     mongodb_db_name = conf.get("mongo", 'mongodb_db_name')
     mongodb_table_name = conf.get("mongo", 'mongodb_table_name')
+
+    sleep_time = int(conf.get("control", 'sleep_time'))
+    # get_number_per_crawler = conf.get("control", 'get_number_per_crawler')
 
     for i in range(1,len(argv)):
         if argv[i] == '-t':
@@ -116,11 +123,12 @@ def init():
 def fetch_loop():
     loop_flat = 1
     while loop_flat == 1:
+        init()
         # 表白墙、贴吧君
         qNoList = ['2425936375','449338017']
         for qno in qNoList:
             crawlerAndStore(qno)
-            time.sleep(5*60)
+            time.sleep(sleep_time)
 
     
 def crawlerAndStore(QQnum):

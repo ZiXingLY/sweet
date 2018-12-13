@@ -38,6 +38,21 @@ public class SweetWallServiceImpl implements SweetWallService {
     }
 
     @Override
+    public List<SweetWall> listByConditions(String uin,Integer page){
+
+//        Criteria criteria = new Criteria();
+//        criteria.andOperator(
+//                Criteria.where("uin").is(uin));
+        Query query = new Query(Criteria.where("uin").is(uin));
+
+        System.out.println(query);
+//        query.addCriteria(criteria);
+//        query.with(new Sort(Sort.Direction.DESC,"created")).skip(10*page).limit(10);
+        return mongoTemplate.find(query, SweetWall.class);
+    }
+
+
+    @Override
     public Long getTotals() {
         Query query = new Query();
 
