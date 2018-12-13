@@ -41,7 +41,7 @@ def get_login_info():
     # driver = webdriver.PhantomJS(executable_path=r"/root/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")
     # driver = webdriver.Chrome(executable_path=r'C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\Scripts\phantomjs-2.1.1-windows\phantomjs-2.1.1-windows\bin\chromedriver.exe') #这个是chormedriver的地址
     driver.get('https://qzone.qq.com/')
-    print("抓取：https://qzone.qq.com/")
+    print("获取登录页面：https://qzone.qq.com/")
 
     driver.switch_to.frame('login_frame')
     driver.find_element_by_id('switcher_plogin').click()
@@ -71,8 +71,8 @@ def get_login_info():
         cookie[elem['name']] = elem['value']
 
     gtk = getGTK(cookie)  # 通过getGTK函数计算gtk
-    print(g_qzonetoken)
-    print(gtk)
+    print('获取 g_qzonetoken ：' + g_qzonetoken)
+    print('获取 gtk ：' + str(gtk))
 
 
 def getGTK(cookie):
@@ -222,110 +222,9 @@ def crawlerAndStore(QQnum):
                 x = col.update({'tid': tid},item)
                 print('已更新')
                 print(tid)
-            # print(result)
-            # print(tid)
-            # print('已存在')
-            # print(item)
-            # json_em = json.dumps(item)
-            # print(json_em.decode('utf-8'))
-
-            # sql = "INSERT INTO sw_wall(tid, content, created, uin, info) VALUES ('%s', '%s', '%s', '%s', '%s')" % \
-            #         (tid,content,created,uin,str(emotion))
-            # try:
-            #     cursor.execute(sql)
-            #     db.commit()
-            # except (Exception) as args:
-            #     print (args)
-            #     print (emotion)
-            #     db.rollback()
-            #     break
-
-
-            # pass
-   #      print(msg_dict['msglist'][0])
-   #      print(msg_dict['msglist'][0]['tid'])
-   #      print(msg_dict['msglist'][0]['uin'])
-
-   #      print(len(msg_dict['msglist']))
-
-   #      sql = "INSERT INTO sw_wall(tid, \
-   #              content, created, uin, image, info) \
-   #              VALUES ('%s', '%s', '%s', '%s', '%s', '%s' )" % \
-   #              ('Mac', 'Mohan', '10', 'M', '10', 'aa')
-   #      try:
-   # # 执行sql语句
-   #          cursor.execute(sql)
-   # # 执行sql语句
-   #          db.commit()
-   #      except:
-   #          print ('error')
-   # # 发生错误时回滚
-   #          db.rollback()
-        # print(msg_dict['msglist'].__class__)
-        # # msg_list_json = msg_list_json.split("smoothpolicy")[0]
-        # # msg_list_json = msg_list_json.split("commentlist")[1:]
-        # # msg_list_json = msg_list_json.split("commentlist")[1:]
-
-        # # 说说动态分4种：1、文字说说（或带有配图的文字说说）
-        # #              2、只有图片的说说
-        # #              3、转发，并配有文字
-        # #              4、转发，不配文字
-
-        # for text in msg_list_json:
-        #     # 1、先检查说说，用户是否发送了文字，如果没有文字，正则表达式匹配无效
-        #     # abtract_pattern = re.compile('\}\],"content":"(.*?)","createTime":"(.*?)","created_time":(.*?),"', re.S)
-        #     abtract_pattern = re.compile('\}\],"content":"(.*?)","createTime":"(.*?)","created_time":(.*?)","editMask":(.*?),"', re.S)
-        #     msg_time = re.findall(abtract_pattern, str(text))
-
-        #     if msg_time != []:
-        #         # 2、如果作者说说有文字，那么检查是否有转发内容
-        #         msg = str(msg_time[0][0])
-        #         sendTime = str(msg_time[0][1])
-        #         print(msg_time)
-        #         print(msg_time[0])
-        #         print(msg_time[0][1])
-
-        #         abtract_pattern = re.compile('\}\],"content":"(.*?)"},"rt_createTime":"(.*?)","', re.S)
-        #         text = text.split("created_time")[1]
-        #         msg_time2 = re.findall(abtract_pattern, str(text))
-
-        #         # 合并发送内容 格式：评论+转发内容
-        #         if msg_time2 != []:
-        #             msg = msg + "  转发内容:" + str(msg_time2[0][0])
-
-        #     else:
-        #         # 3、说说内容为空，检查是否为 =>只有图片的说说 or 转发，不配文字
-        #         # 获取正文发送时间 （发送时间分为：正文发送时间 or 转发时间）
-        #         abtract_pattern = re.compile('"conlist":null,"content":"","createTime":"(.*?)",', re.S)
-        #         msgNull_time = re.findall(abtract_pattern, str(text))
-
-        #         if msgNull_time != []:
-        #             # 如果有正文发送时间，那么就是这条说说仅含有图片  =>只有图片的说说
-        #             msg = "图片"
-        #             sendTime = str(msgNull_time[0])
-        #         else:
-        #             # 如果没有正文发送时间，那么就是说这条说为 =>转发，不配文字
-        #             abtract_pattern = re.compile('\}\],"content":"(.*?)"},"rt_createTime":"(.*?)","', re.S)
-        #             msg_time = re.findall(abtract_pattern, str(text))
-        #             msg = "  转发内容:" + str(msg_time[0][0])
-        #             sendTime = str(msg_time[0][1])
-
-        #     f.write('{},{},{}\n'.format(str(QQnum), sendTime, msg))
-        #     print(str(QQnum) + " : " + sendTime + " : " + msg)
+           
         if begin == max_crawler_emotion_num:
             tag = 0
         begin = begin + 20
         time.sleep(2)
-
-# init()
-# get_login_info()
-# fetch_loop()
-# print(max_crawler_emotion_num)
-# print(type(max_crawler_emotion_num))
-print(argv)
-
-# for i in range(1,len(argv)):
-#     if argv[i] == '-t':
-#         print('ttt')
-    # print("parameter",i,argv[i])
-# get_emotion()
+    return msg_dict['msglist']
