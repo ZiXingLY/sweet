@@ -1,6 +1,6 @@
 ### crawlerQzone 0.0.1
 
-argv init uin mongo 
+argv init uin mongo
 
 # usege 
 使用 `python3 start.py` 启动
