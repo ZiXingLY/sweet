@@ -13,4 +13,5 @@ public interface UserMapper extends Mapper<User> {
     List<User> findUserByOpenid(String openid);
     List<User> getVipUserList();
     List<User> findVipUser();
+    List<User> validationWxAccount(User user);
 }

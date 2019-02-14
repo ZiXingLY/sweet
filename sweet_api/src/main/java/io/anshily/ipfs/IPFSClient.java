@@ -4,13 +4,17 @@ import io.ipfs.api.IPFS;
 import io.ipfs.api.MerkleNode;
 import io.ipfs.api.NamedStreamable;
 import io.ipfs.multihash.Multihash;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 
 public class IPFSClient {
 
-    public static IPFS ipfs = new IPFS("/ip4/127.0.0.1/tcp/5001");
+    public static final String FS_ADDR = "/ip4/47.93.226.47/tcp/5432";
+
+//    public static IPFS ipfs = new IPFS("/ip4/127.0.0.1/tcp/5001");
+    public static IPFS ipfs = new IPFS(FS_ADDR);
 
     public static String add() throws IOException {
         NamedStreamable.FileWrapper file = new NamedStreamable.FileWrapper(new File("/Users/anshi/Desktop/","keniu.sql"));
@@ -26,7 +30,8 @@ public class IPFSClient {
 
     public static void main(String[] args){
         try {
-            System.out.println(cat("QmRvXsYnE6hP9sqigeaDZmKexNnAN8n5KQTSgSDpy3svov"));
+//            System.out.println(add());
+            System.out.println(cat("QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH"));
         } catch (IOException e) {
             e.printStackTrace();
         }

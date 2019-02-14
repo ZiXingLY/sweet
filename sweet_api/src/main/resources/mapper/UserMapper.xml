@@ -52,6 +52,10 @@
     </where>
   </select>
 
+  <select id="validationWxAccount" resultType="io.anshily.model.User">
+    SELECT * from qy_user where phone = #{phone} or openid = #{openid}
+  </select>
+
   <select id="findVipUser" resultType="io.anshily.model.User">
             select * from qy_user where vip_state = 1
   </select>

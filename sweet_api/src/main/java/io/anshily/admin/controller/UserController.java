@@ -327,20 +327,52 @@ public class UserController {
      * @param
      * @return
      */
-    @PostMapping("/WXRegister")
-    public Result WXRegister(@RequestBody User user) {
+//    @PostMapping("/WXRegister")
+//    public Result WXRegister(@RequestBody User user) {
+//
+//        if (user.getOpenid() == null) {
+//            return ResultGenerator.errResult();
+//        }
+//        List<User> wxList = userService.findUserByOpenid(user.getOpenid());
+//        if (wxList.size() > 0) {
+//            return ResultGenerator.successResult(wxList.get(0));
+//        } else {
+//            userService.save(user);
+//
+//            List<User> wxUsers = userService.findUserByOpenid(user.getOpenid());
+//            return ResultGenerator.successResult(wxUsers.get(0));
+//        }
+//    }
 
-        if (user.getOpenid() == null) {
+    @PostMapping("/wxRegiste")
+    public Result wxRegiste(@RequestBody User user) {
+
+        System.out.println(user.getPhone());
+
+        if (user.getOpenid().equals("") || user.getOpenid() == null) {
             return ResultGenerator.errResult();
         }
-        List<User> wxList = userService.findUserByOpenid(user.getOpenid());
-        if (wxList.size() > 0) {
-            return ResultGenerator.successResult(wxList.get(0));
-        } else {
-            userService.save(user);
+        if (user.getPhone().equals("") || user.getPhone() == null){
+            return ResultGenerator.errResult();
+        }
 
-            List<User> wxUsers = userService.findUserByOpenid(user.getOpenid());
-            return ResultGenerator.successResult(wxUsers.get(0));
+        List<User> users = userService.validationWxAccount(user);
+
+        System.out.println(users);
+
+        if (users.size() > 0){
+            return ResultGenerator.errResult(Constants.CODE_ERR_ACCOUNT_EXIST);
+        }
+        user.setPassword(MyMD5.myMD5(user.getPassword() + user.getPhone()));
+
+        List<User> userList = userService.findUserByPhone(user.getPhone());
+
+        if (userList.size() > 0) {
+            return ResultGenerator.errResult(Constants.CODE_ERR_ACCOUNT_EXIST);
+        } else {
+
+            userService.save(user);
+            return ResultGenerator.successResult();
         }
     }
 

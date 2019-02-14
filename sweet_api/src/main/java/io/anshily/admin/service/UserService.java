@@ -17,5 +17,6 @@ public interface UserService extends Service<User> {
     List<User> getVipUserList();
 
     List<User> findVipUser();
+    List<User> validationWxAccount(User user);
 
 }

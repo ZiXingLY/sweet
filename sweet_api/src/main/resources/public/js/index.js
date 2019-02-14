@@ -16,7 +16,7 @@
     hideBlackNode();
     var spanArr = document.getElementsByClassName("categoryButton");
     for (var i = 0; i < spanArr.length; i++){
-       if (spanArr[i].innerText == "新闻"){
+       if (spanArr[i].innerText == "观点"){
            spanArr[i].click();
        }
     }

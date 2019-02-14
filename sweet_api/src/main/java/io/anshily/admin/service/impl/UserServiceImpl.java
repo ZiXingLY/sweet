@@ -50,4 +50,9 @@ public class UserServiceImpl extends AbstractService<User> implements UserServic
     public List<User> findVipUser() {
         return qyUserMapper.findVipUser();
     }
+
+    @Override
+    public List<User> validationWxAccount(User user) {
+        return qyUserMapper.validationWxAccount(user);
+    }
 }

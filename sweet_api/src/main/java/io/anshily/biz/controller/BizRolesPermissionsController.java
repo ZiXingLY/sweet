@@ -15,7 +15,7 @@ import java.util.List;
 * Created by sxd on 2018/07/23.
 */
 @RestController
-@RequestMapping("/biz/roles/permissions")
+@RequestMapping("/sys/roles/permissions")
 public class BizRolesPermissionsController {
     @Resource
     private BizRolesPermissionsService bizRolesPermissionsService;

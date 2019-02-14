@@ -10,8 +10,25 @@ import {Md5} from 'ts-md5/dist/md5';
 export class LoginComponent {
     public userName: any;
     public passWord: any;
+    public aname: any;
 
     constructor(public http: Http, private router: Router, private loading: LoadingService) {
+    }
+
+    register() {
+        const params = {
+            account: this.userName,
+            password: this.passWord,
+            name: this.aname
+        };
+        this.loading.show();
+        this.http.post(ROOT_URL + 'sys/admin/add', params).subscribe(res => {
+            console.log(res);
+            if (res['code'] === 0) {
+                this.loading.hide();
+                console.log(res);
+            }
+        })
     }
 
     login() {
@@ -39,7 +56,7 @@ export class LoginComponent {
                     localStorage.idType = result['data']['admin']['roles_id'];
                     // localStorage.permissions = JSON.stringify(result['data']['permissions']);
                     localStorage.permissions = JSON.stringify(result['data']['permissions']);
-                    // console.log(localStorage.permissions);
+                    console.log(localStorage.permissions);
                     if (result['data']['permissions'][0].controller) {
                         this.router.navigateByUrl(result['data']['permissions'][0].controller ? (result['data']['permissions'][0].controller + '/index') : 'login');
                     } else {

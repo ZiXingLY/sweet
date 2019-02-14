@@ -4,7 +4,9 @@ package io.anshily.shiro;
 //import com.qy.admin.service.SysPermissionInitService;
 //import SysPermissionInit;
 
+import io.anshily.shiro.filter.CORSShrioFilter;
 import io.anshily.shiro.filter.KickoutSessionControlFilter;
+import io.anshily.shiro.filter.MyAuthenticationFilter;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
@@ -41,21 +43,27 @@ public class ShiroConfig {
      */
     @Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
+
+
+        System.out.println(securityManager);
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        // 必须设置 SecurityManager
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
-        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        // 登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/index");
-        // 未授权界面;
-        shiroFilterFactoryBean.setUnauthorizedUrl("/login");
 
         //自定义拦截器
         Map<String, Filter> filtersMap = new LinkedHashMap<String, Filter>();
+        filtersMap.put("cors", new CORSShrioFilter());
         //限制同一帐号同时在线的个数。
         filtersMap.put("kickout", kickoutSessionControlFilter());
         shiroFilterFactoryBean.setFilters(filtersMap);
+
+        // 必须设置 SecurityManager
+        shiroFilterFactoryBean.setSecurityManager(securityManager);
+        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
+        shiroFilterFactoryBean.setLoginUrl("/loginrefuse");
+        // 登录成功后要跳转的链接
+        shiroFilterFactoryBean.setSuccessUrl("/indexrefuse");
+        // 未授权界面;
+        shiroFilterFactoryBean.setUnauthorizedUrl("/loginrefuse");
+
 
         // 权限控制map.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
@@ -97,6 +105,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/credits/**", "anon");
         filterChainDefinitionMap.put("/recharge", "anon");
         filterChainDefinitionMap.put("/views/front/ImageTest.html","anon");
+        filterChainDefinitionMap.put("/loginrefuse","anon");
+        filterChainDefinitionMap.put("/emotions/list","anon");
+        filterChainDefinitionMap.put("/emotions/detail","anon");
 //        分享相关
         filterChainDefinitionMap.put("/shareFlashDetail", "anon");
         filterChainDefinitionMap.put("/shareArticleDetail","anon");
@@ -113,7 +124,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/uploadImage/**","anon");
         filterChainDefinitionMap.put("/getBanner/**", "anon");
         filterChainDefinitionMap.put("/setImage/**","anon");
-        filterChainDefinitionMap.put("/**", "user");
+        filterChainDefinitionMap.put("/**", "cors,user");
 
 
         // 配置不会被拦截的链接 顺序判断,

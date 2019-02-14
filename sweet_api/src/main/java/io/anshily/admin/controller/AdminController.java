@@ -291,4 +291,9 @@ public class AdminController {
 
         return ResultGenerator.successResult();
     }
+
+    @RequestMapping("/loginrefuse")
+    public Result loginrefuse(){
+        return ResultGenerator.errResult(403,"unlogin");
+    }
 }
