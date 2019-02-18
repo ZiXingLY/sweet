@@ -1,0 +1,116 @@
+/* pages/article-detail/article-detail.wxss */
+page{
+  background-color: rgb(244, 244, 244);
+}
+.detail-head{
+  background-color: white;
+  padding: 30rpx;
+}
+.detail-head-user{
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  /* border-bottom: 2rpx dashed #E0E0E0; */
+  padding-bottom: 30rpx;  
+}
+.detail-head-text{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.detail-head-text view{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.detail-head-text-head{
+  width: 46rpx;
+  height: 46rpx;
+  margin-right: 10rpx;  
+}
+.detail-head-text-addtime{
+  color: #888;
+  margin-left: 20rpx;
+}
+.detail-head-text-readnum{
+  width: 33rpx;
+  height: 26rpx;
+  margin-right: 7rpx;
+}
+.detail-head-text-sharenum{
+  width: 33rpx;
+  height: 26rpx;
+  margin-right: 7rpx;
+}
+.detail-head-title{
+  font-weight: bold;
+  font-size: 42rpx;
+}
+.detail-content{
+  background-color: white;
+  padding: 0 30rpx 30rpx;
+}
+.detail-content rich-text{
+  word-wrap: break-word;
+}
+.detail-author{
+  padding: 26rpx;
+  background-color: white;
+  color: #888;
+  font-size: 28rpx;
+  font-weight: 300;
+  line-height: 44rpx;
+}
+.detail-author view:nth-child(1){
+  border-top: 1rpx solid #D3D3D3;
+  padding-top: 20rpx;
+}
+.detail-author view:nth-child(1) text{
+  margin-right: 20rpx;
+}  
+.detail-author view:nth-child(3){
+  margin-top: 20rpx;
+}
+rich-text{
+  font-size: 30rpx;
+  line-height: 60rpx;
+}
+rich-text .rich-img {
+  width: 100%;
+  height: auto;
+}
+.detail-bottom{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  padding: 30rpx 0;
+}
+.detail-bottom view{
+  width: 230rpx;
+  height: 80rpx;
+  position: relative;
+}
+.detail-bottom image{
+  width: 230rpx;
+  height: 80rpx;
+}
+.bottom-first text{
+  position: absolute;
+  font-size: 32rpx;
+  color: #888888;
+  right: 55rpx;
+  top: 18rpx;
+}
+.bottom-second{
+  padding: 0;
+  width: 230rpx;
+  height: 80rpx;
+  background-color: white;
+  margin: 0;
+  border-radius: 50rpx;
+  border: none;
+}

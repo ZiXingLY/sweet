@@ -1,0 +1,48 @@
+<!--pages/article-detail/article-detail.wxml-->
+<view class='detail-head'>
+  <text  class='detail-head-title'>{{detailData.title}}</text>
+  <view class='detail-head-user'>
+    <view class='detail-head-text'>
+      <view>
+        <image class='detail-head-text-head' src='{{imgUrl + userData.header}}'></image>      
+        <text>{{detailData.author}}</text>
+        <text class='detail-head-text-addtime'>{{detailData.addtime}}</text>        
+      </view>
+      <view>
+        <view>
+          <image class='detail-head-text-sharenum' mode="aspectFit" src='/utils/imgs/k_02@3x.png'></image>
+          <text style='color: #888;margin-right: 20rpx;'>{{shareNumber}}</text>
+        </view>
+        <view>
+          <image class='detail-head-text-readnum' mode="aspectFit" src='/utils/imgs/k_03@3x.png'></image>
+          <text style='color: #888;'>{{detailData.readnumber}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='detail-content'>
+   <rich-text nodes="{{detailData.content}}"></rich-text>   
+</view>
+<view class='detail-author'>
+  <view>
+    <text wx:if="{{detailData.source}}">本文来源：{{detailData.source}}    </text>
+    <text>    文章作者：{{detailData.author}}</text>
+  </view>
+  <view>
+    编辑于{{detailData.addtime}}
+  </view>
+  <view>
+    声明：本文由入驻{{detailData.source}}的作者撰写，观点仅代表作者本人，绝不代表可牛赞同其观点或证实其描述。
+  </view>
+</view>
+<view class='detail-bottom'>
+  <view class='bottom-first' bindtap='thumbs'>
+    <image src='{{isZan ? "/utils/imgs/z_s@3x.png" : "/utils/imgs/z_n@3x.png"}}'></image>
+    <text style='color:{{isZan? "#1992EF" : "#888"}}'>{{likenum}}</text>
+  </view>
+  <button class='bottom-second' open-type="share">
+    <image src='/utils/imgs/f@3x.png'></image>    
+  </button>
+</view>
+<view style='height: 100rpx;'></view>

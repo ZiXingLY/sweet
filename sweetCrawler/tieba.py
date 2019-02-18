@@ -13,7 +13,7 @@ import pymongo
 
 def get_emotion():
     # 安装PhantomJS指定路径
-    driver = webdriver.PhantomJS(executable_path=r"/Users/anshi/Desktop/resource/phantomjs-2.1.1-macosx/bin/phantomjs")
+    driver = webdriver.PhantomJS(executable_path=r"/Users/anshi/Desktop/resource/anshi/phantomjs-2.1.1-macosx/bin/phantomjs")
     # driver = webdriver.PhantomJS(executable_path=r"/root/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")
     # driver = webdriver.PhantomJS(executable_path=r"/root/phantomjs-2.1.1-linux-x86_64/bin/phantomjs")
     # driver = webdriver.Chrome(executable_path=r'C:\Users\Administrator\AppData\Local\Programs\Python\Python36-32\Scripts\phantomjs-2.1.1-windows\phantomjs-2.1.1-windows\bin\chromedriver.exe') #这个是chormedriver的地址
@@ -23,7 +23,7 @@ def get_emotion():
     driver.find_element_by_id('switcher_plogin').click()
     # 判断元素是否出现
     WebDriverWait(driver, 10).until(lambda x: x.find_element_by_id("u")).send_keys("1926791261")
-    WebDriverWait(driver, 10).until(lambda x: x.find_element_by_id("p")).send_keys("hang183367.")
+    WebDriverWait(driver, 10).until(lambda x: x.find_element_by_id("p")).send_keys("hanghang183367.")
     print('send_keys')
 
     # time.sleep(0.5)

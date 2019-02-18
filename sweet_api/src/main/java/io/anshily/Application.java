@@ -111,10 +111,10 @@ public class Application extends SpringBootServletInitializer {
         Connector connector = new Connector(TomcatEmbeddedServletContainerFactory.DEFAULT_PROTOCOL);
         connector.setScheme("http");
         //Connector监听的http的端口号
-        connector.setPort(80);
+        connector.setPort(8081);
         connector.setSecure(false);
         //监听到http的端口号后转向到的https的端口号
-        connector.setRedirectPort(443);
+        connector.setRedirectPort(8443);
         return connector;
     }
 
