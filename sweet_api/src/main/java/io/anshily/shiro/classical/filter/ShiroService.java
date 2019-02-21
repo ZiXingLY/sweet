@@ -1,4 +1,4 @@
-package io.anshily.shiro;
+package io.anshily.shiro.classical.filter;
 //
 //
 //import SysPermissionInit;
@@ -22,10 +22,10 @@ import java.util.Map;
  */
 @Service
 public class ShiroService {
-	
+
 	@Autowired
 	ShiroFilterFactoryBean shiroFilterFactoryBean;
-	
+
 //	@Autowired
 //    SysPermissionInitService sysPermissionInitService;
 //

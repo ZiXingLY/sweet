@@ -1,6 +1,5 @@
-package io.anshily.shiro.filter;
+package io.anshily.shiro.classical.filter;
 
-import com.alibaba.fastjson.JSONObject;
 import io.anshily.base.core.ResultGenerator;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.UserFilter;

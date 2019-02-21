@@ -1,5 +1,8 @@
 package io.anshily.admin.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTCreator;
+import com.auth0.jwt.algorithms.Algorithm;
 import io.anshily.admin.extend.ExUsernamePasswordToken;
 import io.anshily.admin.service.CreditsService;
 import io.anshily.admin.service.MessageService;
@@ -13,12 +16,24 @@ import io.anshily.model.Message;
 import io.anshily.model.User;
 import io.anshily.admin.service.UserService;
 import com.github.pagehelper.PageHelper;
+import io.anshily.shiro.jwt.configuration.JwtUtils;
+import io.anshily.shiro.jwt.dto.UserDto;
+import io.anshily.shiro.jwt.service.JWTUserService;
 import net.sf.json.JSONObject;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +48,9 @@ import static io.anshily.base.core.Constants.ADD_SCORE_TYPE_REGIS;
 public class UserController {
     @Resource
     private UserService userService;
+
+    @Resource
+    private JWTUserService jwtUserService;
 
     @Autowired
     CreditsService creditsService;
@@ -82,12 +100,43 @@ public class UserController {
      */
 
     @PostMapping("/ajaxLogin")
-    public Result ajaxLogin(@RequestBody User user) {
+    public Result ajaxLogin(@RequestBody User user, HttpSession session, HttpServletResponse response) {
         try {
-            ExUsernamePasswordToken token = new ExUsernamePasswordToken(user.getPhone(), user.getPassword());
+            String password = MyMD5.myMD5(user.getPassword() + user.getPhone());
+            ExUsernamePasswordToken token = new ExUsernamePasswordToken(user.getPhone(), password);
 
             SecurityUtils.getSubject().login(token);
-            return ResultGenerator.successResult();
+
+            String newToken = JwtUtils.sign(user.getPhone(), password, 3600); //生成jwt token，设置过期时间为1小时jwtUserService.generateJwtToken(user.getPhone());
+
+//            Algorithm algorithm = Algorithm.HMAC256("salt");
+//            JWTCreator.Builder builder = JWT.create()
+//                    .withIssuer(user.getPhone())
+//                    //设置过期时间为2小时
+//                    .withExpiresAt(DateUtils.addHours(new Date(), 2));
+//
+//            String token1 = builder.sign(algorithm);
+//            session.setAttribute(user.getPhone(),token1);
+
+
+//            Subject subject = SecurityUtils.getSubject();
+//            try {
+//                UsernamePasswordToken token = new UsernamePasswordToken(loginInfo.getUsername(), loginInfo.getPassword());
+//                subject.login(token);
+//
+//                UserDto user = (UserDto) subject.getPrincipal();
+//                String newToken = userService.generateJwtToken(user.getUsername());
+//                response.setHeader("x-auth-token", newToken);
+//
+//                return ResponseEntity.ok().build();
+//            } catch (AuthenticationException e) {
+//                logger.error("User {} login fail, Reason:{}", loginInfo.getUsername(), e.getMessage());
+//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//            } catch (Exception e) {
+//                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//            }
+
+            return ResultGenerator.successResult(newToken);
         } catch (Exception e) {
             return ResultGenerator.errResult(Constants.CODE_ERR_ACCOUNT_OR_PASSWORD_ERR);
         }
@@ -108,19 +157,27 @@ public class UserController {
             return ResultGenerator.errResult();
         }
 
-        ExUsernamePasswordToken token = new ExUsernamePasswordToken(user.getOpenid(), user.getOpenid());
-        token.setType(2);
+        List<User> wxList = userService.findUserByOpenid(user.getOpenid());
+        if (wxList.size() != 0){
+            user = wxList.get(0);
+        }
+
+        ExUsernamePasswordToken token = new ExUsernamePasswordToken(user.getPhone(), user.getPassword());
+//        token.setType(2);
 //        token.setOpenid(user.getOpenid());
 
         try {
             SecurityUtils.getSubject().login(token);
-            return ResultGenerator.successResult();
+
+//            String salt = MyMD5.myMD5(user.getPassword() + user.getPhone());
+
+            String newToken = JwtUtils.sign(user.getPhone(), user.getPassword(), 3600);
+
+            return ResultGenerator.successResult(newToken);
         } catch (Exception e) {
             e.printStackTrace();
             return ResultGenerator.errResult(Constants.CODE_ERR_ACCOUNT_OR_PASSWORD_ERR);
         }
-
-
     }
 
     /**

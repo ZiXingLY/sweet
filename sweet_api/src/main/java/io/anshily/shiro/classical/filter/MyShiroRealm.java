@@ -1,4 +1,4 @@
-package io.anshily.shiro;
+package io.anshily.shiro.classical.filter;
 
 import io.anshily.admin.extend.ExUsernamePasswordToken;
 import io.anshily.admin.service.UserService;
@@ -25,10 +25,9 @@ import java.util.*;
 public class MyShiroRealm extends AuthorizingRealm {
 
     // 设置自定义token
-
     public MyShiroRealm() {
+//        setCredentialsMatcher(new JWTCredentialsMatcher());
         setAuthenticationTokenClass(ExUsernamePasswordToken.class);
-
     }
 
 
@@ -58,27 +57,29 @@ public class MyShiroRealm extends AuthorizingRealm {
         String password = String.valueOf(token.getPassword());
         User user = null;
 
-        if (token.getType() == 2) {
-            List<User> wxList = userService.findUserByOpenid(String.valueOf(token.getPassword()));
-
-            if (wxList.size() != 0){
-                user = wxList.get(0);
-            }
-        } else {
+//        if (token.getType() == 2) {
+//            List<User> wxList = userService.findUserByOpenid(username);
+//
+//            if (wxList.size() != 0){
+//                user = wxList.get(0);
+//
+//                username = user.getPhone();
+//                password = user.getPassword();
+//            }
+//        } else {
 
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("phone", username);
-            MyMD5.myMD5(password + username);
+//            MyMD5.myMD5(password + username);
             //密码进行加密处理  明文为  password+name
-//		String paw = password+name;
-//		String pawDES = MyDES.encryptBasedDes(paw);
-            map.put("password", MyMD5.myMD5(password + username));
+
+            map.put("password", password);
             // 从数据库获取对应用户名密码的用户
             List<User> userList = userService.selectByMap(map);
             if (userList.size() != 0) {
                 user = userList.get(0);
             }
-        }
+//        }
 
         if (null == user) {
             throw new AccountException("帐号或密码不正确！");

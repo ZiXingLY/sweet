@@ -16,6 +16,7 @@
             url: URL,
             type: "get",
             dataType: "json",
+            headers : {'x-auth-token': JSON.parse(localStorage['jwt'])},
             async: false,
             success: function (data) {
                 flash = data;

@@ -1,4 +1,4 @@
-package io.anshily.shiro.filter;
+package io.anshily.shiro.classical.filter;
 
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;

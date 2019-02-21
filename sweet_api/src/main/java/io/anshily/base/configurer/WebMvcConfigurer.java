@@ -145,7 +145,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 //        registry.addInterceptor(new HandlerInterceptorAdapter() {
 //            @Override
 //            public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-                //验证签名
+////                验证签名
 //                boolean pass = validateSign(request);
 //                if (pass) {
 //                    return true;
@@ -159,8 +159,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 //                    responseResult(response, result);
 //                    return false;
 //                }
-//                System.out.println("mvc interceptor");
-//                return false;
 //            }
 //        });
     }

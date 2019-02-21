@@ -1,24 +1,22 @@
-package io.anshily.shiro;
+package io.anshily.shiro.classical.filter;
 
 
 //import com.qy.admin.service.SysPermissionInitService;
 //import SysPermissionInit;
 
-import io.anshily.shiro.filter.CORSShrioFilter;
-import io.anshily.shiro.filter.KickoutSessionControlFilter;
-import io.anshily.shiro.filter.MyAuthenticationFilter;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.mgt.SessionStorageEvaluator;
+import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 
+import org.apache.shiro.web.mgt.DefaultWebSessionStorageEvaluator;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
-//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 //import java.util.List;
 import java.util.Map;
@@ -27,7 +25,7 @@ import java.util.Map;
  * @author 作者 z77z
  * @date 创建时间：2017年2月10日 下午1:16:38
  */
-@Configuration
+//@Configuration
 public class ShiroConfig {
 //
 //	@Autowired(required = false)
@@ -45,12 +43,13 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
 
 
-        System.out.println(securityManager);
+//        System.out.println(securityManager);
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 
         //自定义拦截器
         Map<String, Filter> filtersMap = new LinkedHashMap<String, Filter>();
         filtersMap.put("cors", new CORSShrioFilter());
+        filtersMap.put("jwt", new JwtAuthFilter());
         //限制同一帐号同时在线的个数。
         filtersMap.put("kickout", kickoutSessionControlFilter());
         shiroFilterFactoryBean.setFilters(filtersMap);
@@ -67,6 +66,11 @@ public class ShiroConfig {
 
         // 权限控制map.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
+
+
+//        filterChainDefinitionMap.put("/**", "anon");
+
+
         filterChainDefinitionMap.put("/article/wxFindArticleByState", "user");
         filterChainDefinitionMap.put("/front/**", "anon");
         filterChainDefinitionMap.put("/regis", "anon");
@@ -124,7 +128,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/uploadImage/**","anon");
         filterChainDefinitionMap.put("/getBanner/**", "anon");
         filterChainDefinitionMap.put("/setImage/**","anon");
-        filterChainDefinitionMap.put("/**", "cors,user");
+        filterChainDefinitionMap.put("/**", "jwt,cors,user");
 
 
         // 配置不会被拦截的链接 顺序判断,
@@ -178,23 +182,42 @@ public class ShiroConfig {
 //        return cacheSessionDAO;
 //    }
 
-    @Bean
-    public EhCacheManager ehCacheManager() {
-        System.out.println("ShiroConfiguration.getEhCacheManager()");
-        EhCacheManager cacheManager = new EhCacheManager();
-        cacheManager.setCacheManagerConfigFile("classpath:config/ehcache-shiro.xml");
-        return cacheManager;
-    }
+//    @Bean
+//    public EhCacheManager ehCacheManager() {
+//        System.out.println("ShiroConfiguration.getEhCacheManager()");
+//        EhCacheManager cacheManager = new EhCacheManager();
+//        cacheManager.setCacheManagerConfigFile("classpath:config/ehcache-shiro.xml");
+//        return cacheManager;
+//    }
 
     @Bean
     public SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 
-        securityManager.setRealm(myShiroRealm());
-        securityManager.setCacheManager(ehCacheManager());
+//        securityManager.setRealm(myShiroRealm());
+
+        ArrayList<Realm> arrayList = new ArrayList<Realm>();
+        arrayList.add(new MyShiroRealm());
+        arrayList.add(new JWTShiroRealm());
+        securityManager.setRealms(arrayList);
+//        securityManager.setCacheManager(ehCacheManager());
         System.out.println("注入MyShiroRealm 成功  CacheManager 成功");
         return securityManager;
     }
+
+    /**
+     * 初始化Authenticator
+     */
+//    @Bean
+//    public Authenticator authenticator() {
+//        ModularRealmAuthenticator authenticator = new ModularRealmAuthenticator();
+//        //设置两个Realm，一个用于用户登录验证和访问权限获取；一个用于jwt token的认证
+//        authenticator.setRealms(Arrays.asList(new MyShiroRealm(), new JWTShiroRealm()));
+//        //设置多个realm认证策略，一个成功即跳过其它的
+//        authenticator.setAuthenticationStrategy(new FirstSuccessfulStrategy());
+//        return authenticator;
+//    }
+
 
     /**
      * cookie对象;
@@ -230,7 +253,7 @@ public class ShiroConfig {
         //使用cacheManager获取相应的cache来缓存用户登录的会话；用于保存用户—会话之间的关系的；
         //这里我们还是用之前shiro使用的redisManager()实现的cacheManager()缓存管理
         //也可以重新另写一个，重新配置缓存时间之类的自定义缓存属性
-        kickoutSessionControlFilter.setCacheManager(ehCacheManager());
+//        kickoutSessionControlFilter.setCacheManager(ehCacheManager());
         //用于根据会话ID，获取会话进行踢出操作的；
         kickoutSessionControlFilter.setSessionManager(sessionManager());
         //是否踢出后来登录的，默认是false；即后者登录的用户踢出前者登录的用户；踢出顺序。
@@ -240,6 +263,17 @@ public class ShiroConfig {
         //被踢出后重定向到的地址；
         kickoutSessionControlFilter.setKickoutUrl("/kickout");
         return kickoutSessionControlFilter;
+    }
+
+    /**
+     * 禁用session, 不保存用户登录状态。保证每次请求都重新认证。
+     * 需要注意的是，如果用户代码里调用Subject.getSession()还是可以用session，如果要完全禁用，要配合下面的noSessionCreation的Filter来实现
+     */
+    @Bean
+    protected SessionStorageEvaluator sessionStorageEvaluator(){
+        DefaultWebSessionStorageEvaluator sessionStorageEvaluator = new DefaultWebSessionStorageEvaluator();
+        sessionStorageEvaluator.setSessionStorageEnabled(false);
+        return sessionStorageEvaluator;
     }
 
 }

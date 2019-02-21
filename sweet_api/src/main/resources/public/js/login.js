@@ -95,6 +95,7 @@ function login() {
                 if (result.code != 0) {
                     layer.msg(result.message)
                 } else {
+                    localStorage['jwt'] = JSON.stringify(res.data);
                     layer.msg("登录成功...");
                     // 判断有没有点击记住密码
                     if($("#remember")[0].className == "img_selected"){
@@ -130,7 +131,7 @@ function login() {
                             localStorage['userInfo'] = JSON.stringify(infoArr);
                         }else {}
                     }
-                    location.href = afterurl;
+                    // location.href = afterurl;
                 }
             }
         });
