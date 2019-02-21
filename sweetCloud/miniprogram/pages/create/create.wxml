@@ -14,7 +14,7 @@
 
     <view wx:if='{{index == 0}}'>
 
-            <textarea value='{{initValue}}'  placeholder='写下你的心情吧' name='emotion'>
+            <textarea maxlength='1024' value='{{initValue}}'  placeholder='写下你的心情吧' name='emotion'>
       </textarea>
 
     </view>

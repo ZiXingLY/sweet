@@ -191,7 +191,9 @@ function strEmojiDiscode(str) {
   str = str.replace(/\[em\]e327811\[\/em\]/g, '🍃');
   str = str.replace(/\[em\]e264\[\/em\]/g, '<img src="http://qzonestyle.gtimg.cn/qzone/em/e264.png" title="">');
   str = str.replace(/\[em\]e252\[\/em\]/g, '🍃');
-  str = str.replace(/\[em\]e166\[\/em\]/g,'💝')
+  str = str.replace(/\[em\]e166\[\/em\]/g,'💝');
+  str = str.replace(/\[em\]e400824\[\/em\]/g,'😂');
+  str = str.replace(/\[em\]e400832\[\/em\]/g,'');
   str = str.replace(/&lt;/g, '‹');
   str = str.replace(/&lt;/g, '‹');
   // str = str.replace(/&gt;/g, '›');

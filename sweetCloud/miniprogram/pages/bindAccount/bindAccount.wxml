@@ -1,0 +1,13 @@
+<!--pages/bindAccount/bindAccount.wxml-->
+<form bindsubmit="bindFormSubmit">
+
+<view class='weui-cell weui-cell_input'>
+<input placeholder='账户' bindinput='accountInput' class="weui-input input-before" name="account"></input>
+
+</view>
+<view class='weui-cell weui-cell_input'>
+  <input placeholder='密码' bindinput='passwordInput' maxlength='15' class="weui-input" name="password"></input>
+</view>
+
+<button form-type="submit" >绑定</button>
+</form>

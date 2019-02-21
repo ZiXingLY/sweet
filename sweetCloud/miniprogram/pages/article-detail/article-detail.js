@@ -12,7 +12,7 @@ Page({
     shareNumber: 0,
     likenum: 0,
     isZan: false,
-    imgUrl: getApp().globalData.IMG_URL
+    imgUrl: getApp().globalData.netUtil.IMG_URL
   },
 
   /**
@@ -22,10 +22,10 @@ Page({
     wx.setNavigationBarTitle({
       title: '文章详情',
     });
-    cookie = wx.getStorageSync("cookie"); 
-    _openid = wx.getStorageSync("openid");   
-    this.getDetail({ id: options.id});
-    getApp().globalData.api.shareNum({ id: options.id ,type:1}, (res) => {
+    cookie = wx.getStorageSync("token");
+    _openid = wx.getStorageSync("openid");
+    this.getDetail({ id: options.id });
+    getApp().globalData.api.shareNum({ id: options.id, type: 1 }, (res) => {
       console.log(res);
       this.setData({
         shareNumber: res['data']['shareNumber']
@@ -46,22 +46,22 @@ Page({
     // 检查是否点过赞
     getApp().globalData.api.checkZan({ "cookie": cookie }, { aid: options.id }, (res) => {
       console.log(res);
-      if (res['data']['data'] == "liked"){
+      if (res['data']['data'] == "liked") {
         this.setData({
           isZan: true
         })
       }
     });
     // 如果是分享进入
-    if (options.type == "share"){
+    if (options.type == "share") {
       this.getDetail({ id: options.aid });
-      getApp().globalData.api.addIntegral({ aid: options.aid, openid: options.openid, addByOpenid: _openid}, (res) => {
+      getApp().globalData.api.addIntegral({ aid: options.aid, openid: options.openid, addByOpenid: _openid }, (res) => {
         console.log(res);
       })
     }
   },
-  getDetail(params){
-    getApp().globalData.api.articleDetail({"cookie": cookie}, params, (res) => {
+  getDetail(params) {
+    getApp().globalData.api.articleDetail({ "cookie": cookie }, params, (res) => {
       console.log(res);
       res.article.addtime = this.timestampToTime(res.article.addtime);
       res.article.content = res.article.content.replace(/\<img/gi, '<img class="rich-img" ');
@@ -83,9 +83,9 @@ Page({
     return Y + M + D;
   },
   // 点赞
-  thumbs(){
+  thumbs() {
     console.log('点赞');
-    if (!this.data.isZan){
+    if (!this.data.isZan) {
       let params = {
         id: this.data.id
       };
@@ -116,48 +116,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage () {
+  onShareAppMessage() {
     return {
       title: this.data.detailData.title,
       path: '/pages/article-detail/article-detail?type=share&openid=' + _openid + "&aid=" + this.data.detailData.aid

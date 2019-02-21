@@ -19,7 +19,9 @@
     "pages/usecom/index",
     "pages/cet/cet",
     "pages/addPromise/addPromise",
-  "pages/qEmotionDetail/qEmotionDetail"
+  "pages/qEmotionDetail/qEmotionDetail",
+  "pages/bindAccount/bindAccount",
+  "pages/article-detail/article-detail"
   ],
   "window": {
     "backgroundColor": "#303030",

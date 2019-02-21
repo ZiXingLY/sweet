@@ -68,4 +68,14 @@
     </navigator>
   </view>
 
+  <view class="uploader">
+    <navigator url="../bindAccount/bindAccount" open-type="navigate" class="uploader-text">
+      <text>账户绑定</text>
+    </navigator>
+  </view>
+  <view>
+  <button bindtap="login">login</button>
+  <button bindtap="getOpenid">openid</button>
+  </view>
+
 </view>

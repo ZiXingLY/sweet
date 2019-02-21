@@ -33,7 +33,7 @@
     编辑于{{detailData.addtime}}
   </view>
   <view>
-    声明：本文由入驻{{detailData.source}}的作者撰写，观点仅代表作者本人，绝不代表可牛赞同其观点或证实其描述。
+    声明：本文由入驻{{detailData.source}}的作者撰写，观点仅代表作者本人，不代表甜甜圈赞同其观点或证实其描述。
   </view>
 </view>
 <view class='detail-bottom'>

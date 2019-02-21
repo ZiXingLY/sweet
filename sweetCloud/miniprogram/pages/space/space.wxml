@@ -14,4 +14,6 @@
   <view class='float-button-inner' bindtap='goToAddPromise'>
     add
   </view>
+  <cover-image src='https://thispersondoesnotexist.com/'>
+</cover-image>
 </view>

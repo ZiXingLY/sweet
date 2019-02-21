@@ -1,21 +1,21 @@
-// miniprogram/pages/cet/cet.js
+// pages/bindAccount/bindAccount.js
 const ROOT_URL = getApp().globalData.netUtil.ROOT_URL;
-
+const _api = getApp().globalData.api
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name: '',
-    noValue: ''
+    account: '',
+    password: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -67,42 +67,28 @@ Page({
 
   },
 
-  copyNeea(){
-    wx.setClipboardData({
-      data: 'http://cet.neea.edu.cn/cet',
-      success: function(){
-        wx.showToast({
-          title: '复制成功',
-        })
-      }
-    })
-  },
-
-  copyChsi() {
-    wx.setClipboardData({
-      data: 'http://cet.neea.edu.cn/cet',
-      success: function () {
-        wx.showToast({
-          title: '复制成功',
-        })
-      }
-    })
-  },
-
-  nameInput(e){
-    // console.log(e)
-    this.setData({
-      name: e.detail.value
-    })
-  },
-
-  noInput(e){
+  accountInput(e) {
     this.setData({
       noValue: e.detail.value
     })
     // console.log(e)
   },
+  passwordInput(e){
+    console.log(e)
+  },
   bindFormSubmit(e) {
-    console.log(e.detail.value.name)
+    console.log(e.detail.value)
+    wx.request({
+      url: ROOT_URL + '/user/wxRegiste',
+      method: 'POST',
+      data: {
+        phone: e.detail.value.account,
+        password: e.detail.value.password,
+        openid: wx.getStorageSync('openid')
+      },
+      success: (res) => {
+        console.log(res)
+      }
+    })
   }
 })

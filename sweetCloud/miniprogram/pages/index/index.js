@@ -1,6 +1,7 @@
 //index.js
 const app = getApp()
-
+const ROOT_URL = getApp().globalData.netUtil.ROOT_URL;
+const _api = getApp().globalData.api;
 Page({
   data: {
     avatar: '../../images/user.gif',
@@ -157,5 +158,65 @@ Page({
       }
     })
   },
+
+
+  login(){
+
+    _api.wxLogin({
+      openid: wx.getStorageSync('openid')
+    }, (res) => {
+      console.log(res);
+      console.log(res.header['Set-Cookie'])
+      wx.setStorageSync('token', res.header['Set-Cookie'])
+    })
+
+    // wx.request({
+    //   url: ROOT_URL + '/user/wxLogin',
+    //   method: 'POST',
+    //   data: {
+    //     openid: wx.getStorageSync('openid')
+    //   },
+    //   success: (res) => {
+    //     console.log(res);
+    //     console.log(res.header['Set-Cookie'])
+    //     wx.setStorageSync('token', res.header['Set-Cookie'])
+    //   }
+    // })
+
+    // wx.login({
+    //   success(res) {
+    //     if (res.code) {
+
+    //       console.log(res)
+    //       // 发起网络请求
+    //       wx.request({
+    //         url: ROOT_URL +'/user/getOpenid',
+    //         data: {
+    //           code: res.code
+    //         },
+    //         success: (res) => {
+    //           console.log(res);
+    //         }
+    //       })
+    //     } else {
+    //       console.log('登录失败！' + res.errMsg)
+    //     }
+    //   }
+    // })
+  },
+
+  getOpenid(){
+    wx.login({
+      success(res) {
+        console.log(res)
+        _api.getOpenid({code: res.code}, (res) => {
+          console.log(res)
+          if (res.code == 0) {
+            wx.setStorageSync('openid', res.data)
+          }
+        })
+      }
+    })
+  }
 
 })

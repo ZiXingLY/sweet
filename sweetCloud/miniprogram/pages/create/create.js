@@ -1,4 +1,5 @@
 // miniprogram/pages/create/create.js
+const ROOT_URL = getApp().globalData.netUtil.ROOT_URL;
 Page({
 
   /**
@@ -25,33 +26,80 @@ Page({
 // 用户提交emotion输入
   saveEmotion: function(e){
 
-    const db = wx.cloud.database();
+    // const db = wx.cloud.database();
     if (e.detail.value.emotion == null || e.detail.value.emotion == '') {
       wx.showToast({
         title: '嘿嘿，写点什么吧！',
+        icon: 'none'
       })
       return;
     }
     console.log(e.detail.value.emotion)
-    db.collection('emotions').add({
-      data: {
-        content: e.detail.value.emotion,
-        createTime: db.serverDate(),
-        // avatarUrl: 
-      }
-    }).then(res => {
 
-      wx.switchTab({
-        url: '../home/home',
-      })
-      this.setData({
-        initValue: ''
-      })
-      // wx.navigateTo({
-      //   url: '../home/home',
-      // })
-      console.log(res)
+    getApp().globalData.api.saveEmotion({ Cookie: wx.getStorageSync('token') }, { content: e.detail.value.emotion,},(res) => {
+      if(res.code == 0){
+        wx.showToast({
+          title: '发布成功',
+        })
+      }
     })
+
+    // const requestTask = wx.request({
+      // url: ROOT_URL + '/emotions/add',
+      // method: 'POST',
+      // header: {
+      //   Cookie: wx.getStorageSync('token')
+      // },
+      // data: {
+      //   content: e.detail.value.emotion,
+      // },
+      // success: (res) => {
+      //   console.log(res.header['Set-Cookie'])
+      //   console.log(res)
+      //   if(res.data.code == 403){
+      //     wx.showModal({
+      //       title: '提示',
+      //       content: '请先登录',
+      //       success(res) {
+      //         if (res.confirm) {
+      //           console.log('用户点击确定')
+    //           } else if (res.cancel) {
+    //             console.log('用户点击取消')
+    //           }
+    //         }
+    //       })
+    //     }
+    //   },
+    //   fail: (res) => {
+    //     console.log(res)
+    //   },
+    //   complete: (res) => {
+    //     console.log(res)
+    //   }
+    // })
+
+    // requestTask.onHeadersReceived(res => {
+    //   console.log(res);
+    // })
+    // db.collection('emotions').add({
+    //   data: {
+    //     content: e.detail.value.emotion,
+    //     createTime: db.serverDate(),
+    //     // avatarUrl: 
+    //   }
+    // }).then(res => {
+
+    //   wx.switchTab({
+    //     url: '../home/home',
+    //   })
+    //   this.setData({
+    //     initValue: ''
+    //   })
+    //   // wx.navigateTo({
+    //   //   url: '../home/home',
+    //   // })
+    //   console.log(res)
+    // })
   },
 
 
