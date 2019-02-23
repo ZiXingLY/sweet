@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "slide-view": "/component/slide-view/slide-view",
+    "goods-list": "/component/goods-list/goods-list"
+  }
+}

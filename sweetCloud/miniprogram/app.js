@@ -1,8 +1,9 @@
 //app.js
+const _api = require('./api/api.js')
+// const wxParse = require('/lib/wxParse/wxParse.js');
 App({
   onLaunch: function () {
 
-    const _api = require('./api/api.js')
     
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
@@ -21,9 +22,9 @@ App({
             console.log(res)
             if (res.code == 0) {
               wx.setStorageSync('openid', res.data)
-
+console.log()
               _api.wxLogin({
-                openid: wx.getStorageSync('openid')
+                openid: res.data
               }, (res) => {
                 console.log(res);
                 console.log(res.data.data)
@@ -69,6 +70,7 @@ App({
       timeToTime: require("./service/timer.js"),
       netUtil: require("./service/net.js"),
       api: _api,
+      // vxParse: wxParse
     }
 
     // _api.wxLogin({

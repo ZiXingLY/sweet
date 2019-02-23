@@ -12,16 +12,21 @@
     "pages/create/create",
     "pages/myMoment/myMoment",
     "pages/myEmotion/myEmotion",
-    "pages/emotionDetail/emotionDetail",
+    "pages/goods-detail/goods-detail","pages/emotionDetail/emotionDetail",
     "pages/space/space",
     "pages/deviceMotion/deviceMotion",
     "pages/momentDetail/momentDetail",
     "pages/usecom/index",
     "pages/cet/cet",
     "pages/addPromise/addPromise",
-  "pages/qEmotionDetail/qEmotionDetail",
+    "pages/buy/buy",
+    "pages/addGoods/addGoods",
+    "pages/shopping/shopping",
+"pages/qEmotionDetail/qEmotionDetail",
   "pages/bindAccount/bindAccount",
-  "pages/article-detail/article-detail"
+"pages/article-detail/article-detail",
+  "pages/user-detail/user-detail",
+  "pages/addEmotion/addEmotion"
   ],
   "window": {
     "backgroundColor": "#303030",
@@ -45,7 +50,7 @@
         "selectedIconPath": "/images/create_a.png"
       },
       {
-        "pagePath": "pages/space/space",
+        "pagePath": "pages/buy/buy",
         "text": "觅",
         "iconPath": "/images/Secrets_u.png",
         "selectedIconPath": "/images/Secrets_a.png"

@@ -34,7 +34,8 @@ Component({
           // tempFilePath可以作为img标签的src属性显示图片
           // const tempFilePaths = res.tempFilePaths
           console.log(res.tempFilePaths)
-          paths = res.tempFilePaths
+          paths = res.tempFilePaths;
+          _this.triggerEvent('pathload', { paths: paths},{})
           _this.setData({
             value: paths
           })

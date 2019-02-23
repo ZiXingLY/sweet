@@ -1,0 +1,13 @@
+<!--pages/addEmotion/addEmotion.wxml-->
+   <form bindsubmit="bindFormSubmit" class='edit-form'>
+
+    <view>
+            <textarea maxlength='1024' value='{{initValue}}'  placeholder='写下你的心情吧' name='emotion'>
+      </textarea>
+
+    </view>
+      <view>
+        <button form-type="submit" type='primary'> 提交 </button>
+      </view>
+
+    </form>

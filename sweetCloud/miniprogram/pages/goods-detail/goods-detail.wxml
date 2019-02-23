@@ -1,0 +1,327 @@
+<!--pages/goods-detail/goods-detail.wxml-->
+<view class='box'>
+
+  <!-- 作品详情 -->
+  <view class='pgraph_comment'>
+    <view class='pgraph_comment_bbox' catchtap='seeBig'>
+      <view class='pgraph_comment_sbox'>
+      <!-- 如果是组图的话 显示-->
+        <!-- <view class='zutuNum' wx:if="{{imgData.goods_structure == 2}}">1/{{photo.length}}</view> -->
+        <view class='pgraph_comment_img'>
+          <image data-id="{{goodsDate.id}}" mode='aspectFit' src="{{goodsDate.image}}"></image>
+        </view>
+      </view>
+    </view>
+    <view class='pgraph_comment_line'></view>
+    <view class='pgraph_comment_title'>
+      {{goodsDate.title}}
+    </view>
+    <view class='pgraph_comment_price'>
+      <text class='pgraph_comment_price_left'>　</text>
+      <text class="pgraph_comment_price_right">{{imgData.type}}　{{imgData.goods_structure == '1'?'单张':'组图'}}</text>
+    </view>
+    <view class='pgraph_comment_price'>
+      <view class='pgraph_comment_price_left'>
+        <!-- 如果不是从轮播图和打折进来的 需要展示最高价格和最低价格，但是如果最高价格和最低价格相同 就只展示一个 -->
+        <!-- <text class="pgraph_comment_price_left" wx:if="{{options.jumpType != 'lunbotu' && options.jumpType != 'dazhe' && imgData.minprice != imgData.maxprice}}">¥{{imgData.minprice}}-¥{{imgData.maxprice}}</text>
+         <text class="pgraph_comment_price_left" wx:if="{{options.jumpType != 'lunbotu' && options.jumpType != 'dazhe' && imgData.minprice == imgData.maxprice}}">¥{{imgData.minprice}}</text> -->
+        <!-- 如果是从轮播图和打折进来 没有最高价格和最低价格 -->
+        <!-- <text class="pgraph_comment_price_left" style='text-decoration:line-through' wx:if="{{(options.jumpType == 'lunbotu')||(options.jumpType == 'dazhe')}}">¥{{imgData.collect_price}}</text> -->
+        <text class="pgraph_comment_price_left" style='color:#009D41;margin-left:20rpx;' >¥{{goodsDate.price}}</text>
+        <!-- ////// -->
+
+        <view wx:if="{{options.jumpType && options.jumpType == 'myWorks'}}" class='pgraph_comment_price_left_priceDetail' catchtap='priceDetail'>价格详情</view>
+      </view>
+      <text class="pgraph_comment_price_right">购藏　{{imgData.volume}}</text>
+    </view>
+    <view class='pgraph_comment_price'>
+      <text class="pgraph_comment_price_left">行业加持　{{imgData.goods_aid}}</text>
+      <text class="pgraph_comment_price_right">喜欢　{{imgData.like_num}}</text>
+    </view>
+  </view>
+
+  <!-- 摄影师详情 -->
+  <view class='goods_detail_photoger'>
+    <view class='goods_detail_photoger_head'>
+      <image class="pgraph_person_img" data-id="{{imgData.aid}}" bindtap='jumpPhotographer' wx:if="{{imgBull}}" src="{{imgUrl+imgData.img}}"></image>
+      <image class="pgraph_person_img" data-id="{{imgData.aid}}" bindtap='jumpPhotographer' wx:if="{{!imgBull}}" src="{{imgData.img}}"></image>
+    </view>
+    <view class='goods_detail_photoger_detail'>
+      <view class='goods_detail_photoger_name'>
+        <text style='font-size: 33rpx; color:#D8D8D8;'>{{imgData.name}}</text>
+        <text class="goods_detail_photoger_name_right2">{{imgData.type}}</text>        
+        <text class="goods_detail_photoger_name_right1" wx:if="{{imgData.ages}}">{{imgData.ages}}年代</text>
+      </view>
+      <view class='goods_detail_photoger_detail_de'wx:if="{{imgData.brief}}">
+        {{imgData.brief}}
+      </view>
+      <view class='goods_detail_photoger_detail_de'wx:if="{{!imgData.brief}}">
+        暂无商家简介
+      </view>
+    </view>
+  </view>
+
+  <!-- 该作品的收藏者轮播图 -->
+  <view class='detail_banner' wx:if="{{(options.jumpType != 'cangpin') && swiperArr.length>0}}">
+    <swiper autoplay="true" loop='true' interval="5000" vertical="true" duration="500" style='height: 88rpx;' >
+    
+      <block  wx:for="{{swiperArr}}" wx:for-item="items">
+        <swiper-item>
+          <view class='detail_banner_detail'>
+            <image src="{{items.imgBull?imgUrl+items.img:items.img}}"></image>
+            <text style='max-height:40rpx;font-size:30rpx;overflow: hidden;'>{{items.account}}在{{items.time}}购藏了{{items.goods_version}}#{{items.version_no}}</text>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+<!-- 从我的收藏 进来展示 拥有藏品数量 -->
+<view class='cangping_have' wx:if="{{options.jumpType == 'cangpin'}}">
+  <text>拥有藏品：{{allData.photo_num}}
+博物馆版：{{allData.museum_num}};　极品版：{{allData.best_num}};　精品版：{{allData.quality_num}};　收藏版：{{allData.collect_num}};</text>
+</view>
+<!-- 作品简介和评价 -->
+<view class='goods_swiper_box'>
+
+    <view class='goods_swiper_box_title'>
+      <view class="goods_swiper_box_jj {{swiperIndex == 0 ? 'style_bottom' : 'style_bottom1'}}" data-index="0" bindtap='select'>简介</view>
+      <view class="goods_swiper_box_pj {{swiperIndex == 1 ? 'style_bottom' : 'style_bottom1'}}" data-index="1" bindtap='select'>评价</view>
+    </view>
+    <view wx:if="{{swiperIndex == 0}}" class='swiper1'>
+      <view>作品编号：{{imgData.goods_no}}</view>
+      <view>所属组图：{{imgData.type}}</view>
+      <view>拍摄日期：{{imgData.film_time}}</view>
+      <view>相机型号：{{imgData.camera}}</view>
+      <view>拍摄地点：{{imgData.locations}}</view>
+      <view>作品描述：</view>
+      <view>
+      <text wx:if="{{!imgData.content}}">暂无作品描述</text>      
+      <template id="parseTemplate" wx:if="{{imgData.content}}" is="wxParse" data="{{wxParseData:article.nodes}}" />
+      </view>
+      <!-- <text wx:if="{{imgData.content}}">{{imgData.content}}</text> -->
+    </view>
+    <view wx:if="{{swiperIndex == 1 && assetsList.length>0}}" class='swiper2'>
+      <view class='assetsList' wx:for="{{assetsList}}">
+        <view>
+          <image wx:if="{{item.assetsimgBull}}" src='{{imgUrl + item.img}}' mode='scaleToFill' class='touxiang'></image>  
+          <image wx:if="{{!item.assetsimgBull}}" src='{{item.img}}' mode='scaleToFill' class='touxiang'></image>         
+        </view>
+        <view class='swiper2_contruct'>
+          <view>{{item.account}}</view>
+          <view>{{item.content}}</view>
+          <view>{{item.addTime}}</view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{swiperIndex == 1 && assetsList.length == 0}}" class='swiper2'>
+      <view style='font-size: 30rpx;color: #D8D8D8;text-align:center;padding:30rpx 0rpx;'>暂时没有更多评论...</view>
+    </view>    
+  </view>
+
+
+  <!-- <view class="collect">
+    <view class="collecion ">
+      <button class="collection_btn">立即购藏</button>
+    </view>
+  </view> -->
+
+
+
+</view>
+<!-- 底部导航栏＋购物车 -->
+<view class='bootom_box' wx:if="{{!options.jumpType && (options.jumpType != 'myWorks')}}">
+  <view class='bottom_one' catchtap='jumpHome'>
+    <image style='width:44rpx;height:44rpx;' src='/images/home/tabbar-icon1-n.png' mode='aspectFit'></image>
+    <text>联系商家</text>
+  </view>
+  <view class='bottom_two' catchtap='jumpShopping' style='position:relative'>
+    <image style='width:42rpx;height:37rpx;' src='/images/home/tabbar-icon2-d.png' mode='aspectFit'></image>
+    <text>意愿单</text>
+    <view class='tusi' wx:if="{{tusiState == 1}}"></view>
+  </view>
+  <view class='bottom_three'  data-type="shop" catchtap='joinShopping'>
+    加入意愿单
+  </view>
+  <view class='bottom_four'  data-type="buy" catchtap="joinShopping">
+    立即购藏
+  </view>
+</view>
+<!-- 底部导航栏：当适从我的作品页面进入到作品详情，这里需要展示的是赠送和打折 -->
+<view class='bottom_myWorks' wx:if="{{options.jumpType && (options.jumpType == 'myWorks')}}">
+<!-- 单张可以被赠送 -->
+  <button open-type='share' wx:if="{{imgData.goods_structure == 1 && imgData.collect_issue>0}}" catchtap='clickZengsong' class='bottom_myWorks_zengsong' data-name="zengsong">赠送</button>
+  <!-- 单张不可以被赠送 -->
+  <view wx:if="{{imgData.goods_structure == 1 &&  imgData.collect_issue<=0}}" class='bottom_myWorks_zengsong' catchtap='clickZengsong'>赠送</view>
+  <!-- 组图 -->
+  <view wx:if="{{imgData.goods_structure == 2}}" class='bottom_myWorks_zengsong' catchtap='clickZengsong'>赠送</view>
+  <view class='bottom_myWorks_dazhe' catchtap='discount'>打折</view>
+</view>
+<!-- 底部导航栏：当适从我的藏品页面进入到作品详情，这里需要展示的是查看拥有版式 -->
+<view class='bottom_cangpin' data-id="{{options.id}}" wx:if="{{options.jumpType && options.jumpType == 'cangpin'}}" catchtap='jumpHaveformat'>查看拥有版式</view>
+<!-- 价格详情弹窗 -->
+<view class='alert_view' catchtap='closepriceDetail' style='width:{{screenWidth}}px;height:{{screenHeight}}px' wx:if="{{priceDetailBull}}">
+  <view class='priceDetail' catchtap='aaaa'>
+    <view class='priceDetail_view' wx:if="{{priceDetail.collect_price}}">
+      <view>收藏版</view>
+      <view>{{priceDetail.collect_price}}元</view>
+    </view>
+    <view class='priceDetail_view' wx:if="{{priceDetail.quality_price}}">
+      <view>精品版</view>
+      <view>{{priceDetail.quality_price}}元</view>
+    </view>
+    <view class='priceDetail_view'  wx:if="{{priceDetail.best_price}}">
+      <view>极品版</view>
+      <view>{{priceDetail.best_price}}元</view>
+    </view>
+    <view class='priceDetail_view'  wx:if="{{priceDetail.museum_price}}">
+      <view>博物馆版</view>
+      <view>{{priceDetail.museum_price}}元</view>
+    </view>
+    <view class='priceDetail_text'>
+      打折只限收藏版作品，此价格不包含打印、卡纸和相框价格。
+    </view>
+  </view>
+</view>
+<!-- ／／价格详情弹窗／／ -->
+<!-- 打折弹窗 -->
+<view class='alert_view' wx:if="{{dazheBull}}" style='width:{{screenWidth}}px;height:{{screenHeight}}px' catchtouchmove="ture">
+  <view class='select_box' wx:if="{{dazheBull}}" style='width:{{screenWidth}}px;height:500rpx'>
+  <!-- 图片 -->
+    <view class='pgraph_comment_bbox1'>
+      <view class='pgraph_comment_sbox1'>
+        <view class='pgraph_comment_img1'>
+          <image mode='aspectFit' src="{{photo[0].img ? imgUrl+photo[0].img : ''}}"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 价格＋关闭 -->
+    <view class='alert_message'>
+      <view class='alert_message_one'> <image src='/images/home/guanbi.png' catchtap='discountClose'></image></view>
+      <view class='alert_message_two'>{{discountPrice}}</view>
+    </view>
+    <!-- 选择折扣 -->
+    <view class='alert_name' style='margin-top:50rpx;'>选择折扣</view>
+    <view class='discount_box'>
+      <view class="{{item.name == selectDiscount?'discount_box_view selectDiscount':'discount_box_view'}}" catchtap='selectDiscount' data-seldiscount="{{item.seldiscount}}" data-discount="{{item.discount}}" wx:key="{{index}}" data-name='{{item.name}}' wx:for="{{dazheNUmber}}">{{item.name}}</view>
+    </view>
+    <button class='discount_share' wx:if="{{selectDiscount}}"  open-type='share' data-name="fenxiang">分享</button>
+    <view class='discount_share' catchtap='discount_Notic' wx:if="{{!selectDiscount}}">分享</view>
+  <!-- select_box 结束 -->
+  </view>
+</view>
+<!-- ／／ 打折弹窗 ／／ -->
+<!-- 购买弹窗 -->
+<view class='alert_view' style='width:{{screenWidth}}px;height:{{screenHeight}}px'  wx:if="{{alertBull}}" catchtouchmove="ture">
+  <view class='select_box' wx:if="{{alertBull}}">
+  <!-- 图片 -->
+    <view class='pgraph_comment_bbox1'>
+      <view class='pgraph_comment_sbox1'>
+        <view class='pgraph_comment_img1'>
+          <image wx:if="{{selectFormat == '收藏版'}}" mode='aspectFit' src="{{imgUrl+goodsDate.collect_img}}"></image>
+          <image wx:if="{{selectFormat == '精品版'}}" mode='aspectFit' src="{{imgUrl+goodsDate.quality_img}}"></image>
+          <image wx:if="{{selectFormat == '极品版'}}" mode='aspectFit' src="{{imgUrl+goodsDate.best_img}}"></image>
+          <image wx:if="{{selectFormat == '博物馆版'}}" mode='aspectFit' src="{{imgUrl+goodsDate.museum_img}}"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 价格＋板式＋关闭 -->
+    <view class='alert_message'>
+      <view class='alert_message_one'> <image src='/images/home/guanbi.png' catchtap='close'></image></view>
+      <view class='alert_message_two'>{{price}}元</view>
+      <view class='alert_message_three'>{{selectFormat || selectCardboard || selectPhotoframe ? selectFormat+ '　' + selectCardboard+ '　' + selectPhotoframe :'请选择版式、卡纸和相框'}}</view>
+    </view>
+      <!-- 版式 -->
+    <view class='alert_name'>版式</view>
+    <view class='alert_banshi'>
+      <view class="{{item == selectFormat?'alert_banshi_view addSelect':'alert_banshi_view'}}" bindtap='selectFormat' data-value="{{item}}" wx:for="{{ (options.jumpType == 'lunbotu') ||(options.jumpType == 'dazhe') ?lunbotu_Format:Format}}">{{item}}</view>
+    </view>
+    <!-- 打印 -->
+    <view class='alert_dayin'>
+      <view style='margin-right:50rpx' wx:if="{{selectFormat == '收藏版'}}" data-type="不打印" bindtap='selectIsDY'>
+        <image  src="{{selectDY == '不打印'?'/images/home/selected@3x.png':'/images/home/unselected@3x.png'}}" mode='aspectFit'></image>
+        <text>不打印</text>
+      </view>
+      <view data-type="打印" bindtap='selectIsDY'>
+        <image  src="{{selectDY == '打印'?'/images/home/selected@3x.png':'/images/home/unselected@3x.png'}}" mode='aspectFit'></image>
+        <text>打印</text>
+      </view>
+    </view>
+    <!-- 黑色间隔 -->
+    <view class='alert_black'></view>
+    <!-- 如果不是收藏版不显示 卡纸和相框 -->
+    <view>
+      <!-- 卡纸 -->
+      <view class='alert_name'>卡纸</view>
+      <view class='alert_banshi'>
+        <view bindtap='selectCardboard' wx:for="{{paperArr}}" data-id="{{item.id}}" data-price="{{item.price}}" data-type="{{item.name}}" class="{{selectDY == '打印' && selectFormat == '收藏版' && item.name == selectCardboard ?'alert_banshi_view addSelect':'alert_banshi_view'}}">{{item.name}}</view>
+      </view>
+      <!-- 黑色间隔 -->
+      <view class='alert_black' style='margin-top:15rpx;'></view>
+      <!-- 相框 -->
+      <view class='alert_name'>相框<text style='color:#808080'> （卡纸需另购）</text></view>
+      <view class='alert_banshi'>
+        <view bindtap='selectPhotoframe' wx:for="{{frameArr}}" data-id="{{item.id}}" data-price="{{item.price}}" data-type="{{item.name}}" class="{{selectDY == '打印' && selectFormat == '收藏版' && item.name == selectPhotoframe ?'alert_banshi_view addSelect':'alert_banshi_view'}}">{{item.name}}</view>
+      </view>
+    </view>
+    <view class='alert_banshi' style='margin-top:20rpx;' wx:if="{{(options.jumpType != 'lunbotu')||(options.jumpType != 'dazhe')}}">
+      <view style='color:white;font-size:30rpx;'>数量：</view>
+      <view class='reduce' catchtap='reduce' data-index="{{index}}">-</view>
+        <text style='width:60rpx;text-align:center;display:inline-block;color:white;'>{{allNum}}</text>
+        <view class='add' catchtap='add' data-index="{{index}}">+</view>
+    </view>
+    <!-- 确定 -->
+    <view class='alert_sure'  catchtap='sumbit'>确定</view>
+  <!-- select_box 结束 -->
+  </view>
+</view>
+
+<!-- 如果是从 轮播图进来 展示立即购藏按钮 -->
+<view class='bottom_lunbotu' wx:if="{{options.jumpType && (options.jumpType == 'lunbotu')||(options.jumpType == 'dazhe')}}" data-type="buy" catchtap="joinShopping">立即购藏</view>
+
+<!-- ******* 查看大图 ＊＊＊＊＊＊＊＊＊＊ -->
+<view class='goodBig' style='width:{{screenWidth}}px;height:{{screenHeight}}px' catchtap='closeBig' wx:if="{{bigBull}}" catchtouchmove="ture">
+<swiper bindchange="addLove"  vertical="true" current='{{swiperCurrent}}' class='goodBig_swiper' style='width:{{screenWidth}}px;height:{{screenHeight*0.8}}px'>
+  <swiper-item wx:for="{{photoData}}" wx:for-item="item1" wx:for-index="index1" class="goodBig_item">
+    <swiper class='goodBig_swiper' bindchange="swiperChange" style='width:{{screenWidth}}px;height:{{screenHeight*0.8}}px'>
+      <swiper-item wx:for="{{item1.photo}}" wx:for-item="forItem1" wx:for-index="forIndex1" class="goodBig_item">
+      <view class='goodBig_item_view' bindtouchmove="touchmoveCallback" bindtouchstart="touchstartCallback">
+      <!-- bindtouchstart='touchStartHandle'
+          bindtouchmove='touchMoveHandle'  -->
+        <image
+          
+          bindload='load' 
+         mode='aspectFit'
+          catchtap='stopClick'
+          src="{{forItem1.img?imgUrl+forItem1.img:''}}"
+          data-src="{{imgUrl+forItem1.img}}"
+          class='goodBig_item_view_img'></image>
+      </view>
+          <!-- 信息 -->
+    <view class='goodBig_content' catchtap='stopClick'>
+      <view class='goodBig_one'>
+        <text></text>
+        <text>{{forIndex1+1}}/{{item1.photo.length}}</text>
+      </view>
+      <view class='goodBig_two'>
+        {{item1.goods_name}}
+      </view>
+      <view class='goodBig_three'>
+        <text>摄影师：{{item1.name}}</text>
+        <text>作品编号：{{item1.photo[forIndex1].photo_no}}</text>
+      </view>
+      <view class='goodBig_four'>
+        <text wx:if="{{options.jumpType != 'lunbotu' &&options.jumpType != 'dazhe' && item1.minprice != item1.maxprice}}">￥{{item1.minprice}}-¥{{item1.maxprice}}</text>
+        <text wx:if="{{options.jumpType != 'lunbotu' &&options.jumpType != 'dazhe' && item1.minprice == item1.maxprice}}">￥{{item1.minprice}}</text>
+        <text wx:if="{{(options.jumpType == 'lunbotu')||(options.jumpType == 'dazhe')}}">￥{{item1.minprice}}</text>
+        <text>购藏　{{item1.volume}}</text>
+      </view>
+      <view class='goodBig_five'>
+        <text>行业加持　{{item1.goods_aid}}</text>
+        <text>喜欢　{{item1.like_num}}</text>
+      </view>
+    </view>
+      </swiper-item>
+    </swiper>
+  </swiper-item>
+</swiper>
+</view>

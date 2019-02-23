@@ -1,0 +1,102 @@
+
+
+<view>
+
+  <view class='search'>
+    <view class='bg_box' style='opacity: {{opacity}}'></view>
+    <view class='app_logo'>
+      <image mode='aspectFit' src='../../images/home/VIP.svg' catchtap='jumpPurchase'></image>
+    </view>
+    <view class='app_search'>
+      <view class='bg_search'>
+        <image mode='aspectFit' src='../../images/home/search.svg'></image>
+        <input placeholder='搜索您要查找的商品' disabled="true" bindtap='goSearch'></input>
+      </view>
+    </view>
+    <view class='app_news' bindtap='go_message'>
+      <image mode='aspectFit' src="{{noticBull == 1?'/images/home/newMessage.png':'/images/home/message.svg'}}"></image>
+    </view>
+  </view>
+  <view class='home_hidden'></view>
+  <!-- 轮播图组件 -->
+  <slide-view id='banner' dataArr="{{swiperArr}}" bind:getItem="_getItem"></slide-view>
+</view>
+
+<!-- 图见人气摄影师 -->
+<view class="pgraph">
+  <view class="pgraph_top">
+    <image class="pgraph_img" src="../../images/home/tjlogo.svg"></image>
+    <text class="pgraph_left">人气摄影家</text>
+    <image class="pgraph_right_img" src="../../images/home/chevron.svg"></image>    
+    <text class="pgraph_right" bindtap='go_pg_list'>更多</text>
+  </view>
+
+  <view class="pgraph_bot">
+    <view class="pgraph_senti"> 
+      <view wx:for="{{imgArr}}" wx:for-item="item" class="pgraph_person" data-id='{{item["id"]}}' data-id="{{item.id}}" bindtap='goPhotographer'>
+        <image mode='aspectFit' class="pgraph_person_img" src="{{item.header}}"></image>
+        <text>{{item['name']}}</text>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<!-- 图见本周推荐作品 -->
+<view class='pgraph'>
+  <view class="pgraph_top">
+    <image class="pgraph_img" src="../../images/home/tjlogo.svg"></image>
+    <text class="pgraph_left">本周推荐作品</text>
+    <image class="pgraph_right_img" src="../../images/home/chevron.svg"></image>    
+    <text class="pgraph_right" bindtap='go_works_list'>更多</text>
+  </view>
+  <view class='pgraph_comment'>
+    <view class='pgraph_comment_bbox'>
+      <view class='pgraph_comment_sbox' catchtap='_goDetail' data-id="{{goodsArr[0].id}}">
+        <view class='pgraph_comment_img'>
+          <image mode='aspectFit' src="{{goodsArr[0].image}}"></image>
+        </view>
+      </view>
+    </view>
+    <view class='pgraph_comment_line'></view>
+    <view class='pgraph_comment_title'>
+      {{goodsArr[0].goods_name}}
+    </view>
+    <view class='pgraph_comment_price'>
+      <text class="pgraph_comment_price_left">　</text>
+      <text class="pgraph_comment_price_right" wx:if="{{goodsArr[0].type == 1}}">自然　{{goodsArr[0].goods_structure == '1'?'单张':'组图'}}</text>
+      <text class="pgraph_comment_price_right" wx:if="{{goodsArr[0].type == 2}}">人文　{{goodsArr[0].goods_structure == '1'?'单张':'组图'}}</text>
+      <text class="pgraph_comment_price_right" wx:if="{{goodsArr[0].type == 3}}">时尚　{{goodsArr[0].goods_structure == '1'?'单张':'组图'}}</text>
+      <text class="pgraph_comment_price_right" wx:if="{{goodsArr[0].type == 4}}">当代　{{goodsArr[0].goods_structure == '1'?'单张':'组图'}}</text>
+    </view>
+    <view class='pgraph_comment_price'>
+      <text wx:if="{{goodsArr[0].minprice != goodsArr[0].maxprice}}" class="pgraph_comment_price_left">¥{{goodsArr[0].minprice}}-¥{{goodsArr[0].maxprice}}</text>
+      <text wx:if="{{goodsArr[0].minprice == goodsArr[0].maxprice}}" class="pgraph_comment_price_left">¥{{goodsArr[0].minprice}}</text>
+      <text class="pgraph_comment_price_right">购藏　{{goodsArr[0].volume}}</text>
+    </view>
+    <view class='pgraph_comment_price'>
+      <text class="pgraph_comment_price_left">行业加持　{{goodsArr[0].goods_aid}}</text>
+      <text class="pgraph_comment_price_right">喜欢　{{goodsArr[0].like_num}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 商品列表 -->
+<view class='goodsList'>
+  <goods-list id='goods' dataArr="{{surplusArr}}" bind:goDetail="_getDetail"></goods-list>  
+</view>
+
+
+<view class='bottom_title'>
+  <text>——已经到底了——</text>
+</view>
+<!-- 获取用户信息弹窗 -->
+<!-- <view class='userAlert' catchtouchmove="ture" wx:if="{{userShow}}">
+  <view class="userAlertBox" wx:if="{{userShow}}">
+    <text>是否允许获取你的头像和昵称</text>
+    <view class='userAlert_button'>
+       <button catchtap='userCancle' size='mini' plain='true'>取消</button>
+    <button size='mini' plain='true' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">确定</button>  
+    </view>     
+  </view>
+</view> -->

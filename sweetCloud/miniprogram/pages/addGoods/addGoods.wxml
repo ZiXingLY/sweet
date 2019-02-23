@@ -1,0 +1,18 @@
+<!--pages/addGoods/addGoods.wxml-->
+<form bindsubmit="bindFormSubmit">
+<view class='weui-cell weui-cell_input'>
+<input placeholder='标题' class="weui-input input-before" name="title"></input>
+</view>
+<view class='upload-img'>
+  <sweet-picture-upload-view name='paths' bind:pathload="onPathLoad">
+  </sweet-picture-upload-view>
+</view>
+<view class='weui-cell'>
+            <textarea class='weui-textarea' value='{{initValue}}'  placeholder='描述信息' name='info'>
+      </textarea>
+</view>
+      <view>
+        <button form-type="submit" type='primary'> 提交 </button>
+      </view>
+
+</form>

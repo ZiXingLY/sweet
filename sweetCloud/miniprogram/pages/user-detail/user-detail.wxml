@@ -1,0 +1,59 @@
+<!--pages/photographer/photographer.wxml-->
+<view>
+  <!-- 摄影师详情 -->
+  <view class='goods_detail_photoger'>
+    <view class='goods_detail_photoger_head'>
+      <image class="pgraph_person_img" mode='aspectFit' wx:if="{{imgBull}}" src="{{imgUrl+author.img}}"></image>
+      <image class="pgraph_person_img" mode='aspectFit' wx:if="{{!imgBull}}" src="{{author.img}}"></image>
+    </view>
+    <view class='goods_detail_photoger_detail'>
+      <view class='goods_detail_photoger_name'>
+        <text style='font-size: 33rpx; color: white;'>{{author.name}}</text>
+      </view>
+      <view class='goods_detail_photoger_detail_de'>
+        <text wx:if="{{author.ages}}">{{author.ages}}年代</text>
+      </view>
+      <view class='goods_detail_photoger_detail_heng'>
+        <text>行业加持 {{author.aid_num}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 作品简介和作品 -->
+  <view class='goods_swiper_box'>
+
+    <view class='goods_swiper_box_title'>
+      <view class="goods_swiper_box_jj {{swiperIndex == 0 ? 'style_bottom' : 'style_bottom1'}}" data-index="0" bindtap='select'>作品 {{total}}</view>
+      <view class="goods_swiper_box_pj {{swiperIndex == 1 ? 'style_bottom' : 'style_bottom1'}}" data-index="1" bindtap='select'>摄影师简介</view>
+    </view>
+    <!-- <swiper 
+        duration="300" 
+        bindchange="bindChange"
+        current="{{swiperIndex}}"
+        style='height: {{swiper_height}}rpx'
+        > -->
+      <view wx:if="{{swiperIndex == 0}}">
+        <view class='goodsList' wx:if="{{total != 0}}">
+          <goods-list id='goods' dataArr="{{goodsArr}}" bind:goDetail="_getDetail"></goods-list>  
+        </view>
+        <view wx:if="{{total == 0}}" class='noMore'>暂无更多数据...</view>
+        <view class='fixBottom' wx:if="{{is_author != 3}}">
+          <view catchtap='jumpHome'>
+            <image src='/images/home/tabbar-icon1-n.png' mode='aspectFit'></image>
+            <text>首页</text>
+          </view>
+          <view catchtap='jumpBuyWork'>换购作品</view>
+        </view>
+      </view>
+
+      <view wx:if="{{swiperIndex == 1}}">
+        <view  class='text_detail' wx:if="{{author.brief}}">
+          {{author.brief}}
+        </view>
+        <view  class='text_detail' wx:if="{{!author.brief}}">
+          暂无作者简介
+        </view>
+      </view>
+    <!-- </swiper> -->
+  </view>
+</view>

@@ -1,5 +1,5 @@
 // miniprogram/pages/emotionDetail/emotionDetail.js
-
+const emotionDetail = getApp().globalData.api.emotionDetail
 const app = getApp();
 const wxParse = getApp().globalData.wxParse;
 Page({
@@ -35,34 +35,46 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+console.log(options)
     wx.showNavigationBarLoading();
-
-    const db = wx.cloud.database()
-    db.collection('emotions').where({
-      _id: options.id
-    })
-    .get()
-    .then(res => {
-
-      console.log(res.data[0])
-
-      let item = res.data[0];
-
-      item.createTime = this.timestampToTime(item.createTime.$date);
-      item.content = wxParse.strDiscode(item.content);
-
+    emotionDetail({
+      id: options.id
+    },(res) => {
+      console.log(res)
+      let data = res.data;
+      data.createTime = this.timestampToTime(data.add_time);
+      data.content = wxParse.strDiscode(data.content);
       this.setData({
-        emotion: item
+        emotion: data
       })
       wx.hideNavigationBarLoading()
-      console.log(res.data[0])
     })
+
+    // const db = wx.cloud.database()
+    // db.collection('emotions').where({
+    //   _id: options.id
+    // })
+    // .get()
+    // .then(res => {
+
+    //   console.log(res.data[0])
+
+    //   let item = res.data[0];
+
+    //   item.createTime = this.timestampToTime(item.createTime.$date);
+    //   item.content = wxParse.strDiscode(item.content);
+
+    //   this.setData({
+    //     emotion: item
+    //   })
+    //   wx.hideNavigationBarLoading()
+    //   console.log(res.data[0])
+    // })
 
     // this.setData({
     //   id: options.id
     // })
-    console.log(options.id)
+    // console.log(options.id)
   },
 
   /**

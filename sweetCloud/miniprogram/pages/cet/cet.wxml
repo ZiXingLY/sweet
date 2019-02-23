@@ -2,7 +2,6 @@
 
 <view class='weui-cell weui-cell_input'>
 <input placeholder='输入你的姓名' bindinput='nameInput' class="weui-input input-before" name="name"></input>
-
 </view>
 <view class='weui-cell weui-cell_input'>
   <input placeholder='输入你的15位准考证号' bindinput='noInput' maxlength='15' class="weui-input" name="noValue"></input>

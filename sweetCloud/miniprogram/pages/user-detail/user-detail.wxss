@@ -1,0 +1,154 @@
+
+page {
+  background: #141414;
+}
+/* 详情 --------------------------------------- */
+
+.goods_detail_photoger {
+  height: 188rpx;
+  padding: 30rpx;
+  background: #282828;
+  display: flex;
+}
+.goods_detail_photoger_head image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4rpx solid #D8D8D8;
+}
+.goods_detail_photoger_detail {
+  width: 480rpx;
+  padding-left: 22rpx;
+  height: 188rpx;
+  color: #838383;
+}
+.goods_detail_photoger_name {
+  font-size: 20rpx;
+  line-height: 33rpx;
+}
+.goods_detail_photoger_detail_de {
+  margin-top: 35rpx;
+  font-size: 24rpx;
+}
+.goods_detail_photoger_detail_heng {
+  margin-top: 35rpx;
+  font-size: 24rpx;
+}
+
+/* cui 摄影师简介和作品 -----------------------------------------------*/
+.goods_swiper_box{
+  width: 750rpx;
+  /* height: 100rpx; */
+  margin-top: 10rpx;
+}
+.goods_swiper_box_title{
+  /* width: 710rpx; */
+  /* height: 110rpx; */
+  height: 93rpx;
+  line-height: 100rpx;
+  display: flex;
+  /* padding: 0rpx 30rpx; */
+  align-items: center;
+  justify-content: space-around;
+  background-color: #282828;
+}
+.goods_swiper_box_jj{
+  padding: 20prx;
+  height: 100rpx;
+  width: 200rpx;
+  color: #838383;
+  text-align: center;
+}
+.goods_swiper_box_pj{
+  padding: 20prx;
+  width: 200rpx;
+  height: 100rpx;
+  color: #838383;
+  text-align: center;
+  /* border-bottom: 6rpx solid green; */
+}
+.style_bottom {
+  color: #169C45;
+  border-bottom: 6rpx solid #169C45;
+}
+.style_bottom1 {
+  color:#636363;
+  /* border-bottom: 6rpx solid #282828; */
+}
+/** cui */
+.goodsList {
+  background: #141414;
+  padding-bottom: 100rpx;
+  /* margin: 10rpx 0; */
+}
+.text_detail {
+  margin-top: 10rpx;
+  /* padding: 20rpx; */
+  padding: 50rpx 30rpx;
+  color: #7D7D7D;
+  font-size: 33rpx;
+  background: #282828;
+  line-height:50rpx;
+  letter-spacing:1rpx;
+}
+.pg_bottom_btn {
+  text-align: center;
+  margin: 20rpx 0;
+  display: flex;
+}
+.pg_bottom_btn view{
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 375rpx;
+  font-size: 33rpx;
+}
+.pg_bottom_btn_right {
+  background: #169C45;
+  color: white;
+}
+.pg_bottom_btn_left {
+  background: #282828;
+  color: #7B7B7B;
+}
+.noMore{
+  /* background-color: #882323; */
+  text-align: center;
+  font-size: 32rpx;
+  color: #636363;
+  padding: 30prx 0rpx;
+  margin-top: 20rpx;
+}
+.fixBottom{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  height: 90rpx;
+  width: 750rpx;
+}
+.fixBottom>view:nth-of-type(1){
+  width: 50%;
+  height: 90rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ font-size: 20rpx;
+  color: #808080;
+  text-align: center;
+  background: #282828;
+}
+.fixBottom>view:nth-of-type(1) image{
+  width: 44rpx;
+  height: 44rpx;
+  margin-top: 10rpx;
+}
+.fixBottom>view:nth-of-type(2){
+  width: 50%;
+  height: 90rpx;
+  line-height: 90rpx;
+ font-size: 30rpx;
+  color: #fff;
+  text-align: center;
+  background: #009D41;
+}

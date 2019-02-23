@@ -1,0 +1,5 @@
+/* pages/addGoods/addGoods.wxss */
+.upload-img{
+  display: block;
+  height: 300rpx;
+}

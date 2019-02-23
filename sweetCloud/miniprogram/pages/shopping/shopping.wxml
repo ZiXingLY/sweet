@@ -1,0 +1,70 @@
+<block wx:if="{{arrData1.length != 0}}">
+<view class='title'>
+  <view class='title_left'>
+    <image src="{{all?'/images/home/selected@3x.png':'/images/home/unselected@3x.png'}}" catchtap='allSelect' mode='aspectFit'></image>
+    <text>全选</text>   
+  </view>
+  <text class='title_right' bindtap='delate'>删除</text>  
+</view>
+<!-- 图片内容 -->
+<view style="margin-bottom:110rpx;">
+  <view wx:for="{{arrData1}}" wx:key="{{index}}">
+    <view class='yishixiao'>{{item.is_unable == 2?'已失效':''}}</view>
+    <view class='order_box_secondLine'>
+      <image src="{{item.bull?'/images/home/selected@3x.png':'/images/home/unselected@3x.png'}}" mode='aspectFit' class='selectimg' data-index='{{index}}' data-item="{{item}}" catchtap='selectShop'></image>
+      <!-- 相框＋图片 -->
+      <view class='pgraph_comment_bbox_c' >
+        <view class='pgraph_comment_sbox_c'>
+          <view class='pgraph_comment_img_c'>
+            <image mode='aspectFit' src="{{imgUrl+item.cover}}"></image>
+          </view>
+        </view>
+      </view>
+      <view class='order_content'>
+        <view class='order_contruct'>
+          <text>{{item.goods_name}}</text>
+        </view>
+        <view class='order_local'>
+        <!-- 是否打印 -->
+          <text>{{item.is_print == 1?'打印':'不打印'}},</text>
+          <!-- 卡纸 -->
+          <text wx:if="{{item.paper}}">{{item.paper}},</text>
+          <!-- 相框 -->
+          <text wx:if="{{item.frame}}">{{item.frame}}</text>
+        </view>
+        <view class='order_price'>
+          <view class='order_price_view'>
+            <text>¥</text>
+            <text>{{item.current_price}}</text>
+          </view>
+          <!-- 版本 -->
+          <view class='order_price_banben' wx:if="{{item.goods_version == 1}}">收藏版</view>
+          <view class='order_price_banben' wx:if="{{item.goods_version == 2}}">精品版</view>
+          <view class='order_price_banben' wx:if="{{item.goods_version == 3}}">极品版</view>
+          <view class='order_price_banben' wx:if="{{item.goods_version == 4}}">博物馆版</view>
+          <!-- ＊＊＊＊＊＊＊＊ -->
+          <view class='order_price_number'>
+            <text class='order_price_number_text1'>数量：</text>
+            <view class='reduce' catchtap='reduce' data-id="{{item.id}}" data-index="{{index}}">-</view>
+            <text style='width:60rpx;text-align:center;display:inline-block'>{{item.num}}</text>
+            <view class='add' catchtap='add' data-id="{{item.id}}" data-index="{{index}}">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+</view>
+<view class='pageBottom'>
+  <view class='pageBottom_left'>
+    合计金额：<text>￥ {{money}}</text> (共 <text>{{allNum}}</text> 件)
+  </view>
+  <view class='pageBottom_right' catchtap='sumbit'>
+    结算
+  </view>
+</view>
+</block>
+<block wx:if="{{arrData1.length == 0}}">
+  <view class='noneShoping'>购物车空空如也～</view>
+</block>
+

@@ -1,0 +1,30 @@
+<!--components/goods-list/goods-list.wxml-->
+<view style="display: flex; justify-content: space-between;flex-flow: wrap;">
+  <view class='pgraph_comment_c' wx:for="{{dataArr}}" wx:for-item="item" data-id="{{item['id']}}" catchtap="_goDetail">
+    <view class='pgraph_comment_bbox_c' >
+      <view class='pgraph_comment_sbox_c'>
+        <view class='pgraph_comment_img_c'>
+          <image mode='aspectFit' src="{{item['image']?item['image']:''}}"></image>
+        </view>
+      </view>
+    </view>
+    <view class='pgraph_comment_line_c'></view>
+    <view class='pgraph_comment_title_c'>
+      {{item.goods_name}}
+    </view>
+    <view class='pgraph_comment_price_c'>
+      <text class='pgraph_comment_price_left_c'>　</text>
+      <text class="pgraph_comment_price_right_c" wx:if="{{(index1+1) == item.type}}" wx:for="{{type}}" wx:for-item="item1" wx:for-index="index1">{{item1}}　{{item.goods_structure == '1'?'单张':'组图'}}</text>
+      <!-- <text class="pgraph_comment_price_right_c"></text> -->
+    </view>
+    <view class='pgraph_comment_price_c'>
+      <text wx:if="{{item.minprice != item.maxprice}}" class="pgraph_comment_price_left_c">¥{{item.price}}-¥</text>
+      <text wx:if="{{item.minprice == item.maxprice}}" class="pgraph_comment_price_left_c">¥{{item.minprice}}</text>
+      <text class="pgraph_comment_price_right_c">购藏　{{item.volume}}</text>
+    </view>
+    <view class='pgraph_comment_price_c'>
+      <text class="pgraph_comment_price_left_c">行业加持　{{item.goods_aid}}</text>
+      <text class="pgraph_comment_price_right_c">喜欢　{{item.like_num}}</text>
+    </view>
+  </view>
+</view>

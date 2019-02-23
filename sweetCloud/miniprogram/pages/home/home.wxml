@@ -51,7 +51,7 @@
   </view> -->
 
     <view wx:for='{{emotions}}' class='sw-card'>
-    <emotion-view emotion='{{item}}' bindtap='goToDetail' data-idx='{{item._id}}'></emotion-view>
+    <emotion-view emotion='{{item}}' bindtap='goToDetail' data-idx='{{item.id}}'></emotion-view>
   </view>
 
 </view>

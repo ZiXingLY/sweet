@@ -1,5 +1,4 @@
 <!--pages/addPromise/addPromise.wxml-->
-<text>pages/addPromise/addPromise.wxml</text>
 
 <form bindsubmit="bindFormSubmit">
 

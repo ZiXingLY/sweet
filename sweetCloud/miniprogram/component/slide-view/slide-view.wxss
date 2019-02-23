@@ -1,0 +1,5 @@
+/* components/slide-view/slide-view.wxss */
+
+image {
+  width: 750rpx;height: 500rpx;
+}

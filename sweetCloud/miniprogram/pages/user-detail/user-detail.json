@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "卖家",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "goods-list": "/component/goods-list/goods-list"
+  }
+}

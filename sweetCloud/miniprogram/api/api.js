@@ -304,6 +304,33 @@ let getEmotions = (params, success) => {
     }
   })
 }
+
+let goodsDetail = (params, success) => {
+  _http({
+    url: "goods/detail",
+    data: params,
+    header: {
+      'content-type': 'application/json', // 默认值
+      'x-auth-token': wx.getStorageSync('token')
+    },
+    success: (res) => {
+      success(res.data);
+    }
+  })
+}
+let emotionDetail = (params, success) => {
+  _http({
+    url: "emotions/detail",
+    data: params,
+    header: {
+      'content-type': 'application/json', // 默认值
+      'x-auth-token': wx.getStorageSync('token')
+    },
+    success: (res) => {
+      success(res.data);
+    }
+  })
+}
 let saveEmotion = (header, params, success) => {
   _http({
     url: "emotions/add",
@@ -330,6 +357,18 @@ let saveEmotion = (header, params, success) => {
     }
   })
 }
+
+let addGoods = (header, params, success) => {
+  _http({
+    url: "goods/add",
+    data: params,
+    header: header,
+    method: "POST",
+    success: (res) => {
+      success(res.data);
+    }
+    })
+  }
 
 // 网络请求自动增加状态提示框
 let _http = (r) => {
@@ -403,5 +442,8 @@ module.exports = {
   shareNum: shareNum,
   shareImg: shareImg,
   getEmotions: getEmotions,
-  saveEmotion: saveEmotion
+  saveEmotion: saveEmotion,
+  addGoods: addGoods,
+  goodsDetail: goodsDetail,
+  emotionDetail: emotionDetail 
 }

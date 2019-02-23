@@ -13,6 +13,13 @@ Page({
 
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
+
+    if (e.detail.value == 2){
+      console.log('to addGoods');
+      wx.navigateTo({
+        url: '../addGoods/addGoods',
+      })
+    }
     this.setData({
       index: e.detail.value
     })
@@ -36,7 +43,12 @@ Page({
     }
     console.log(e.detail.value.emotion)
 
-    getApp().globalData.api.saveEmotion({ Cookie: wx.getStorageSync('token') }, { content: e.detail.value.emotion,},(res) => {
+    getApp().globalData.api.saveEmotion({ 
+      'Cookie': wx.getStorageSync('token'),
+      'x-auth-token': wx.getStorageSync('token') 
+      }, { 
+        content: e.detail.value.emotion
+        },(res) => {
       if(res.code == 0){
         wx.showToast({
           title: '发布成功',

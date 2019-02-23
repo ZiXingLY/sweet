@@ -1,0 +1,61 @@
+
+.pgraph_comment_c {
+  width: 310rpx;
+  padding: 30rpx;
+  color:#7F7F7F;
+  background: #282828;
+  margin: 10rpx 0;
+}
+.pgraph_comment_line_c {
+  height: 2rpx;
+  border-radius: 2rpx;
+  background: #141414;
+  margin-top: 30rpx;
+}
+.pgraph_comment_title_c {
+  font-size: 30rpx;
+  margin-top: 15rpx;
+  line-height: 45rpx;
+  height: 85rpx;
+  display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+overflow: hidden;
+}
+
+.pgraph_comment_price_c {
+  font-size: 24rpx;
+  margin: 13rpx 0;
+}
+.pgraph_comment_price_right_c {
+  float: right;
+}
+.pgraph_comment_bbox_c {
+  border-top: 1rpx solid #FAFAFA;
+  width: 305rpx;
+  height: 305rpx;
+  border-radius: 6rpx;
+  background: #FAFAFA;
+}
+.pgraph_comment_sbox_c {
+  text-align: center;
+  margin: 19rpx;
+  width: 265rpx;
+  height: 265rpx;
+  border-radius: 6rpx;
+  background: #FAF6F4;
+  border: 1rpx solid #D8D8D9;
+}
+.pgraph_comment_img_c {
+  width: 225rpx;
+  height: 225rpx;
+  margin: 20rpx;
+  line-height: 225rpx;
+  text-align: center;
+  position: relative
+}
+.pgraph_comment_img_c image {
+  width: 225rpx;
+  height: 225rpx;
+  object-fit: contain;
+}
