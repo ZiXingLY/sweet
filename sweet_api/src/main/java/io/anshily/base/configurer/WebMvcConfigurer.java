@@ -229,7 +229,6 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/uploads/**").addResourceLocations(ResourceUtils.FILE_URL_PREFIX + Constants.PATH_IMAGE_PATH);
-        registry.addResourceHandler("/dkwd_web/**").addResourceLocations(ResourceUtils.FILE_URL_PREFIX + Constants.PATH_MANAGER_PATH);
         registry.addResourceHandler("/public/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/public/");//路径最后必须带/
         registry.addResourceHandler("/resources/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX + "/resources/");
         registry.addResourceHandler("/views/**").addResourceLocations(ResourceUtils.CLASSPATH_URL_PREFIX+"/views/");

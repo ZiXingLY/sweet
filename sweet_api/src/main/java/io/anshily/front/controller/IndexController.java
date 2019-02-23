@@ -1,18 +1,25 @@
 package io.anshily.front.controller;
 
+import io.anshily.admin.service.UserService;
+import io.anshily.base.core.Result;
+import io.anshily.base.core.ResultGenerator;
 import io.anshily.base.utils.UploadFile;
 import io.anshily.front.service.ArticleService;
 import io.anshily.front.service.FlashService;
 import io.anshily.front.service.CategoryService;
 import io.anshily.front.service.LikerService;
 import io.anshily.model.Article;
+import io.anshily.service.BannerService;
+import io.anshily.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class IndexController {
@@ -24,6 +31,12 @@ public class IndexController {
     FlashService flashService;
     @Autowired
     LikerService likerService;
+    @Autowired
+    GoodsService goodsService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    BannerService bannerService;
     //进入首页
     @RequestMapping("/")
     public String index(){
@@ -43,6 +56,15 @@ public class IndexController {
         String url = "/../" + imgName.substring(2,imgName.length()-2);
         System.out.print(url);
         return url;
+    }
+
+    @RequestMapping("/wx/index")
+    public @ResponseBody Result xwIndex(){
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("goods",goodsService.findAll());
+        map.put("user",userService.findAll());
+        map.put("banner",bannerService.findAll());
+        return ResultGenerator.successResult(map);
     }
 
 //    @RequestMapping("/setImage")

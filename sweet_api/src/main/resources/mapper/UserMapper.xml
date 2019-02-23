@@ -24,24 +24,24 @@
   </resultMap>
 
   <select id="selectByMap" resultType="io.anshily.model.User">
-    SELECT * FROM qy_user WHERE phone=#{phone} AND password=#{password}
+    SELECT * FROM sw_user WHERE phone=#{phone} AND password=#{password}
   </select>
 
   <select id="findUserByPhone" parameterType="string" resultType="io.anshily.model.User">
-    select * from qy_user where phone = #{phone}
+    select * from sw_user where phone = #{phone}
   </select>
 
   <select id="findUserByOpenid" parameterType="string" resultType="io.anshily.model.User">
-    select * from qy_user where openid = #{openid}
+    select * from sw_user where openid = #{openid}
   </select>
 
   <select id="getVipUserList" resultType="io.anshily.model.User">
-        select * from qy_user where vip_state = 1
+        select * from sw_user where vip_state = 1
   </select>
 
   <select id="selectAdmin" resultMap="BaseResultMap">
     SELECT *
-    FROM qy_user
+    FROM sw_user
     <where>
       <if test="type != null and type != ''">
         type = #{type}
@@ -53,10 +53,10 @@
   </select>
 
   <select id="validationWxAccount" resultType="io.anshily.model.User">
-    SELECT * from qy_user where phone = #{phone} or openid = #{openid}
+    SELECT * from sw_user where phone = #{phone} or openid = #{openid}
   </select>
 
   <select id="findVipUser" resultType="io.anshily.model.User">
-            select * from qy_user where vip_state = 1
+            select * from sw_user where vip_state = 1
   </select>
 </mapper>

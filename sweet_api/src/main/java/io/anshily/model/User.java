@@ -2,7 +2,7 @@ package io.anshily.model;
 
 import javax.persistence.*;
 
-@Table(name = "qy_user")
+@Table(name = "sw_user")
 public class User {
     /**
      * id
@@ -10,6 +10,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    /**
+     * 用户名
+     */
+    private String username;
 
     /**
      * 电话
@@ -372,5 +377,13 @@ public class User {
      */
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

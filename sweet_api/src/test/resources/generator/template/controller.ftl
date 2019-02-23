@@ -3,7 +3,7 @@ import ${basePackage}.base.core.Result;
 import ${basePackage}.base.core.ResultGenerator;
 import ${basePackage}.model.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
-import PageBean;
+import ${basePackage}.base.core.PageBean;
 import com.github.pagehelper.PageHelper;
 import org.springframework.web.bind.annotation.*;
 

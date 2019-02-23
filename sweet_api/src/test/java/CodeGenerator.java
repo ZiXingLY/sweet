@@ -39,7 +39,7 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
 //        genCode("sys_permission","sys_permission_init","sys_role","sys_role_permission","sys_user","sys_user_role");
-//        genCode("sw_cet");
+//        genCode("sw_banner");
 //        genCode("qy_permissions","qy_permissions_init","qy_role","qy_role_permission","qy_user","qy_user_role");
 //        genCode("qy_level_score");
         //genCodeByCustomModelName("输入表名","输入自定义Model名称");
