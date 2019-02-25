@@ -331,6 +331,20 @@ let emotionDetail = (params, success) => {
     }
   })
 }
+let addCart = (params, success) => {
+  _http({
+    url: "cart/add",
+    method: "POST",
+    data: params,
+    header: {
+      'content-type': 'application/json', // 默认值
+      'x-auth-token': wx.getStorageSync('token')
+    },
+    success: (res) => {
+      success(res.data);
+    }
+  })
+}
 let saveEmotion = (header, params, success) => {
   _http({
     url: "emotions/add",
@@ -445,5 +459,6 @@ module.exports = {
   saveEmotion: saveEmotion,
   addGoods: addGoods,
   goodsDetail: goodsDetail,
-  emotionDetail: emotionDetail 
+  emotionDetail: emotionDetail,
+  addCart: addCart 
 }

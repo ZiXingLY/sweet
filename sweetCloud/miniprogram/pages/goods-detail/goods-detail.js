@@ -1,5 +1,6 @@
 // pages/goods-detail/goods-detail.js
-const goodsDetail = getApp().globalData.api.goodsDetail
+const goodsDetail = getApp().globalData.api.goodsDetail;
+const addCart = getApp().globalData.api.addCart
 const app = getApp();
 var url = app.globalData.netUtil.ROOT_URL;
 var imgUrl = app.globalData.imgUrl;
@@ -76,7 +77,7 @@ Page({
     let mydata = wx.getStorageSync("token");
     this.setData({
       mydata: mydata,
-      // id: options.id,
+      id: options.id,
       // ids:options.ids,
       options:options
     });
@@ -360,6 +361,17 @@ Page({
   // 点击加入购藏夹/购买
   joinShopping(e){
     //加载动画
+
+    addCart({
+      gid: this.data.id
+    },res => {
+      console.log(res)
+      if(res.code == 0){
+        wx.showToast({
+          title: '添加成功',
+        })
+      }
+    })
     wx.showLoading({
       title: "加载中",
       mask: true
