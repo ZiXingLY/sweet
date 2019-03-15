@@ -6,19 +6,19 @@ import io.anshily.admin.service.UserService;
 import io.anshily.base.core.Result;
 import io.anshily.base.core.ResultGenerator;
 import io.anshily.base.utils.MyMD5;
+import io.anshily.gxchainbaas.GXCserve;
+import io.anshily.ipfs.IPFSServe;
 import io.anshily.model.Credits;
 import io.anshily.model.Share;
 import io.anshily.model.User;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import tk.mybatis.mapper.entity.Condition;
 import tk.mybatis.mapper.entity.Example;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -37,11 +37,44 @@ public class AdminController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    IPFSServe ipfsServe;
+
+    @Autowired
+    GXCserve gxCserve;
+
     @GetMapping("/reedit")
     public ModelAndView reedit(int id){
         ModelAndView mov = new ModelAndView("front/reedit");
         mov.addObject("eid",id);
         return mov;
+    }
+
+    @PostMapping("/ipfs/add")
+    public Result add(String data){
+        try {
+            String res = ipfsServe.add(data);
+           return ResultGenerator.successResult(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResultGenerator.errResult(5432);
+        }
+    }
+
+    @GetMapping("/ipfs/cat")
+    public Result cat(String hash){
+        try {
+            String res = ipfsServe.cat(hash);
+            return ResultGenerator.successResult(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResultGenerator.errResult(5432);
+        }
+    }
+
+    @GetMapping("/gxc/call")
+    public Result callContract(){
+        return ResultGenerator.successResult(gxCserve.callContract());
     }
 
     @GetMapping("/favicon.ico")

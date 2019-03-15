@@ -109,7 +109,10 @@ public class ShiroConfig {
         chainDefinition.addPathDefinition("../../public/**", "anon");
         chainDefinition.addPathDefinition("/public/**", "anon");
         chainDefinition.addPathDefinition("/category/getCategory","anon");
+        chainDefinition.addPathDefinition("/ipfs/add","anon");
+        chainDefinition.addPathDefinition("/gxc/call","anon");
         chainDefinition.addPathDefinition("/**", "noSessionCreation,authcToken");
+
         return chainDefinition;
     }
 

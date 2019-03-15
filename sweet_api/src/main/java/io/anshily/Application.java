@@ -1,5 +1,8 @@
 package io.anshily;
 
+import com.gxchain.client.GXChainClient;
+import io.anshily.base.core.Constants;
+import io.ipfs.api.IPFS;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
@@ -67,6 +70,21 @@ public class Application extends SpringBootServletInitializer {
         };
         tomcat.addAdditionalTomcatConnectors(httpConnector());
         return tomcat;
+    }
+
+    @Bean(name = "ipfsClient")
+    public IPFS ipfs(){
+        IPFS ipfs = new IPFS("/ip4/127.0.0.1/tcp/5001");
+        return ipfs;
+    }
+
+    @Bean(name = "gxClient")
+    public GXChainClient gxChainClient(){
+        String activePrivateKey = "5KCuWPtZ1jTMNP9G7vETiNJdesA27RzWHmfmXZrkmibfM3WhUJ2";
+        String accountIdOrName = Constants.EXAMPLE_ACCOUNT;
+        String entryPoint = "http://ttq.tiantianquan.xyz:28090";
+        GXChainClient client = new GXChainClient(activePrivateKey, accountIdOrName, entryPoint);
+        return client;
     }
 ////
 //    @Bean

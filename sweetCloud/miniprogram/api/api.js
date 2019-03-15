@@ -1,7 +1,7 @@
 //const ROOT_URL = "https://51cnews.knighteam.com/";
 // const ROOT_URL = "https://qstitvc.com/";
-const ROOT_URL = "https://localhost:8443/";
-// const ROOT_URL = 'https://ttq.tiantianquan.xyz/'
+// const ROOT_URL = "https://localhost:8443/";
+const ROOT_URL = 'https://ttq.tiantianquan.xyz/'
 // const ROOT_URL = "http://192.168.0.218:8080/";
 
 // 分享图片
